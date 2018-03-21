@@ -3,6 +3,7 @@ node_js: stable
 
 # S: Build Lifecycle
 install:
+  - npm rebuild node-sass --force
   - npm install
 
 before_script:
