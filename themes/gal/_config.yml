@@ -1,14 +1,14 @@
 # use_logo如果为true, 需要在logo_image设置路径
 use_logo: false
-logo_image:  # 使用路径, 填写文件名即可(比如, logo_image: logo.png 指向 source/imgs/logo.png)
-navbar_text: # 如果没有Logo, 则设置为false, 并且设置navbar_text(否则默认为站点标题, 最好进行设置)
+logo_image: # 使用路径, 填写文件名即可(比如, logo_image: logo.png 指向 source/imgs/logo.png)
+navbar_text: 慵懒的闲人 # 如果没有Logo, 则设置为false, 并且设置navbar_text(否则默认为站点标题, 最好进行设置)
 
 # 必填, 设定小型设备展示背景图, 指向source/imgs, 比如xs_bg_image: bg.png -> source/imgs/bg.png
 xs_bg_image: xsbg.gif
 
 # 必填, 个人头像, 如果是路径, 则指向source/imgs
 # 也可以填http:// OR https:// url地址
-author_image: avatar.jpg
+author_image: touxiang.jpg
 
 # 导航菜单
 menu:
@@ -61,21 +61,17 @@ sidebar:
 
 # 友情链接配置, 要先开启上面的friend_links
 friend_links:
-  - name: KDays Forum
-    link: http://kdays.net/days/
-  - name: 绅士导航♂
-    link: http://www.gal123.com/
-  - name: 萌导航
-    link: http://www.moe123.com/
+  - name: Hackの博客
+    link: http://www.reallinxu.com/
+  - name: 夏军谊的小站
+    link: https://www.xiajunyi.com/
+  - name: 华东19部博客
+    link: https://team19.abstiger.com/
 
 # 个人链接配置, 要先开启上面的links
 links:
   - name: Github
-    link: https://github.com/ZEROKISEKI/
-  - name: Coding
-    link: https://coding.net/u/SORA1
-  - name: 知乎
-    link: https://www.zhihu.com/people/aonosora/activities
+    link: https://github.com/reallinxu
 
 
 # 是否使用公告
@@ -135,7 +131,7 @@ leancloud:
 # 如果不用的话要把下面的use_comment设置为false
 comment:
   gitment:
-      owner: # 必填项, 你的GitHub ID
+      owner: reallinxu # 必填项, 你的GitHub ID
       repo: # 必填项  你的存储评论的repo
       oauth:
         client_id:  # 必填项
