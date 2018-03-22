@@ -44,9 +44,9 @@ menu:
 # 如果使用文件名则对应目录: source/imgs/preview, 比如 preview1.jpg -> source/imgs/preview/preview1.jpg
 # 如果用url则填写完整的url地址即可
 default_preview:
-  - preview1.jpg
+  - preview5.jpg
   - preview2.jpg
-  - preview3.jpg
+  - preview6.jpg
   - preview4.jpg
 
 # 侧边栏
