@@ -180,14 +180,6 @@
                 
                 
                 
-                
-                <li class="">
-                    <a href="/about">
-                        <i class="fa fa-user"></i>关于我
-                    </a>
-                </li>
-                
-                
             </ul>
         </div>
     </div>
@@ -244,6 +236,15 @@
     </div>
 </article>
 
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = ' WordPress搭建		'
+    }
+</script>
 
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
@@ -377,7 +378,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/12/26/e5-be-ae-e4-bf-a1-e5-b0-8f-e7-a8-8b-e5-ba-8f-e5-88-9d-e6-8e-a2/"> 微信小程序初探		</a>
+                    <a href="/2018/01/23/e6-9b-b4-e6-96-b0-e6-9c-ac-e5-9c-b0-e4-bb-a3-e7-a0-81-e5-88-b0github/"> 更新本地代码到github		</a>
                 </span>
             </li>
             
@@ -425,7 +426,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/12/22/wordpress-twentyfourteen-e9-a1-b5-e9-9d-a2-e4-b8-8d-e5-b1-85-e4-b8-ad-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3/"> WordPress TwentyFourteen页面不居中问题解决		</a>
+                    <a href="/2018/01/12/centos服务器安装mysql/"> centos服务器安装mysql		</a>
                 </span>
             </li>
             
@@ -456,9 +457,9 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/微信，小程序/" style="font-size: 14.403654657721606px;" class="tag-cloud-link">微信，小程序</a>
+    <a href="/tags/微信，小程序/" style="font-size: 18.942345383851073px;" class="tag-cloud-link">微信，小程序</a>
     
-    <a href="/tags/CentOS/" style="font-size: 19.73321490551779px;" class="tag-cloud-link">CentOS</a>
+    <a href="/tags/CentOS/" style="font-size: 8.528896999136546px;" class="tag-cloud-link">CentOS</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
@@ -555,5 +556,25 @@
 <script src="/js/oni.js"></script>
 
 
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'reallinxu'
+      window.commentConfig.repo = 'https://github.com/reallinxu/blogIssue.git'
+      window.commentConfig.client_id = '8a650c64bc604060b9d8'
+      window.commentConfig.client_secret = '190504b8efc6da2640900588c43c1c556ae35a6f'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'reallinxu',
+        repo: 'https://github.com/reallinxu/blogIssue.git',
+        client_id: '8a650c64bc604060b9d8',
+        client_secret: '190504b8efc6da2640900588c43c1c556ae35a6f',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
 
 </html>

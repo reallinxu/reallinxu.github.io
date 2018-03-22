@@ -34,9 +34,9 @@ menu:
     url: tags
     dropdown: 3
   # about, 这个实际上是自定义page, 后面的自定义page参照about样式
-  - title: 关于我
-    icon: user
-    url: about
+ # - title: 关于我
+ #   icon: user
+ #   url: about
 
 # 每篇文章的preview默认图片
 # 必填项(除非你每篇文章的front-matter都设置了preview属性)
@@ -132,14 +132,14 @@ leancloud:
 comment:
   gitment:
       owner: reallinxu # 必填项, 你的GitHub ID
-      repo: # 必填项  你的存储评论的repo
+      repo: https://github.com/reallinxu/blogIssue.git # 必填项  你的存储评论的repo
       oauth:
-        client_id: reallinxu # 必填项
-        client_secret: # 必填项
+        client_id: 8a650c64bc604060b9d8 # 必填项
+        client_secret: 190504b8efc6da2640900588c43c1c556ae35a6f # 必填项
         redirect_uri: # 可以填也可以不填
 
 # 是否使用评论系统
-use_comment: false
+use_comment: true
 
 node_sass:
   outputStyle: compressed

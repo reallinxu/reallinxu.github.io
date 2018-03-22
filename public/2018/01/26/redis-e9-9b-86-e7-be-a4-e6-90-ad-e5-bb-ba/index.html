@@ -180,14 +180,6 @@
                 
                 
                 
-                
-                <li class="">
-                    <a href="/about">
-                        <i class="fa fa-user"></i>关于我
-                    </a>
-                </li>
-                
-                
             </ul>
         </div>
     </div>
@@ -255,6 +247,15 @@
     </div>
 </article>
 
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = ' Redis集群搭建		'
+    }
+</script>
 
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
@@ -394,19 +395,13 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/01/23/e6-9b-b4-e6-96-b0-e6-9c-ac-e5-9c-b0-e4-bb-a3-e7-a0-81-e5-88-b0github/"> 更新本地代码到github		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2018/01/23/e6-9c-ac-e5-9c-b0-e4-bb-a3-e7-a0-81-e4-b8-8a-e4-bc-a0-e5-88-b0github/"> 本地代码上传到github		</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/12/18/hello-world-1/"> Hello，World！		</a>
+                    <a href="/2018/01/29/e7-bd-91-e7-ab-99-e5-90-8c-e6-97-b6-e6-94-af-e6-8c-81http-e5-92-8chttps-e8-ae-bf-e9-97-ae/"> 网站同时支持http和https访问		</a>
                 </span>
             </li>
             
@@ -424,25 +419,31 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/01/24/vi-e6-96-87-e4-bb-b6found-a-swap-file-by-the-name/"> vi文件Found a swap file by the name 		</a>
+                    <a href="/2018/03/13/java8-e5-88-9d-e8-af-86/"> java8初识		</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/12/22/wordpress-e6-90-ad-e5-bb-ba/"> WordPress搭建		</a>
+                    <a href="/2018/01/29/wordpress-e4-bb-8eapache-e8-bf-81-e7-a7-bb-e5-88-b0nginx/"> WordPress从Apache迁移到nginx		</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2017/12/22/wordpress-twentyfourteen-e9-a1-b5-e9-9d-a2-e4-b8-8d-e5-b1-85-e4-b8-ad-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3/"> WordPress TwentyFourteen页面不居中问题解决		</a>
+                    <a href="/2017/12/22/CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群/"> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</a>
                 </span>
             </li>
             
             <li class="list-group-item">
                 <span class="post-title">
                     <a href="/2018/01/12/centos服务器安装mysql/"> centos服务器安装mysql		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/Dubbo+Zookeeper+Spring-boot+dubbo-simple 搭建入门/"> Dubbo+Zookeeper+Spring-boot+dubbo-simple 搭建入门		</a>
                 </span>
             </li>
             
@@ -467,9 +468,9 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/微信，小程序/" style="font-size: 19.97212735556903px;" class="tag-cloud-link">微信，小程序</a>
+    <a href="/tags/微信，小程序/" style="font-size: 17.962965051403103px;" class="tag-cloud-link">微信，小程序</a>
     
-    <a href="/tags/CentOS/" style="font-size: 8.230553786210823px;" class="tag-cloud-link">CentOS</a>
+    <a href="/tags/CentOS/" style="font-size: 9.002652062904456px;" class="tag-cloud-link">CentOS</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
@@ -566,5 +567,25 @@
 <script src="/js/oni.js"></script>
 
 
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'reallinxu'
+      window.commentConfig.repo = 'https://github.com/reallinxu/blogIssue.git'
+      window.commentConfig.client_id = '8a650c64bc604060b9d8'
+      window.commentConfig.client_secret = '190504b8efc6da2640900588c43c1c556ae35a6f'
+      window.commentConfig.redirect_uri = ''
+    } else {
+      window.commentConfig = {
+        owner: 'reallinxu',
+        repo: 'https://github.com/reallinxu/blogIssue.git',
+        client_id: '8a650c64bc604060b9d8',
+        client_secret: '190504b8efc6da2640900588c43c1c556ae35a6f',
+        redirect_uri: ''
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
 
 </html>
