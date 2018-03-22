@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Reallinxu">
+    
+    
+    
+    
+    
+    
+    <title> Redis集群搭建		 | HackBlog</title>
+    <link href=”http://yoursite.com“ rel=”prefetch” />
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/touxiang.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <div class="gal-menu gal-dropdown">
+    <div class="circle" id="gal">
+        <div class="ring">
+            <a href="http://yoursite.com" class="menuItem" style="left: 50%; top: 15%;">首页</a>
+            
+            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
+            
+            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
+            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
+            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
+            
+            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
+            
+        </div>
+        <audio id="audio" src="/imgs/oni.mp3"></audio>
+    </div>
+</div>
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="http://yoursite.com">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">慵懒的闲人</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/CentOS/">CentOS</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/WeChat小程序/">WeChat小程序</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/github/">github</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/categories">...</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/微信，小程序/">微信，小程序</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/CentOS/">CentOS</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="http://yoursite.com">HackBlog</a>
+        >
+        <span> Redis集群搭建		</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/01/26/redis-e9-9b-86-e7-be-a4-e6-90-ad-e5-bb-ba/"> Redis集群搭建		</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-01-26
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/01/26/redis-e9-9b-86-e7-be-a4-e6-90-ad-e5-bb-ba/"> Redis集群搭建		</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-01-26
+            </p>
+            <p>
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <p>redis安装请参考：</p>
+<p><a href="http://www.reallinxu.com/2018/01/24/redis%E5%85%A5%E9%97%A8/" target="_blank" rel="noopener">http://www.reallinxu.com/2018/01/24/redis%E5%85%A5%E9%97%A8/</a></p>
+<p>1.单台机器redis集群搭建</p>
+<p><pre class="lang:default decode:true ">[root@linxu ~]# mkdir /usr/local/redis-cluster #创建集群目录<br>[root@linxu ~]# cd /usr/local/redis-cluster<br>[root@linxu redis-cluster]# mkdir -p 9001/data 9002/data 9003/data 9004/data 9005/data 9006/data  #创建六个节点目录<br>[root@linxu redis-cluster]# mkdir bin<br>[root@linxu bin]# cd /usr/local/redis/redis-4.0.6/src   #redis安装目录下src<br>[root@linxu src]# cp <em> /usr/local/redis-cluster/bin  #将redis安装目录src文件copy到bin中<br>[root@linxu redis-4.0.6]# cd /usr/local/redis/redis-4.0.6   #redis安装目录<br>[root@linxu redis-4.0.6]# cp </em> /usr/local/redis-cluster/9001   #其他9002-9006同样操作<br>[root@linxu 9001]# cd /usr/local/redis-cluster/9001            #先修改9001，其他几台需要同样操作<br>[root@linxu redis-4.0.6]# vi redis.conf                        #修改配置文件<br>port 9001（每个节点的端口号）<br>daemonize yes(修改daemonize为yes，即默认以后台程序方式运行，效果同使用&amp;号强制后台运行)<br>bind 192.168.43.163（绑定当前机器 IP）<br>dir /usr/local/redis-cluster/9001/data/（数据文件存放位置）<br>pidfile /var/run/redis_9001.pid（pid 9001和port要对应）<br>cluster-enabled yes（启动集群模式）<br>cluster-config-file nodes-9001.conf（9001和port要对应）<br>cluster-node-timeout 15000<br>appendonly yes(是否开启AOF，默认关闭no)</pre></p>
+<p>PS:9002-9006同样修改，只是端口号不同，此处省略，可以将9001的redis.conf拷贝到所有目录，通过vi的:%s/9001/9002替换(此处9001替换为9002)，共四处修改</p>
+<p>[root@linxu bin]# cd /usr/local/redis-cluster/bin<br>[root@linxu bin]# ./redis-server  ../9001/redis.conf  #启动六个节点<br>[root@linxu bin]# ./redis-server  ../9002/redis.conf<br>[root@linxu bin]# ./redis-server  ../9003/redis.conf<br>[root@linxu bin]# ./redis-server  ../9004/redis.conf<br>[root@linxu bin]# ./redis-server  ../9005/redis.conf<br>[root@linxu bin]# ./redis-server  ../9006/redis.conf<br>[root@linxu bin]# ps -ef|grep redis  #查看是否启动成功（成功有六个redis进程）<br>[root@linxu bin]# cd  #返回根目录<br>[root@linxu ~]# wget <a href="https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.0.tar.gz" target="_blank" rel="noopener">https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.0.tar.gz</a> #下载rubby，yum下载为2.0.0版本，redis支持版本需大于2.2.2，此处为官网下载<br>[root@linxu ~]# tar zxvf ruby-2.5.0.tar.gz<br>[root@linxu ~]# mv ruby-2.5.0 /usr/local/ruby/<br>[root@linxu ~]# cd /usr/local/ruby/ruby-2.5.0<br>[root@linxu ruby-2.5.0]# ./configure<br>[root@linxu ruby-2.5.0]# make<br>[root@linxu ruby-2.5.0]# make install<br>[root@linxu ruby-2.5.0]# ruby -v   #查看版本<br>[root@linxu ruby-2.5.0]# yum install rubygems  #安装rubygems<br>[root@linxu ~]# gem install redis</p>
+<p>PS：此处如果先通过yum安装ruby版本低于2.2.2会报错，可以移除旧版本，再安装新版本,再安装rvm进行，步骤如下<br>    [root@linxu ~]# yum install curl  #安装curl<br>    [root@linxu ~]# curl -L get.rvm.io | bash -s stable<br>    如果执行无法完成，替换为\curl -sSL <a href="https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer" target="_blank" rel="noopener">https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer</a> | bash<br>    [root@linxu ~]#  source /etc/profile.d/rvm.sh<br>    此时再执行[root@linxu ~]# gem install redis即可</p>
+<p>[root@linxu bin]# ./redis-trib.rb create –replicas 1 192.168.43.216:9001 192.168.43.216:9002 192.168.43.216:9003 192.168.43.216:9004 192.168.43.216:9005 192.168.43.216:9006  #搭建集群<br>[root@linxu bin]# ./redis-cli  -c -h 192.168.43.216 -p 9001  #验证<br>192.168.43.216:9001&gt; set name da<br>-&gt; Redirected to slot [5798] located at 192.168.43.216:9002<br>OK<br>192.168.43.216:9002&gt; </p>
+<p>PS：此处需要加参数-c，否则不会自动跳转到分配的节点，会报错(error) MOVED 5798 192.168.43.216:9002<br><br>2.不同机器搭建redis集群</p>
+<p><pre class="lang:default decode:true">#此处使用两台机器，通过单台机器一样的方法在每台机器各创建三个节点</pre></p>
+<p>#第一台  192.168.43.216 节点 10001 10002 10003</p>
+<p>#第二台  192.168.43.163 节点 10004 10005 10006</p>
+<p>#将六个节点全部启动<br>[root@linxu bin]# ./redis-server ../10001/redis.conf  #其他节点同样启动</p>
+<p>#启动后创建集群<br>./redis-trib.rb  create  –replicas  1   192.168.43.163:10004 192.168.43.163:10005 192.168.43.163:10006 192.168.43.216:10001 192.168.43.216:10002 192.168.43.216:10003<br>[root@linxu bin]# ./redis-cli  -c -h 192.168.43.216 -p 10001  #验证<br>192.168.43.216:10001&gt; set a 1<br>-&gt; Redirected to slot [15495] located at 192.168.43.163:10005<br>OK<br><br>&nbsp;</p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Reallinxu
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/touxiang.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/hello-world/">Hello World</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/13/java8-e5-88-9d-e8-af-86/"> java8初识		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/29/e7-bd-91-e7-ab-99-e5-90-8c-e6-97-b6-e6-94-af-e6-8c-81http-e5-92-8chttps-e8-ae-bf-e9-97-ae/"> 网站同时支持http和https访问		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/29/wordpress-e4-bb-8eapache-e8-bf-81-e7-a7-bb-e5-88-b0nginx/"> WordPress从Apache迁移到nginx		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/26/redis-e9-9b-86-e7-be-a4-e6-90-ad-e5-bb-ba/"> Redis集群搭建		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/24/vi-e6-96-87-e4-bb-b6found-a-swap-file-by-the-name/"> vi文件Found a swap file by the name 		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/24/redis-e5-85-a5-e9-97-a8/"> redis入门		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/e6-9b-b4-e6-96-b0-e6-9c-ac-e5-9c-b0-e4-bb-a3-e7-a0-81-e5-88-b0github/"> 更新本地代码到github		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/e6-9c-ac-e5-9c-b0-e4-bb-a3-e7-a0-81-e4-b8-8a-e4-bc-a0-e5-88-b0github/"> 本地代码上传到github		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/dubbozookeeperspring-boot-e6-90-ad-e5-bb-ba-e5-85-a5-e9-97-a8/"> Dubbo+Zookeeper+Spring-boot+dubbo-simple 搭建入门		</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="sidebar-rand_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            随机文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/21/hello-world/">Hello World</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/e6-9b-b4-e6-96-b0-e6-9c-ac-e5-9c-b0-e4-bb-a3-e7-a0-81-e5-88-b0github/"> 更新本地代码到github		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/22/48/"> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/23/e6-9c-ac-e5-9c-b0-e4-bb-a3-e7-a0-81-e4-b8-8a-e4-bc-a0-e5-88-b0github/"> 本地代码上传到github		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/18/hello-world-1/"> Hello，World！		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/03/13/java8-e5-88-9d-e8-af-86/"> java8初识		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/24/vi-e6-96-87-e4-bb-b6found-a-swap-file-by-the-name/"> vi文件Found a swap file by the name 		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/01/29/wordpress-e4-bb-8eapache-e8-bf-81-e7-a7-bb-e5-88-b0nginx/"> WordPress从Apache迁移到nginx		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/22/spring-batch-restart-e9-87-8d-e6-8b-89-e6-9c-ba-e5-88-b6/"> Spring-batch restart重拉机制		</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/12/22/wordpress-twentyfourteen-e9-a1-b5-e9-9d-a2-e4-b8-8d-e5-b1-85-e4-b8-ad-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3/"> WordPress TwentyFourteen页面不居中问题解决		</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+                <li class="">
+                    <a href="/2018/01/26/redis-e9-9b-86-e7-be-a4-e6-90-ad-e5-bb-ba/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/26/redis-e9-9b-86-e7-be-a4-e6-90-ad-e5-bb-ba/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                </li>
+                <li class="">
+                    <a href="/2018/01/26/redis-e9-9b-86-e7-be-a4-e6-90-ad-e5-bb-ba/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/微信，小程序/" style="font-size: 17.758698021531835px;" class="tag-cloud-link">微信，小程序</a>
+    
+    <a href="/tags/CentOS/" style="font-size: 16.79326843164217px;" class="tag-cloud-link">CentOS</a>
+    
+</div>
+                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
+    
+    <li>
+        <a href="http://www.reallinxu.com/" target="_blank">Hackの博客</a>
+    </li>
+    
+    <li>
+        <a href="https://www.xiajunyi.com/" target="_blank">夏军谊的小站</a>
+    </li>
+    
+    <li>
+        <a href="https://team19.abstiger.com/" target="_blank">华东19部博客</a>
+    </li>
+    
+</div>
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/reallinxu" target="_blank">Github</a>
+    </li>
+    
+</div>
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Reallinxu Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '6'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+<script src="/js/oni.js"></script>
+
+
+
+</html>
