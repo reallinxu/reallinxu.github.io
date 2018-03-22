@@ -1,0 +1,11 @@
+---
+title: " Hello，World！\t\t"
+id: 1
+categories:
+  - CentOS
+  - 杂项
+date: 2017-12-18 17:28:35
+tags:
+---
+
+第一次搭建，有点小激动，感谢夏某某的服务器和指导。
