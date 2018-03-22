@@ -9,6 +9,7 @@ xs_bg_image: xsbg.gif
 # 必填, 个人头像, 如果是路径, 则指向source/imgs
 # 也可以填http:// OR https:// url地址
 author_image: touxiang.jpg
+author: reallinxu
 
 # 导航菜单
 menu:
