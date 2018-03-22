@@ -134,7 +134,7 @@ comment:
       owner: reallinxu # 必填项, 你的GitHub ID
       repo: # 必填项  你的存储评论的repo
       oauth:
-        client_id:  # 必填项
+        client_id: reallinxu # 必填项
         client_secret: # 必填项
         redirect_uri: # 可以填也可以不填
 
