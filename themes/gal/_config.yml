@@ -132,7 +132,7 @@ leancloud:
 comment:
   gitment:
       owner: reallinxu # 必填项, 你的GitHub ID
-      repo: reallinxu.github.io # 必填项  你的存储评论的repo
+      repo: blogIssue # 必填项  你的存储评论的repo
       oauth:
         client_id: 8a650c64bc604060b9d8 # 必填项
         client_secret: 190504b8efc6da2640900588c43c1c556ae35a6f # 必填项
