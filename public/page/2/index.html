@@ -1,1124 +1,2160 @@
 <!DOCTYPE html>
-<html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="author" content="Reallinxu">
-    
-    
-    
-    
-    
-    
-    <title>HackBlog</title>
-    <link href=”http://yoursite.com“ rel=”prefetch” />
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/aos.css">
-<link rel="stylesheet" href="/css/style.css">
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/aos.js"></script>
-    <script src="/js/highslide/highslide-full.min.js"></script>
-    <link rel="stylesheet" href="/js/highslide/highslide.css">
-    <style type="text/css">
-        @media (max-width: 768px) {
-            body {
-                background-color: #f0f0f0;
-                background: url('/imgs/xsbg.gif');
-                background-attachment: fixed;
-            }
-        }
-    </style>
-    
-    <!--<script type="text/javascript">
-      if (document.images) {
-        var avatar = new Image();
-        avatar.src = '/imgs/touxiang.jpg'
-        var previews = 'preview5.jpg,preview2.jpg,preview6.jpg,preview4.jpg'.split(',')
-        var previewsPreLoad = []
-        for(var i = 0; i < length; i++) {
-          previewsPreLoad.push(new Image())
-          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
-        }
-      }
-    </script>-->
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="HackBlog">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="HackBlog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HackBlog">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/page/2/"/>
+
+
+
+
+
+  <title>HackBlog</title>
+  
+
+
+
+
+
+
+
+
 </head>
-<body>
-    <!-- 背景轮播图功能 -->
-    <section class="hidden-xs">
-    <ul class="cb-slideshow">
-        <li><span>天若</span></li>
-        <li><span>有情</span></li>
-        <li><span>天亦老</span></li>
-        <li><span>我为</span></li>
-        <li><span>长者</span></li>
-        <li><span>续一秒</span></li>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HackBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
     </ul>
-</section>
-    <!-- 欧尼酱功能, 谁用谁知道 -->
-    
-    <div class="gal-menu gal-dropdown">
-    <div class="circle" id="gal">
-        <div class="ring">
-            <a href="http://yoursite.com" class="menuItem" style="left: 50%; top: 15%;">首页</a>
-            
-            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
-            
-            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
-            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
-            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
-            
-            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
-            
-        </div>
-        <audio id="audio" src="/imgs/oni.mp3"></audio>
-    </div>
-</div>
-    
-    <header class="navbar navbar-inverse" id="gal-header">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed"
-                    data-toggle="collapse" data-target=".bs-navbar-collapse"
-                    aria-expanded="false">
-                <span class="fa fa-lg fa-reorder"></span>
-            </button>
-            <a href="http://yoursite.com">
-                
-                <style>
-                    #gal-header .navbar-brand {
-                        height: 54px;
-                        line-height: 24px;
-                        font-size: 28px;
-                        opacity: 1;
-                        background-color: rgba(0,0,0,0);
-                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
-                    }
-                </style>
-                <!-- 这里使用文字(navbar_text or config.title) -->
-                <div class="navbar-brand">慵懒的闲人</div>
-                
-            </a>
-        </div>
-        <div class="collapse navbar-collapse bs-navbar-collapse">
-            <ul class="nav navbar-nav" id="menu-gal">
-                
-                
-                <li class="">
-                    <a href="/">
-                        <i class="fa fa-home"></i>首页
-                    </a>
-                </li>
-                
-                
-                
-                <li class="">
-                    <a href="/archives">
-                        <i class="fa fa-archive"></i>归档
-                    </a>
-                </li>
-                
-                
-                
-                
-                <li class="dropdown">
-                    <!-- TODO 添加hover dropdown效果 -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
-                        <i class="fa fa-list"></i>分类
-                    </a>
-                    <ul class="dropdown-menu">
-                        
-                        
-                        <li>
-                            <a href="/categories/杂项/">杂项</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/Spring-batch/">Spring-batch</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/categories/Redis/">Redis</a>
-                        </li>
-                        
-                        
-                        <li>
-                            <a href="/categories">...</a>
-                        </li>
-                        
-                        
-                    </ul>
-                </li>
-                
-                
-                
-                
-                
-                <li class="dropdown">
-                    <!-- TODO 添加hover dropdown效果 -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
-                        <i class="fa fa-tags"></i>标签
-                    </a>
-                    <ul class="dropdown-menu">
-                        
-                        
-                        <li>
-                            <a href="/tags/微信，小程序/">微信，小程序</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/tags/CentOS/">CentOS</a>
-                        </li>
-                        
-                        
-                        
-                    </ul>
-                </li>
-                
-                
-                
-                
-                <li class="">
-                    <a href="/about">
-                        <i class="fa fa-user"></i>关于我
-                    </a>
-                </li>
-                
-                
-            </ul>
-        </div>
-    </div>
-</header>
-    <div id="gal-body">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 gal-right" id="mainstay">
-                    
-<div class="alert well fade in" id="gal-issue" role="alert">
-    <!-- TODO 添加关闭公告框功能 -->
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <!-- 这里自行配置公告内容 -->
-    <h3>welcome to my Blog！Have a good time！</h3>
-    <!-- 自行配置公告内容结束 -->
-</div>
+  
 
-<div id="article-list">
-     
-     
-     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
     
-    <div class="data-article hidden-xs">
-        <span class="month">01月</span>
-        <span class="day">12</span>
-    </div>
-    <!-- 大型设备文章 -->
-    <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/aticle/P4.html">
-                    <span> centos服务器安装mysql</span>
-                </a>
-            </h1>
-        </div>
-        <div class="tag-article">
-            
-            
-            <!-- TODO 添加评论统计 -->
-            <!--<span class="label label-gal">
-                <i class="fa fa-comments"></i>
-                <a href="/aticle/P4.html#comments">739</a>
-            </span>-->
-        </div>
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/aticle/P4.html">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview2.jpg" alt=" centos服务器安装mysql">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="visible-xs">
-        <div class="title-article">
-            <center>
-                <h4>
-                    <a href="/aticle/P4.html">
-                        <span> centos服务器安装mysql</span>
-                    </a>
-                </h4>
-            </center>
-        </div>
-        <p></p>
-        <center>
-            <i class="fa fa-calendar"></i> 2018-01-12
-        </center>
-        <p></p>
-        <p></p>
-        <center>
-            
-            
-        </center>
-        <p></p>
-        <div class="alert alert-gal article-body content-article">
-            <p style="text-align: center;">
-                <a href="/aticle/P4.html">
-                    
-                    <img src="/imgs/preview/preview4.jpg" alt=" centos服务器安装mysql">
-                </a>
-            </p>
-        </div>
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-        <a class="btn btn-danger pull-right read-more btn-block" href="/aticle/P4.html">
-            阅读全文
-            <!--<span class="badge">739</span>-->
-        </a>
-    </section>
-</div>
-     
-     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-    
-    <div class="data-article hidden-xs">
-        <span class="month">12月</span>
-        <span class="day">22</span>
-    </div>
-    <!-- 大型设备文章 -->
-    <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/aticle/P13.html">
-                    <span> Spring-batch restart重拉机制		</span>
-                </a>
-            </h1>
-        </div>
-        <div class="tag-article">
-            
-            
-            <!-- TODO 添加评论统计 -->
-            <!--<span class="label label-gal">
-                <i class="fa fa-comments"></i>
-                <a href="/aticle/P13.html#comments">739</a>
-            </span>-->
-        </div>
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/aticle/P13.html">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview4.jpg" alt=" Spring-batch restart重拉机制		">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="visible-xs">
-        <div class="title-article">
-            <center>
-                <h4>
-                    <a href="/aticle/P13.html">
-                        <span> Spring-batch restart重拉机制		</span>
-                    </a>
-                </h4>
-            </center>
-        </div>
-        <p></p>
-        <center>
-            <i class="fa fa-calendar"></i> 2017-12-22
-        </center>
-        <p></p>
-        <p></p>
-        <center>
-            
-            
-        </center>
-        <p></p>
-        <div class="alert alert-gal article-body content-article">
-            <p style="text-align: center;">
-                <a href="/aticle/P13.html">
-                    
-                    <img src="/imgs/preview/preview4.jpg" alt=" Spring-batch restart重拉机制		">
-                </a>
-            </p>
-        </div>
         
-        <a class="btn btn-danger pull-right read-more btn-block" href="/aticle/P13.html">
-            阅读全文
-            <!--<span class="badge">739</span>-->
-        </a>
-    </section>
-</div>
-     
-     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-    
-    <div class="data-article hidden-xs">
-        <span class="month">12月</span>
-        <span class="day">22</span>
-    </div>
-    <!-- 大型设备文章 -->
-    <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/aticle/P16.html">
-                    <span> WordPress搭建		</span>
-                </a>
-            </h1>
-        </div>
-        <div class="tag-article">
-            
-            
-            <!-- TODO 添加评论统计 -->
-            <!--<span class="label label-gal">
-                <i class="fa fa-comments"></i>
-                <a href="/aticle/P16.html#comments">739</a>
-            </span>-->
-        </div>
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/aticle/P16.html">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview2.jpg" alt=" WordPress搭建		">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="visible-xs">
-        <div class="title-article">
-            <center>
-                <h4>
-                    <a href="/aticle/P16.html">
-                        <span> WordPress搭建		</span>
-                    </a>
-                </h4>
-            </center>
-        </div>
-        <p></p>
-        <center>
-            <i class="fa fa-calendar"></i> 2017-12-22
-        </center>
-        <p></p>
-        <p></p>
-        <center>
-            
-            
-        </center>
-        <p></p>
-        <div class="alert alert-gal article-body content-article">
-            <p style="text-align: center;">
-                <a href="/aticle/P16.html">
-                    
-                    <img src="/imgs/preview/preview4.jpg" alt=" WordPress搭建		">
-                </a>
-            </p>
-        </div>
-        
-        <a class="btn btn-danger pull-right read-more btn-block" href="/aticle/P16.html">
-            阅读全文
-            <!--<span class="badge">739</span>-->
-        </a>
-    </section>
-</div>
-     
-     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-    
-    <div class="data-article hidden-xs">
-        <span class="month">12月</span>
-        <span class="day">22</span>
-    </div>
-    <!-- 大型设备文章 -->
-    <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/aticle/P2.html">
-                    <span> WordPress TwentyFourteen页面不居中问题解决</span>
-                </a>
-            </h1>
-        </div>
-        <div class="tag-article">
-            
-            
-            <!-- TODO 添加评论统计 -->
-            <!--<span class="label label-gal">
-                <i class="fa fa-comments"></i>
-                <a href="/aticle/P2.html#comments">739</a>
-            </span>-->
-        </div>
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/aticle/P2.html">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview6.jpg" alt=" WordPress TwentyFourteen页面不居中问题解决">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="visible-xs">
-        <div class="title-article">
-            <center>
-                <h4>
-                    <a href="/aticle/P2.html">
-                        <span> WordPress TwentyFourteen页面不居中问题解决</span>
-                    </a>
-                </h4>
-            </center>
-        </div>
-        <p></p>
-        <center>
-            <i class="fa fa-calendar"></i> 2017-12-22
-        </center>
-        <p></p>
-        <p></p>
-        <center>
-            
-            
-        </center>
-        <p></p>
-        <div class="alert alert-gal article-body content-article">
-            <p style="text-align: center;">
-                <a href="/aticle/P2.html">
-                    
-                    <img src="/imgs/preview/preview2.jpg" alt=" WordPress TwentyFourteen页面不居中问题解决">
-                </a>
-            </p>
-        </div>
-        
-        <a class="btn btn-danger pull-right read-more btn-block" href="/aticle/P2.html">
-            阅读全文
-            <!--<span class="badge">739</span>-->
-        </a>
-    </section>
-</div>
-     
-     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-    
-    <div class="data-article hidden-xs">
-        <span class="month">12月</span>
-        <span class="day">22</span>
-    </div>
-    <!-- 大型设备文章 -->
-    <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/aticle/P1.html">
-                    <span> 微信小程序初探</span>
-                </a>
-            </h1>
-        </div>
-        <div class="tag-article">
-            
-            <span class="label label-gal">
-                <i class="fa fa-tags"></i>
+          <h1 class="post-title" itemprop="name headline">
                 
-                <a href="/tags/微信，小程序/">微信，小程序</a>
+                <a class="post-title-link" href="/aticle/P6.html" itemprop="url"> 更新本地代码到github		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-23T16:28:47+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index">
+                    <span itemprop="name">github</span>
+                  </a>
+                </span>
+
                 
+                
+              
             </span>
+          
+
+          
             
-            
-            <!-- TODO 添加评论统计 -->
-            <!--<span class="label label-gal">
-                <i class="fa fa-comments"></i>
-                <a href="/aticle/P1.html#comments">739</a>
-            </span>-->
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/aticle/P1.html">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview6.jpg" alt=" 微信小程序初探">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="visible-xs">
-        <div class="title-article">
-            <center>
-                <h4>
-                    <a href="/aticle/P1.html">
-                        <span> 微信小程序初探</span>
-                    </a>
-                </h4>
-            </center>
-        </div>
-        <p></p>
-        <center>
-            <i class="fa fa-calendar"></i> 2017-12-22
-        </center>
-        <p></p>
-        <p></p>
-        <center>
-            
-            <i class="fa fa-tags"></i>
-            
-            <a href="/tags/微信，小程序/">微信，小程序</a>
-            
-            
-            
-        </center>
-        <p></p>
-        <div class="alert alert-gal article-body content-article">
-            <p style="text-align: center;">
-                <a href="/aticle/P1.html">
-                    
-                    <img src="/imgs/preview/preview2.jpg" alt=" 微信小程序初探">
-                </a>
-            </p>
-        </div>
-        
-        <a class="btn btn-danger pull-right read-more btn-block" href="/aticle/P1.html">
-            阅读全文
-            <!--<span class="badge">739</span>-->
-        </a>
-    </section>
-</div>
-     
-     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
+      </header>
     
-    <div class="data-article hidden-xs">
-        <span class="month">12月</span>
-        <span class="day">22</span>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>第一步：查看当前的git仓库状态，可以使用git status</strong></p>
+<pre class="lang:default decode:true">git status</pre>
+
+<p><strong>第二步：更新全部</strong></p>
+<pre class="lang:default decode:true">git add *</pre>
+
+<p><strong>第三步：接着输入git commit -m “更新说明”</strong></p>
+<pre class="lang:default decode:true">git commit -m "更新说明"</pre>
+
+<p><strong>第四步：先git pull,拉取当前分支最新代码</strong></p>
+<pre class="lang:default decode:true">git pull</pre>
+
+<p><strong>第五步：push到远程master分支上</strong></p>
+<pre class="lang:default decode:true  ">git push origin master</pre>
+          
+        
+      
     </div>
-    <!-- 大型设备文章 -->
-    <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/aticle/P5.html">
-                    <span> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</span>
-                </a>
-            </h1>
-        </div>
-        <div class="tag-article">
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P7.html" itemprop="url"> 本地代码上传到github		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
             
-            <span class="label label-gal">
-                <i class="fa fa-tags"></i>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-23T16:22:40+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index">
+                    <span itemprop="name">github</span>
+                  </a>
+                </span>
+
                 
-                <a href="/tags/CentOS/">CentOS</a>
                 
+              
             </span>
+          
+
+          
             
-            
-            <!-- TODO 添加评论统计 -->
-            <!--<span class="label label-gal">
-                <i class="fa fa-comments"></i>
-                <a href="/aticle/P5.html#comments">739</a>
-            </span>-->
+          
+
+          
+          
+
+          
+
+          
+
+          
+
         </div>
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/aticle/P5.html">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview2.jpg" alt=" CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>第一步：建立git仓库</strong><br>cd到你的本地项目根目录下，执行git命令</p>
+<pre class="lang:default decode:true">git init</pre>
+**第二步：将项目的所有文件添加到仓库中**
+<pre class="lang:default decode:true">git add .</pre>
+**如果想添加某个特定的文件，只需把.换成特定的文件名即可**
+
+**第三步：将add的文件commit到仓库**
+<pre class="lang:default decode:true">git commit -m "注释语句"</pre>
+
+<hr>
+<p><strong>第四步：去github上创建自己的Repository</strong></p>
+<p><strong>第五步：重点来了，将本地的仓库关联到github上</strong></p>
+<pre class="lang:default decode:true">git remote add origin https://github.com/reallinxu/spring-boot-dubbo</pre>
+**后面的https链接地址换成你自己的仓库url地址**
+
+**第六步：上传github之前，要先pull一下，执行如下命令：**
+<pre class="lang:default decode:true">git pull origin master</pre>
+**第七步，也就是最后一步，上传代码到github远程仓库**
+<pre class="lang:default decode:true ">git push -u origin master</pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P3.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P3.html" itemprop="url"> Dubbo+Zookeeper+Spring-boot+dubbo-simple 搭建入门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-23T16:16:32+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Dubbo/" itemprop="url" rel="index">
+                    <span itemprop="name">Dubbo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.安装Zookeeper</p>
+<p><pre class="lang:default decode:true ">[root@linxu ~]#  wget <a href="http://mirrors.shu.edu.cn/apache/zookeeper/zookeeper-3.5.3-beta/zookeeper-3.5.3-beta.tar.gz" target="_blank" rel="noopener">http://mirrors.shu.edu.cn/apache/zookeeper/zookeeper-3.5.3-beta/zookeeper-3.5.3-beta.tar.gz</a><br>[root@linxu ~]#  tar -zxvf zookeeper-3.5.3-beta.tar.gz  #此时可能会报错使用<br>[root@linxu ~]#  tar -xvf zookeeper-3.5.3-beta.tar.gz<br>[root@linxu ~]#  mv zookeeper-3.5.3-beta /usr/local/zookeeper #没有目录请先mkdir<br>[root@linxu ~]#  cd /usr/local/zookeeper/zookeeper-3.5.3-beta/conf<br>[root@linxu conf]# cp zoo_sample.cfg zoo.cfg<br>[root@linxu conf]# vi zoo.cfg </pre></p>
+<p>#修改配置对应项<br>dataDir=/usr/local/zookeeper/zookeeper-3.5.3-beta/data<br>dataLogDir=/usr/local/zookeeper/zookeeper-3.5.3-beta/logs<br>[root@linxu conf]# vi /etc/profile<br>末尾添加<br>export ZOOKEEPER_HOME=/usr/local/zookeeper/zookeeper-3.5.3-beta/<br>export PATH=$ZOOKEEPER_HOME/bin:$PATH<br>export PATH<br>[root@linxu conf]# source /etc/profile #使生效<br>[root@linxu conf]# zkServer.sh start   #启动<br>[root@linxu conf]# zkServer.sh status  #查看状态<br>[root@linxu conf]# zkServer.sh stop    #停止<br>[root@linxu conf]# zkServer.sh restart #重启</p>
+<p><br>2.部署dubbo-admin</p>
+<p>从github上下载dubbo源码，编译dubbo-admin(最新版已没有dubbo-admin，下载历史版本)</p>
+<p>dubbo地址：<a href="https://github.com/alibaba/dubbo/tree/dubbo-2.5.8" target="_blank" rel="noopener">https://github.com/alibaba/dubbo/tree/dubbo-2.5.8</a></p>
+<p>编译：mvn package -Dmaven.test.skip=true</p>
+<p>编译成功后将target目录下的war包放到tomcat下webapps中，启动tomcat即可访问<a href="http://localhost:8080/dubbo-admin-2.5.8/" target="_blank" rel="noopener">http://localhost:8080/dubbo-admin-2.5.8/</a></p>
+<p>3.本地使用spring-boot创建提供者（provider）和消费者(consume)</p>
+<p>代码：<a href="https://github.com/reallinxu/spring-boot-dubbo" target="_blank" rel="noopener">https://github.com/reallinxu/spring-boot-dubbo</a></p>
+<p>分别启动provider和consume，查看dubbo主页，可以看到提供者和消费者。</p>
+<p>PS：provider和consume的接口位置必须一致</p>
+<p>4.搭建dubbo-simple监控</p>
+<p>从github上下载dubbox源码，编译dubbo-monitor-simple</p>
+<p>dubbox地址：<a href="https://github.com/reallinxu/dubbox" target="_blank" rel="noopener">https://github.com/reallinxu/dubbox</a></p>
+<p>编译：mvn package -Dmaven.test.skip=true</p>
+<p>编译成功后将dubbo-monitor-simple-2.8.4-assembly.tar.gz放入服务器</p>
+<p><pre class="lang:default decode:true">[root@linxu dubbo-simple]# tar -zxvf dubbo-monitor-simple-2.8.4-assembly.tar.gz<br>[root@linxu bin]# cd /usr/local/dubbo-simple/dubbo-monitor-simple-2.8.4/conf<br>修改dubbo.properties<br>dubbo.container=log4j,spring,registry,jetty<br>dubbo.application.name=simple-monitor<br>dubbo.application.owner=</pre></p>
+<p>#dubbo.registry.address=multicast://224.5.6.7:1234<br>dubbo.registry.address=zookeeper://192.168.43.163:2181 #Zookeeper地址</p>
+<p>#dubbo.registry.address=redis://127.0.0.1:6379</p>
+<p>#dubbo.registry.address=dubbo://127.0.0.1:9090<br>dubbo.protocol.port=7070<br>dubbo.jetty.port=7072  #jetty端口，避免冲突<br>dubbo.jetty.directory=${user.home}/monitor<br>dubbo.charts.directory=${dubbo.jetty.directory}/charts<br>dubbo.statistics.directory=${user.home}/monitor/statistics<br>dubbo.log4j.file=logs/dubbo-monitor-simple.log<br>dubbo.log4j.level=WARN<br>启动dubbo-simple</p>
+<p><pre class="lang:default decode:true ">[root@linxu ~]# cd /usr/local/dubbo-simple/dubbo-monitor-simple-2.8.4/bin<br>[root@linxu bin]# sh start.sh</pre><br>启动成功后登陆访问<a href="http://192.168.43.163:7072" target="_blank" rel="noopener">http://192.168.43.163:7072</a> (端口为jetty端口)</p>
+<p>如果查看不到监控提供者</p>
+<p>com.alibaba.dubbo.monitor.MonitorService</p>
+<p>请核对dubbo.properties zookeeper地址和端口是否正确</p>
+<p>&nbsp;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P4.html" itemprop="url"> centos服务器安装mysql</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-12T16:14:23+08:00">
+                2018-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.安装mysql</p>
+<p><pre class="lang:default decode:true ">[root@localhost ~]rpm -qa | grep mysql #搜索指定rpm包是否安装。<br>[root@localhost ~]yum install mysql #安装客户端<br>[root@localhost ~]yum install mysql-server #安装服务端(此时安装失败，需要下载)<br>[root@localhost ~]wget <a href="http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm" target="_blank" rel="noopener">http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</a><br>[root@localhost ~]rpm -ivh mysql-community-release-el7-5.noarch.rpm<br>[root@localhost ~]yum install mysql-community-server #安装server<br>[root@localhost ~]yum install mysql-devel #服务端安装好后，需要安装 ，包含了所需要的库和文件，如果需要编译其他Mysql客户程序，必须要安装</pre><br>2.服务器安装完成后，通过本机DbVisualizer连接时会连接不上，此时需要赋予权限</p>
+<p><pre class="lang:default decode:true ">[root@localhost ~]grant all on <em>.</em> to test@’%’ identified by ‘123456’; <em>.</em>，表示赋予用户操作服务器上所有数据库所有表的权限。 %，表示所有ip<br>grant 权限1,权限2,…权限n on 数据库名称.表名称 to 用户名@用户地址 identified by ‘密码’</pre><br>3.删除权限</p>
+<p><pre class="lang:default decode:true">[root@localhost ~]grant all on <em>.</em> to test@’%’ identified by ‘123456’; <em>.</em>，表示赋予用户操作服务器上所有数据库所有表的权限。 %，表示所有ip<br>revoke 权限1,权限2,…权限n on 数据库名称.表名称 from 用户名@用户地址</pre><br>&nbsp;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P13.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P13.html" itemprop="url"> Spring-batch restart重拉机制		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-22T14:27:28+08:00">
+                2017-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-batch/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring-batch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于Spring-batch中的Reader-processor-writer模式，例如</p>
+<p><pre class="lang:default decode:true">&lt;batch:step id=”test-01”&gt;<br>    &lt;batch:tasklet&gt;<br>        &lt;batch:chunk reader=”testR” processor=”testP” commit-interval=”1”&gt;<br>            &lt;batch:writer&gt;<br>                &lt;bean class=”com.test.TestW” /&gt;<br>            &lt;/batch:writer&gt;<br>        &lt;/batch:chunk&gt;<br>    &lt;/batch:tasklet&gt;<br>&lt;/batch:step&gt;</pre><br>如果reader读取为两条数据，第二条数据异常断批，由于commint-interval为1，第一条会执行processor和writer，且成功commit，第二条Processor会回滚，writer不会执行。当restart时，会从第二条数据重新处理，第一条已处理不会再重复处理。</p>
+<p>如果此时将</p>
+<p><pre class="lang:default decode:true ">&lt;batch:chunk reader=”testR” processor=”testP” commit-interval=”1”&gt;</pre><br>改为</p>
+<p><pre class="lang:default decode:true ">&lt;batch:chunk reader=”testR” processor=”testP” commit-interval=”2”&gt;</pre><br>这时，reader读取两条数据，第二条数据异常断批，则两条数据都会回滚掉，restart时会重新执行。</p>
+<p>以上，目前已验证Reader-processor-writer模式重拉不会导致数据重复处理。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P16.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P16.html" itemprop="url"> WordPress搭建		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-22T14:17:01+08:00">
+                2017-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WordPress/" itemprop="url" rel="index">
+                    <span itemprop="name">WordPress</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>具体参考</p>
+<p><a href="http://www.bandwagonhost.net/401.html" target="_blank" rel="noopener">http://www.bandwagonhost.net/401.html</a></p>
+<p><a href="http://www.bandwagonhost.net/403.html" target="_blank" rel="noopener">http://www.bandwagonhost.net/403.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P2.html" itemprop="url"> WordPress TwentyFourteen页面不居中问题解决</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-22T14:12:35+08:00">
+                2017-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WordPress/" itemprop="url" rel="index">
+                    <span itemprop="name">WordPress</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>选择 仪表盘–&gt;外观–&gt;编辑</p>
+<p>选择style.css，找到如下代码：  </p>
+<pre><code class="java">html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {  
+    border: <span class="number">0</span>;  
+    font-family: inherit;  
+    font-size: <span class="number">100</span>%;  
+    font-style: inherit;  
+    font-weight: inherit;  
+    margin: <span class="number">0</span>;  
+    outline: <span class="number">0</span>;  
+    padding: <span class="number">0</span>;  
+    vertical-align: baseline;  
+}
+</code></pre>
+<p>将  </p>
+<pre><code class="java">margin: <span class="number">0</span>;
+</code></pre>
+<p>改为  </p>
+<pre><code class="java">margin: auto;
+</code></pre>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P1.html" itemprop="url"> 微信小程序初探</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-22T10:20:31+08:00">
+                2017-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WeChat小程序/" itemprop="url" rel="index">
+                    <span itemprop="name">WeChat小程序</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>微信小程序，简称小程序，英文名Mini Program，是一种不需要下载安装即可使用的应用，它实现了应用“触手可及”的梦想，用户扫一扫或搜一下即可打开应用。2017年1月9日，张小龙在2017微信公开课Pro上发布的小程序正式上线。</p>
+</blockquote>
+<h1>前言：</h1><br><font size="4">距离微信小程序发布已经过去很长一段时间了，怀着只求一知半解的心态来初探一下小程序，并利用小程序API做出一个小玩意儿，俯身亲耳以请各位大牛提出不足之处。这段时间对于小程序的学习是挺囫囵吞枣的，只是对小程序有着一些初步的了解，下面是对学习过程的一些梳理总结。</font><br><br><br><h1>初探：</h1>
+
+
+<p>1.小程序的组成主要由以下四种类型文件：  </p>
+<p>  .js　　　JavaScrip文件<br>  .json　　项目配置文件，负责窗口颜色等等<br>  .wxss　　类似HTML文件<br>  .wxml　　类似CSS文件</p>
+<p>2.小程序根目录下用app来命名的上述四种类型文件，就是程序入口文件，四个文件对应介绍如下：</p>
+<p>   app.json　　必须要有这个文件，配置文件入口。所有的页面都需要添加在此文件的pages中，第一条记录为 进入的首页。此文件还可以设置窗口的颜色，底部导航菜单等。<br>   app.js　　　必须要有这个文件，可以在这个文件中监听并处理小程序的生命周期函数、声明全局变量等。<br>   app.wxss　　不必须有这个文件，可以定义全局的css样式。<br>   app.wxml　　不必须有这个文件，并不是首页界面。  </p>
+<p>3.小程序的基本函数如下：  </p>
+<p>App函数用来注册一个小程序。接受一个 object 参数，其指定小程序的生命周期函数等。  </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">触发时机  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">onLaunch</td>
+<td style="text-align:left">生命周期函数–监听小程序初始化</td>
+<td style="text-align:left">当小程序初始化完成时，会触发 onLaunch（全局只触发一次）  </td>
+</tr>
+<tr>
+<td style="text-align:left">onShow</td>
+<td style="text-align:left">生命周期函数–监听小程序显示</td>
+<td style="text-align:left">当小程序启动，或从后台进入前台显示，会触发 onShow  </td>
+</tr>
+<tr>
+<td style="text-align:left">onHide</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">生命周期函数–监听小程序隐藏    当小程序从前台进入后台，会触发 onHide  </td>
+</tr>
+<tr>
+<td style="text-align:left">onError</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">错误监听函数    当小程序发生脚本错误，或者 api 调用失败时，会触发 onError 并带上错误信息  </td>
+</tr>
+<tr>
+<td style="text-align:left">其他</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">开发者可以添加任意的函数或数据到 Object 参数中，用 this 可以访问 </td>
+</tr>
+</tbody>
+</table>
+<p><br>   </p>
+<p>Page函数用来注册一个页面。接受一个 object 参数，其指定页面的初始数据、生命周期函数、事件处理函数等。   </p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">data</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">页面的初始数据 </td>
+</tr>
+<tr>
+<td style="text-align:left">onLoad</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">生命周期函数–监听页面加载 </td>
+</tr>
+<tr>
+<td style="text-align:left">onReady</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">生命周期函数–监听页面初次渲染完成 </td>
+</tr>
+<tr>
+<td style="text-align:left">onShow</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">生命周期函数–监听页面显示 </td>
+</tr>
+<tr>
+<td style="text-align:left">onHide</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">生命周期函数–监听页面隐藏 </td>
+</tr>
+<tr>
+<td style="text-align:left">onUnload</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">生命周期函数–监听页面卸载 </td>
+</tr>
+<tr>
+<td style="text-align:left">onPullDownRefresh</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">页面相关事件处理函数–监听用户下拉动作 </td>
+</tr>
+<tr>
+<td style="text-align:left">onReachBottom</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">页面上拉触底事件的处理函数 </td>
+</tr>
+<tr>
+<td style="text-align:left">onShareAppMessage</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">用户点击右上角转发 </td>
+</tr>
+<tr>
+<td style="text-align:left">onPageScroll</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">页面滚动触发事件的处理函数，其他Any开发者可以添加任意的函数或数据到 object 参数中，在页面的函数中用 this 可以访问   </td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>4.更多小程序API请参考官方文档。<br>   <a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">点击传送门</a>  </p>
+<h1>实践：</h1>
+
+<p>通过实现一个数字爆炸小游戏加深了解，也是对初探小程序的一个完美终结。功能实现有单机版和联网版，单机版只能本地使用，联网版需要后台部分通过简单的spring-boot搭建。</p>
+<p><a href="https://github.com/reallinxu/NumBomb.git" target="_blank" rel="noopener">数字爆炸小程序代码github地址</a></p>
+<p>要点笔记：</p>
+<p>1.js文件中page中方法data为初始化数据，可以在wxml文件中通过来获取，也可在js定义的方法中通过setData进行修改。</p>
+<p>2.传值，可以通过在wxml中使用data-id传值，在方法中可以获取date-id的值。<br>getNumJson: function (e){<br>　var numjson = e.currentTarget.dataset.id;<br>}</p>
+<p>3.多参传值可以利用json进行传输，方法接收json字符串后通过JSON.parse转换成含有参数的对象。</p>
+<p>4.页面跳转，js中使用下面方法进行跳转，此方法会销毁原page。<br>wx.redirectTo({<br>　　url: ‘../boom/boom’<br>})<br>当页面在tabbar时，用此方法不会跳转，应使用：<br>wx.switchTab({<br>　　url: ‘../index/index’<br>}) </p>
+<p>5.图片作为页面背景时，background-image 只能用网络url或者base64，图片的base64可以通过网页在线转换。 </p>
+<p>6.隐藏标签布局可以使css样式中 display: none或者在标签中设置 hidden=’true’，通过使用class=’‘在js中设置demo值来指定对应的css，这样可以在function中通过修改demo值来改变成不同的css。</p>
+<p>7.普通方法中修改变量使用:<br>baseInput: function (e) {<br>   　　this.setData({<br> 　　　　baseNum: e.detail.value<br>   　　})<br>}<br>wx.request请求中直接使用this已经是wx.request的this了，所以此时需要在wx.request中使用，则需要在wx.request外部定义 var that = this; 在wx.request中再使用that代替this即可。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P5.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P5.html" itemprop="url"> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-22T10:20:31+08:00">
+                2017-12-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.CentOS联网设置</p>
+<p><pre class="lang:default decode:true">网络接口配置文件<br>[root@localhost ~]# vi /etc/sysconfig/network-scripts/ifcfg-ens33</pre></p>
+<h1 id="Intel-Corporation-82545EM-Gigabit-Ethernet-Controller-Copper"><a href="#Intel-Corporation-82545EM-Gigabit-Ethernet-Controller-Copper" class="headerlink" title="Intel Corporation 82545EM Gigabit Ethernet Controller (Copper)"></a>Intel Corporation 82545EM Gigabit Ethernet Controller (Copper)</h1><p>TYPE=Ethernet       #网卡类型<br>DEVICE=eth0         #网卡接口名称<br>ONBOOT=yes          #系统启动时是否自动加载<br>BOOTPROTO=static    #启用地址协议 –static:静态协议 –bootp协议 –dhcp协议<br>IPADDR=192.168.1.11      #网卡IP地址<br>NETMASK=255.255.255.0    #网卡网络地址<br>GATEWAY=192.168.1.1      #网卡网关地址<br>DNS1=10.203.104.41       #网卡DNS地址<br>HWADDR=00:0C:29:13:5D:74 #网卡设备MAC地址<br>BROADCAST=192.168.1.255  #网卡广播地址 </p>
+<p>PS:该文件名ifcfg-ens33不固定，找差不多类型文件即可。联网只要设置为自动加载即可，即ONBOOT设置为yes(一般默认为no)。设置完后reboot重启，命令ifconfig查看ip。<br>2.CentOS安装jdk</p>
+<p><pre class="lang:default decode:true ">使用WinSCP连接虚拟机，centOS可以直接通过FTP和SSH连接。<br>将jdk-8u144-linux-x64.tar.gz下载好通过WinSCP放入root目录下。<br>使用SecureCRT连接虚拟机，开始准备安装jdk。<br>1.创建Java文件夹<br>[root@localhost ~]# cd /usr/local<br>[root@localhost local]# mkdir java<br>[root@localhost local]# ls<br>bin  etc  games  include  java  lib  lib64  libexec  sbin  share  src<br>2.将jdk-8u144-linux-x64.tar.gz解压，再移到java文件夹下<br>[root@localhost ~]# tar zxvf jdk-8u144-linux-x64.tar.gz<br>[root@localhost ~]# mv jdk1.8.0_144 /usr/local/java<br>3.设置环境变量<br>[root@localhost ~]# vi ~/.bashrc<br>文件末尾加上以下几行：<br>export JAVA_HOME=/usr/local/java/jdk1.8.0_144<br>export CLASSPATH=.:${JAVA_HOME}/lib<br>export PATH=${JAVA_HOME}/bin:$PATH<br>使生效：<br>[root@localhost jdk1.8.0_144]# source ~/.bashrc<br>4.验证是否安装成功<br>[root@localhost jdk1.8.0_144]# java<br>[root@localhost jdk1.8.0_144]# javac<br>[root@localhost jdk1.8.0_144]# java -version</pre><br>3.CentOS安装Nexus</p>
+<p><pre class="lang:default decode:true ">将nexus-3.5.2-01-unix.tar.gz通过WInSCP放入root目录下。<br>使用SecureCRT连接虚拟机，开始准备安装nexus。<br>1.创建Nexus文件夹<br>[root@localhost ~]# cd /usr/local<br>[root@localhost local]# ls<br>bin  etc  games  include  java  lib  lib64  libexec  sbin  share  src<br>[root@localhost local]# mkdir nexus<br>[root@localhost local]# ls<br>bin  etc  games  include  java  lib  lib64  libexec  nexus  sbin  share  src<br>2.将nexus-3.5.2-01-unix.tar.gz移到nexus文件夹下再解压<br>[root@localhost ~]# mv nexus-3.5.2-01-unix.tar.gz /usr/local/nexus<br>[root@localhost ~]# cd /usr/local/nexus<br>[root@localhost ~]# tar zxvf nexus-3.5.2-01-unix.tar.gz<br>3.启动nexus<br>[root@localhost ~]# cd /usr/local/nexus/nexus-3.5.2-01/bin<br>[root@localhost bin]# ./nexus start<br>WARNING: <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>WARNING: Detected execution as “root” user.  This is NOT recommended!<br>WARNING: <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>Starting nexus<br>[root@localhost bin]# ./nexus status<br>WARNING: <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>WARNING: Detected execution as “root” user.  This is NOT recommended!<br>WARNING: <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>**</em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><br>nexus is running.<br>4.验证是否启动成功<br>在浏览器中输入{ip}:8081(默认为8081端口)。<br>此时并不能打开，因为防火墙的原因，此处我是关闭防火墙(也可以开放相应端口解决)，为了简单直接关闭啦。<br>关闭防火墙命令如下：<br>[root@localhost bin]# systemctl stop firewalld.service #停止firewall(此时重启后防火墙会自动开启)<br>[root@localhost bin]# systemctl disable firewalld.service #禁止firewall开机启动<br>[root@localhost bin]# firewall-cmd –state #查看默认防火墙状态（关闭后显示notrunning，开启后显示running）<br>此时再通过浏览器进入即可。</pre><br>4.CentOS安装Tomcat</p>
+<p><pre class="lang:default decode:true ">将apache-tomcat-8.5.23.tar.gz通过WInSCP放入root目录下。<br>使用SecureCRT连接虚拟机，开始准备安装tomcat。<br>1.创建Tomcat文件夹<br>[root@localhost ~]# cd /usr/local<br>[root@localhost local]# mkdir tomcat<br>[root@localhost local]# ls<br>bin  etc  games  include  java  lib  lib64  libexec  nexus  sbin  share  src  tomcat<br>2.将apache-tomcat-8.5.23.tar.gz移到tomcat文件夹下再解压<br>[root@localhost ~]# mv apache-tomcat-8.5.23.tar.gz /usr/local/tomcat/<br>[root@localhost ~]# cd /usr/local/tomcat/<br>[root@localhost tomcat]# tar zxvf apache-tomcat-8.5.23.tar.gz<br>3.启动Tomcat<br>[root@localhost ~]# cd /usr/local/tomcat/apache-tomcat-8.5.23/bin<br>[root@localhost bin]# ./startup.sh<br>Using CATALINA_BASE:   /usr/local/tomcat/apache-tomcat-8.5.23<br>Using CATALINA_HOME:   /usr/local/tomcat/apache-tomcat-8.5.23<br>Using CATALINA_TMPDIR: /usr/local/tomcat/apache-tomcat-8.5.23/temp<br>Using JRE_HOME:        /usr/local/java/jdk1.8.0_144<br>Using CLASSPATH:       /usr/local/tomcat/apache-tomcat-8.5.23/bin/bootstrap.jar:/usr/local/tomcat/apache-tomcat-8.5.23/bin/tomcat-juli.jar<br>Tomcat started.<br>4.验证是否安装成功<br>用浏览器输入{IP}:8080(默认为8080端口)。 PS：注意防火墙设置。</pre><br>5.CentOS安装RabbitMq</p>
+<p><pre class="lang:default decode:true ">1.安装Erlang<br>使用SecureCRT连接虚拟机，开始准备安装Erlang。<br>[root@localhost bin]# rpm -ivh <a href="http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm" target="_blank" rel="noopener">http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm</a><br>[root@localhost bin]# yum install erlang<br>安装  1 软件包 (+110 依赖软件包)</pre></p>
+<p>总下载量：51 M<br>安装大小：117 M<br>Is this ok [y/d/N]:<br>输入：y<br>是否继续？[y/N]：<br>输入: y</p>
+<p>2.安装RabbitMq<br>1.将rabbitmq-signing-key-public.asc、rabbitmq-server-3.3.5-1.noarch.rpm通过WInSCP放入root目录下。<br>使用SecureCRT连接虚拟机，开始准备安装RabbitMq。<br>[root@localhost ~]# rpm –import rabbitmq-signing-key-public.asc<br>[root@localhost ~]# rpm -ivh rabbitmq-server-3.3.5-1.noarch.rpm<br>准备中…                          ################################# [100%]<br>正在升级/安装…<br>   1:rabbitmq-server-3.3.5-1          ################################# [100%]<br>[root@localhost ~]# rabbitmq-plugins enable rabbitmq_management<br>The following plugins have been enabled:<br>  mochiweb<br>  webmachine<br>  rabbitmq_web_dispatch<br>  amqp_client<br>  rabbitmq_management_agent<br>  rabbitmq_management<br>Plugin configuration has changed. Restart RabbitMQ for changes to take effect.<br>[root@localhost ~]# chkconfig –level 3 rabbitmq-server on<br>2.配置文件路径<br>[root@localhost ~]# vi /etc/init.d/rabbitmq-server<br>寻找行：PID_FILE=/var/run/rabbitmq/pid<br>在以上内容之下，插入行<br>export RABBITMQ_MNESIA=/rabbitmq/mnesia<br>3.配置访问权限<br>[root@localhost ~]# chmod 644 /etc/rabbitmq/enabled_plugins<br>4.启动RabbitMq<br>[root@localhost ~]# service rabbitmq-server start<br>[root@localhost ~]# rabbitmqctl add_user admin admin<br>[root@localhost ~]# rabbitmqctl set_user_tags admin administrator<br>5.验证RabbitMq<br>用浏览器输入{Ip}:15672查看后管。(PS：注意防火墙)</p>
+<p>3.配置RabbitMq集群<br>1.修改hosts文件<br>    vi /etc/hosts<br>    将两台虚拟机的Ip配置进去：<br>    192.168.43.69 test1<br>    192.168.43.216 test2<br>    重启两台虚拟机reboot<br>2.启动第一台虚拟机的Rabbitmq:<br>    service rabbitmq-server start<br>    将/var/lib/rabbitmq的.erlang.cookie文件拷贝到第二台虚拟机相同位置覆盖<br>    更改.erlang.cookie的访问权限为400<br>    chmod 400 /var/lib/rabbitmq/.erlang.cookie<br>    更改.erlang.cookie的文件所有人为rabbitmq<br>    chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie<br>    启动第二台虚拟机的Rabbitmq：<br>    service rabbitmq-server start<br>    rabbitmqctl stop_app<br>    rabbitmqctl join_cluster rabbit@test1<br>    rabbitmqctl start_app<br>3.验证集群是否成功<br>    用浏览器输入{Ip}:15672查看后管。(PS：注意防火墙)</p>
+<pre><code>PS：cookie文件会有两处都存在，root目录下cookie可以直接删除。
+   如果使用虚拟机使用桥接模式，主机名hostname会自动修改成和hosts配置一致，如果使用仅主机网络等，hostname没有修改，可以使用hostnamectl set-hostname test1命令就行修改。&lt;/pre&gt;
+</code></pre><p>软件包地址：<a href="http://download.csdn.net/download/anonymous_l/10021072" target="_blank" rel="noopener">http://download.csdn.net/download/anonymous_l/10021072</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P9.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P9.html" itemprop="url"> Hello，World！		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-18T17:28:35+08:00">
+                2017-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS/" itemprop="url" rel="index">
+                    <span itemprop="name">CentOS</span>
+                  </a>
+                </span>
+
+                
+                
+                  . 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CentOS/杂项/" itemprop="url" rel="index">
+                    <span itemprop="name">杂项</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>第一次搭建，有点小激动，感谢夏某某的服务器和指导。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Reallinxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
-            </div>
-        </div>
-    </section>
-    <section class="visible-xs">
-        <div class="title-article">
-            <center>
-                <h4>
-                    <a href="/aticle/P5.html">
-                        <span> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</span>
-                    </a>
-                </h4>
-            </center>
-        </div>
-        <p></p>
-        <center>
-            <i class="fa fa-calendar"></i> 2017-12-22
-        </center>
-        <p></p>
-        <p></p>
-        <center>
+              </div>
             
-            <i class="fa fa-tags"></i>
-            
-            <a href="/tags/CentOS/">CentOS</a>
-            
-            
-            
-        </center>
-        <p></p>
-        <div class="alert alert-gal article-body content-article">
-            <p style="text-align: center;">
-                <a href="/aticle/P5.html">
-                    
-                    <img src="/imgs/preview/preview6.jpg" alt=" CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		">
-                </a>
-            </p>
-        </div>
-        
-        <a class="btn btn-danger pull-right read-more btn-block" href="/aticle/P5.html">
-            阅读全文
-            <!--<span class="badge">739</span>-->
-        </a>
-    </section>
-</div>
-     
-     <div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-    
-    <div class="data-article hidden-xs">
-        <span class="month">12月</span>
-        <span class="day">18</span>
-    </div>
-    <!-- 大型设备文章 -->
-    <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/aticle/P9.html">
-                    <span> Hello，World！		</span>
-                </a>
-            </h1>
-        </div>
-        <div class="tag-article">
-            
-            
-            <!-- TODO 添加评论统计 -->
-            <!--<span class="label label-gal">
-                <i class="fa fa-comments"></i>
-                <a href="/aticle/P9.html#comments">739</a>
-            </span>-->
-        </div>
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/aticle/P9.html">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview5.jpg" alt=" Hello，World！		">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-    <section class="visible-xs">
-        <div class="title-article">
-            <center>
-                <h4>
-                    <a href="/aticle/P9.html">
-                        <span> Hello，World！		</span>
-                    </a>
-                </h4>
-            </center>
-        </div>
-        <p></p>
-        <center>
-            <i class="fa fa-calendar"></i> 2017-12-18
-        </center>
-        <p></p>
-        <p></p>
-        <center>
-            
-            
-        </center>
-        <p></p>
-        <div class="alert alert-gal article-body content-article">
-            <p style="text-align: center;">
-                <a href="/aticle/P9.html">
-                    
-                    <img src="/imgs/preview/preview5.jpg" alt=" Hello，World！		">
-                </a>
-            </p>
-        </div>
-        
-        <a class="btn btn-danger pull-right read-more btn-block" href="/aticle/P9.html">
-            阅读全文
-            <!--<span class="badge">739</span>-->
-        </a>
-    </section>
-</div>
-     
-</div>
-<!-- 前方最多7个 < 1 2 3 4 5 6 -->
-<!-- 前方超过第7页则分为 < 1 ... (n - 3) (n - 2) (n - 1) n, 此时前面为固定的6个 -->
 
-<!-- 后方最多8个 (n + 1) 到 (n + 7) > -->
-<!-- 如果末页和当前页相差超过7, 此时后面为固定的6个, (n + 1) (n + 2) (n + 3) ... total > -->
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">Kategorien</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Reallinxu</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
-<div id="gal-pagination" class="clearfix">
-    <ul class="pagination pagination-gal pull-right">
-        
-        <li class="prev">
-            <a href="/">«</a>
-        </li>
-        
-        
-        
-        <li>
-            <a href="/">1</a>
-        </li>
-        
-        
-        <li class="current">
-            <span>2</span>
-        </li>
-        
-        
-        
-        
-    </ul>
-</div>
+  <span class="post-meta-divider">|</span>
 
-                </div>
-                <aside class="col-md-4 gal-left" id="sidebar">
-    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
-<aside id="sidebar-search">
-    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
-        <form class="form-inline clearfix" id="search-form" method="get"
-              action="/search/index.html">
-            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
-            <button class="btn btn-danger btn-gal" type="submit">
-                <i class="fa fa-search"></i>
-            </button>
-        </form>
-    </div>
-</aside>
-    <aside id="sidebar-author">
-    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
-        <div class="panel-heading" style="text-align: center">
-            <i class="fa fa-quote-left"></i>
-            Reallinxu
-            <i class="fa fa-quote-right"></i>
-        </div>
-        <div class="author-panel text-center">
-            <img src="/imgs/touxiang.jpg" width="140" height="140"
-                 alt="个人头像" class="author-image">
-            <p class="author-description"></p>
-        </div>
-    </div>
-</aside>
-    
-    <aside id="sidebar-recent_comments">
-    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
-        <div class="panel-heading">
-            <i class="fa fa-comments"></i>
-            最新评论
-            <i class="fa fa-times-circle panel-remove"></i>
-            <i class="fa fa-chevron-circle-up panel-toggle"></i>
-        </div>
-        <ul class="list-group list-group-flush"></ul>
-    </div>
-</aside>
-    
-    <!-- 要配置好leancloud才能开启此小工具 -->
-    
-    
-    <aside id="sidebar-recent_posts">
-    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
-        <div class="panel-heading">
-            <i class="fa fa-refresh"></i>
-            近期文章
-            <i class="fa fa-times-circle panel-remove"></i>
-            <i class="fa fa-chevron-circle-up panel-toggle"></i>
-        </div>
-        <ul class="list-group list-group-flush">
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P17.html"> 将本地代码传入github</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P10.html"> java8初识		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P8.html"> 网站同时支持http和https访问		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P15.html"> WordPress从Apache迁移到nginx		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P12.html"> Redis集群搭建		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P14.html"> vi文件Found a swap file by the name 		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P11.html"> redis入门		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P6.html"> 更新本地代码到github		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P7.html"> 本地代码上传到github		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P3.html"> Dubbo+Zookeeper+Spring-boot+dubbo-simple 搭建入门</a>
-                </span>
-            </li>
-            
-        </ul>
-    </div>
-</aside>
-    
-    
-    <aside id="sidebar-rand_posts">
-    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
-        <div class="panel-heading">
-            <i class="fa fa-refresh"></i>
-            随机文章
-            <i class="fa fa-times-circle panel-remove"></i>
-            <i class="fa fa-chevron-circle-up panel-toggle"></i>
-        </div>
-        <ul class="list-group list-group-flush">
-            
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P10.html"> java8初识		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P13.html"> Spring-batch restart重拉机制		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P12.html"> Redis集群搭建		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P15.html"> WordPress从Apache迁移到nginx		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P16.html"> WordPress搭建		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P17.html"> 将本地代码传入github</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P5.html"> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P2.html"> WordPress TwentyFourteen页面不居中问题解决</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P9.html"> Hello，World！		</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/aticle/P7.html"> 本地代码上传到github		</a>
-                </span>
-            </li>
-            
-        </ul>
-    </div>
-</aside>
-    
-    
-    <aside id="gal-sets">
-        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
-            <ul class="nav nav-pills pills-gal">
-                <li class="">
-                    <a href="/page/2/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
-                </li>
-                <li class="">
-                    <a href="/page/2/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
-                </li>
-                <li class="">
-                    <a href="/page/2/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
-    
-    <a href="/tags/微信，小程序/" style="font-size: 17.247105784127598px;" class="tag-cloud-link">微信，小程序</a>
-    
-    <a href="/tags/CentOS/" style="font-size: 9.760478389704687px;" class="tag-cloud-link">CentOS</a>
-    
-</div>
-                <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
-    
-    <li>
-        <a href="http://www.reallinxu.com/" target="_blank">Hackの博客</a>
-    </li>
-    
-    <li>
-        <a href="https://www.xiajunyi.com/" target="_blank">夏军谊的小站</a>
-    </li>
-    
-    <li>
-        <a href="https://team19.abstiger.com/" target="_blank">华东19部博客</a>
-    </li>
-    
-</div>
-                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
-    
-    <li>
-        <a href="https://github.com/reallinxu" target="_blank">Github</a>
-    </li>
-    
-</div>
-            </div>
-        </div>
-    </aside>
-    
-</aside>
-            </div>
-        </div>
-    </div>
-    <footer id="gal-footer">
-    <div class="container">
-        Copyright © 2018 Reallinxu Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
-    </div>
-</footer>
 
-<!-- 回到顶端 -->
-<div id="gal-gotop">
-    <i class="fa fa-angle-up"></i>
-</div>
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
-<script src="/js/activate-power-mode.js"></script>
-<script>
-
-    // 配置highslide
-	hs.graphicsDir = '/js/highslide/graphics/'
-    hs.outlineType = "rounded-white";
-    hs.dimmingOpacity = 0.8;
-    hs.outlineWhileAnimating = true;
-    hs.showCredits = false;
-    hs.captionEval = "this.thumb.alt";
-    hs.numberPosition = "caption";
-    hs.align = "center";
-    hs.transitions = ["expand", "crossfade"];
-    hs.lang.number = '共%2张图, 当前是第%1张';
-    hs.addSlideshow({
-      interval: 5000,
-      repeat: true,
-      useControls: true,
-      fixedControls: "fit",
-      overlayOptions: {
-        opacity: 0.75,
-        position: "bottom center",
-        hideOnMouseOut: true
-      }
-    })
-
-    // 初始化aos
-    AOS.init({
-      duration: 1000,
-      delay: 0,
-      easing: 'ease-out-back'
-    });
-
-</script>
-<script>
-	POWERMODE.colorful = 'true';    // make power mode colorful
-	POWERMODE.shake = 'true';       // turn off shake
-	// TODO 这里根据具体情况修改
-	document.body.addEventListener('input', POWERMODE);
-</script>
-<script>
-    window.slideConfig = {
-      prefix: '/imgs/slide/background',
-      ext: 'jpg',
-      maxCount: '6'
-    }
-</script>
-<script src="/js/hs.js"></script>
-<script src="/js/blog.js"></script>
-
-<script src="/js/oni.js"></script>
-
-
-
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-<script>
-    if(window.commentConfig) {
-      window.commentConfig.owner = 'reallinxu'
-      window.commentConfig.repo = 'blogIssue'
-      window.commentConfig.client_id = 'a53f3c5891f6d9ccd2f8'
-      window.commentConfig.client_secret = 'c733f276015db7d493f9fff82f171bbe460cd63c'
-      window.commentConfig.redirect_uri = ''
-    } else {
-      window.commentConfig = {
-        owner: 'reallinxu',
-        repo: 'blogIssue',
-        client_id: 'a53f3c5891f6d9ccd2f8',
-        client_secret: 'c733f276015db7d493f9fff82f171bbe460cd63c',
-        redirect_uri: ''
-      }
-    }
-</script>
-<script src="/js/comment/gitment.js"></script>
-
 </html>
