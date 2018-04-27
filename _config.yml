@@ -7,7 +7,7 @@ title: HackBlog
 subtitle:
 description:
 author: Reallinxu
-language:
+language: zh-CN
 timezone:
 
 # URL
@@ -78,6 +78,8 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type:
+
+plugins: hexo-generate-feed
 
 jsonContent:
   dateFormat: MM-DD

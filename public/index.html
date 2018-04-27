@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next muse use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -74,6 +74,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="HackBlog" type="application/atom+xml" />
+
 
 
 
@@ -83,6 +85,7 @@
 <meta property="og:title" content="HackBlog">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="HackBlog">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HackBlog">
 
@@ -99,8 +102,8 @@
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: '0',
-      author: 'Author'
+      userId: '123456',
+      author: 'TenKen'
     },
     algolia: {
       applicationID: '',
@@ -132,7 +135,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -142,7 +145,7 @@
   <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
-
+		<a href="https://github.com/reallinxu"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -181,7 +184,27 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -191,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            归档
           </a>
         </li>
       
@@ -233,7 +256,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -257,9 +280,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T10:20:31+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T10:20:31+08:00">
                 2018-04-26
               </time>
             
@@ -278,7 +301,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -295,6 +318,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/java a=a++引发的思考.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/java a=a++引发的思考.html" class="cy_cmt_count" data-xid="aticle/java a=a++引发的思考.html" itemprop="commentsCount" ></span>
+                </a>
+              
+            
           
 
           
@@ -321,727 +355,19 @@
       
         
           
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近越来越感觉到java基础的重要性，开始重新拾起封存已久的《Thinking in java》,偶然的一个小案例引发了此次的思考。</p>
-<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>首先一个小的demo：</p>
-<pre><code>public class Test {
+          前言最近越来越感觉到java基础的重要性，开始重新拾起封存已久的《Thinking in java》,偶然的一个小案例引发了此次的思考。
+Demo首先一个小的demo：
+public class Test {
     public static void main(String[] args) {
-        int a = 1;
-        System.out.println(&quot;1:&quot;+ a);
-        a++;
-        System.out.println(&quot;2:&quot;+ a);
-        ++a;
-        System.out.println(&quot;3:&quot;+ a);
-        a = ++a;
-        System.out.println(&quot;4:&quot;+ a);
-        a = a++;
-        System.out.println(&quot;5:&quot;+ a);
-        a = a++ + ++a;
-        System.out.println(&quot;6:&quot;+ a);
-    }
-}
-</code></pre><p>java入门时都会遇到过的小案例，前三个答案相信都会随口而出，但是第四个才是此次探索的问题所在，上面答案如下：<br>    1:1<br>    2:2<br>    3:3<br>    4:4<br>    5:4<br>    6:10<br>回答正确的可以绕过本篇文章，回答错误的跟笔者一起探索下去吧。</p>
-<h1 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h1><ol>
-<li>a++ 和 ++a 区别不在过多赘述，a++是先执行表达式后++，++a是先++再执行表达式。</li>
-<li>a = ++a; 从上的结果可以得出a=3，此时a先++等于4，再赋值给a。此时a=4无异议。</li>
-<li>a = a++; 从上的结果可以得出a=4，此时a先被赋值为4，再执行++，此时a=5。为什么++未生效呢？这篇文章主要就是这个问题的探讨，具体原因可以参考下面对jVM的分析。</li>
-<li>a = a++ + a++; 从上的结果可以得出a=4，运算时第一个a仍为4，然后经过a++为5，又因为++a先执行++，此时a=6，所以结果4+6=10。</li>
-</ol>
-<h1 id="JVM分析"><a href="#JVM分析" class="headerlink" title="JVM分析"></a>JVM分析</h1><p>上述Demo可以通过java自带的javap查看字节码文件，命令如下：<br>    javac Test.java<br>    javap -c Test.class<br>觉得分不清的可以分别对语句进行查看字节码文件，以下是笔者的探索过程。</p>
-<ol>
-<li><p>a++和++a的字节码分析(两个字节码基本相同)：</p>
-<pre><code>0: iconst_1                    1压入栈顶
-1: istore_1                    栈顶值(1)存入局部变量1(a)
-2: iinc          1, 1        变量1自加（a++或++a操作，自加后变量1的值为2）  
-8: iload_1                    变量1的值压入栈顶（值为4）
-</code></pre></li>
-<li><p>a=++a的字节码分析：</p>
-<pre><code>0: iconst_3                    3压入栈顶
-1: istore_1                    栈顶值(3)存入局部变量1(a)
-2: iinc          1, 1        变量1自加（++a操作，自加后变量1的值为4）
-5: iload_1                    变量1的值压入栈顶（值为4）
-6: istore_1                    将栈顶值（4）存入变量1（=操作）
-</code></pre></li>
-<li><p>a=a++的字节码分析：</p>
-<pre><code>0: iconst_4                    4压入栈顶
-1: istore_1                    栈顶值(4)存入局部变量1(a)
-2: iload_1                    变量1的值压入栈顶（值为4）
-3: iinc          1, 1        变量1自加（a++操作，自加后变量1的值为5）
-6: istore_1                    将栈顶值（4）存入变量1（=操作）
-</code></pre></li>
-</ol>
-<p>从3可以看出a=a++,a++操作后并没有压入栈，所以++实际上并未生效。以上为思考全过程，如果不足请指正。</p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/MarkDown.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Reallinxu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HackBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/aticle/MarkDown.html" itemprop="url">Markdown学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T18:57:44+08:00">
-                2018-04-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/learning/" itemprop="url" rel="index">
-                    <span itemprop="name">learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-<h1 id="初识-Markdown"><a href="#初识-Markdown" class="headerlink" title="初识 Markdown"></a>初识 Markdown</h1><p>MarkDown，我总结它是一种写作的方式方法，也可称之为一种轻量级的语言。这种写作方式最大的特点是用“符号”表示“格式”。所以使用MarkDown的时候，随着你对文字的编辑，同时能够把整篇文章的格式也顺便“打”出来。而不需要写好某些内容，再选中，利用工具栏设置它的格式，而是一次性完成。</p>
-<h2 id="Markdown-的优势"><a href="#Markdown-的优势" class="headerlink" title="Markdown 的优势"></a>Markdown 的优势</h2><h3 id="书写简洁"><a href="#书写简洁" class="headerlink" title="书写简洁"></a>书写简洁</h3><p>Markdown的语法简洁明了、知识点相对于HTML来说，只是其一小部分，所以对于我们来说，学习起来相对容易，应用起来也更简便；而且功能比纯文本更强，因此有很多人用它来写博客。</p>
-<h3 id="专注写作"><a href="#专注写作" class="headerlink" title="专注写作"></a>专注写作</h3><p>在使用MarkDown写作的时候，设置你所编写文本的格式时，直接通过MarkDown相关语法符号设置，以便内容编写起来更加顺畅。当写到标题的时候，自然地输入“##标题”，就能达到传统写作，再次选中进行格式设置的效果。不由的让我想到，我在进行传统写作的时候，把文章内容写好，再去编辑各个部分的格式的场景。</p>
-<h3 id="书写错误易发现"><a href="#书写错误易发现" class="headerlink" title="书写错误易发现"></a>书写错误易发现</h3><p>MarkDown 由于是使用标记符号来控制排版格式的，所以你在预览时发现的错误都可以直接在文稿中去查看，轻松修正过来。很多时候我们不会意识到这也是一个优势，但是在长期的使用中，就会体会到能快速发现问题和解决问题就是一种优势。</p>
-<h1 id="熟练MarkDown"><a href="#熟练MarkDown" class="headerlink" title="熟练MarkDown"></a>熟练MarkDown</h1><h2 id="1-对文字样式的编辑"><a href="#1-对文字样式的编辑" class="headerlink" title="1.对文字样式的编辑"></a>1.对文字样式的编辑</h2><ol>
-<li>斜体 ：<em>斜体</em></li>
-<li>粗体 ： <strong>粗体</strong></li>
-<li>加粗斜体 ： <strong><em>加粗斜体</em></strong></li>
-<li>删除线 ：  <del>删除线</del></li>
-</ol>
-<h2 id="2-分级标题"><a href="#2-分级标题" class="headerlink" title="2.分级标题"></a>2.分级标题</h2><h3 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h3><h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h3><h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><p>……<br>……</p>
-<h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><h2 id="3-超链接"><a href="#3-超链接" class="headerlink" title="3.超链接"></a>3.超链接</h2><h3 id="行内式"><a href="#行内式" class="headerlink" title="行内式"></a>行内式</h3><p>欢迎来到<a href="http://www.baidu.com" title="百度一下，你就知道了" target="_blank" rel="noopener">百度</a></p>
-<h3 id="参考式"><a href="#参考式" class="headerlink" title="参考式"></a>参考式</h3><p>我经常去的几个网站<a href="http://www.xinhuanet.com/" title="新华网" target="_blank" rel="noopener">新华网</a>、<a href="http://www.baidu.com" title="baidu" target="_blank" rel="noopener">百度</a>以及<a href="http://www.china.com.cn/" title="中国网" target="_blank" rel="noopener">中国网</a></p>
-<h3 id="自动链接"><a href="#自动链接" class="headerlink" title="自动链接"></a>自动链接</h3><p><a href="http://www.china.com.cn/" target="_blank" rel="noopener">http://www.china.com.cn/</a><br><a href="mailto:&#121;&#97;&#110;&#x79;&#97;&#111;&#64;&#99;&#x73;&#x69;&#x69;&#46;&#99;&#x6f;&#109;&#x2e;&#99;&#x6e;" target="_blank" rel="noopener">&#121;&#97;&#110;&#x79;&#97;&#111;&#64;&#99;&#x73;&#x69;&#x69;&#46;&#99;&#x6f;&#109;&#x2e;&#99;&#x6e;</a></p>
-<h2 id="4-列表"><a href="#4-列表" class="headerlink" title="4.列表"></a>4.列表</h2><h3 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h3><ul>
-<li>无序列表一</li>
-<li>无序列表二</li>
-<li>无序列表三</li>
-</ul>
-<ul>
-<li>无序列表一</li>
-<li>无序列表二</li>
-<li>无序列表三</li>
-</ul>
-<ul>
-<li>无序列表一</li>
-<li>无序列表二</li>
-<li>无序列表三</li>
-</ul>
-<h3 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h3><p>语法：数字+英文句点+空格  </p>
-<ol>
-<li>有序列表一</li>
-<li>有序列表二</li>
-<li>有序列表三</li>
-</ol>
-<h2 id="5-引用"><a href="#5-引用" class="headerlink" title="5.引用"></a>5.引用</h2><h3 id="单层引用"><a href="#单层引用" class="headerlink" title="单层引用"></a>单层引用</h3><blockquote>
-<p>这是一个有两段文字的引用,</p>
-</blockquote>
-<blockquote>
-<p>无意义的占行文字1.</p>
-</blockquote>
-<blockquote>
-<p>无意义的占行文字2.</p>
-<p>无意义的占行文字3.</p>
-</blockquote>
-<blockquote>
-<p>无意义的占行文字4.</p>
-</blockquote>
-<h3 id="多层嵌套"><a href="#多层嵌套" class="headerlink" title="多层嵌套"></a>多层嵌套</h3><blockquote>
-<blockquote>
-<blockquote>
-<p>请问 Markdwon 怎么用？ - 小白</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>自己看教程！ - 愤青</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>教程在哪？ - 小白</p>
-</blockquote>
-<h2 id="6-插入图片"><a href="#6-插入图片" class="headerlink" title="6.插入图片"></a>6.插入图片</h2><h3 id="行内式-1"><a href="#行内式-1" class="headerlink" title="行内式"></a>行内式</h3><p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg" alt="中国" title="中国"></p>
-<h3 id="参考式-1"><a href="#参考式-1" class="headerlink" title="参考式"></a>参考式</h3><p>![中国][China]<br>[China]:<a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg" target="_blank" rel="noopener">https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg</a>  “中国”</p>
-<p><strong>语法说明</strong>：</p>
-<p>在需要添加注脚的文字后加上脚注名字[^注脚名字],称为加注。 然后在文本的任意位置(一般在最后)添加脚注，脚注前必须有对应的脚注名字。</p>
-<p>注意：经测试注脚与注脚之间必须空一行，不然会失效。成功后会发现，即使你没有把注脚写在文末，经Markdown转换后，也会自动归类到文章的最后。</p>
-<p><strong>代码如下</strong>：</p>
-<p>使用 Markdown<a href="Markdown是一种纯文本标记语言">^1</a>可以效率的书写文档,   </p>
-<p>不知道的话，你就百度<a href="百度一下，你就知道了。">^Le</a>。</p>
-<h2 id="8-表格"><a href="#8-表格" class="headerlink" title="8.表格"></a>8.表格</h2><h3 id="语法说明-："><a href="#语法说明-：" class="headerlink" title="语法说明 ："></a>语法说明 ：</h3><p>不管是哪种方式，第一行为表头，第二行分隔表头和主体部分，第三行开始每一行为一个表格行。</p>
-<p>列于列之间用管道符|隔开。原生方式的表格每一行的两边也要有管道符。</p>
-<p>第二行还可以为不同的列指定对齐方向。默认为左对齐，在-右边加上:就右对齐。</p>
-<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><h5 id="简单方式写表格："><a href="#简单方式写表格：" class="headerlink" title="简单方式写表格："></a>简单方式写表格：</h5><table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-<th>分数    </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>小明</td>
-<td>男</td>
-<td>75  </td>
-</tr>
-<tr>
-<td>小红</td>
-<td>女</td>
-<td>79   </td>
-</tr>
-<tr>
-<td>小陆</td>
-<td>男</td>
-<td>92 </td>
-</tr>
-</tbody>
-</table>
-<h5 id="原生方式写表格："><a href="#原生方式写表格：" class="headerlink" title="原生方式写表格："></a>原生方式写表格：</h5><table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-<th>分数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>小明</td>
-<td>男</td>
-<td>75</td>
-</tr>
-<tr>
-<td>小红</td>
-<td>女</td>
-<td>79</td>
-</tr>
-<tr>
-<td>小陆</td>
-<td>男</td>
-<td>92</td>
-</tr>
-</tbody>
-</table>
-<h5 id="为表格第二列指定方向："><a href="#为表格第二列指定方向：" class="headerlink" title="为表格第二列指定方向："></a>为表格第二列指定方向：</h5><table>
-<thead>
-<tr>
-<th>产品</th>
-<th style="text-align:right">价格  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Leanote 高级账号</td>
-<td style="text-align:right">60元/年  </td>
-</tr>
-<tr>
-<td>Leanote 超级账号</td>
-<td style="text-align:right">120元/年</td>
-</tr>
-</tbody>
-</table>
-<h2 id="9-分隔线"><a href="#9-分隔线" class="headerlink" title="9.分隔线"></a>9.分隔线</h2><hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<h2 id="10-插入代码"><a href="#10-插入代码" class="headerlink" title="10.插入代码"></a>10.插入代码</h2><h3 id="行内式-2"><a href="#行内式-2" class="headerlink" title="行内式"></a>行内式</h3><p>C语言里的函数 <code>scanf()</code> 怎么使用？</p>
-<h3 id="多行代码"><a href="#多行代码" class="headerlink" title="多行代码"></a>多行代码</h3><h5 id="缩进式多行代码"><a href="#缩进式多行代码" class="headerlink" title="缩进式多行代码"></a>缩进式多行代码</h5><pre><code>#include &lt;stdio.h&gt;
-int main(void)
-{
-    printf(&quot;Hello world\n&quot;);
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/markdown-learning.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Reallinxu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HackBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/aticle/markdown-learning.html" itemprop="url">Markdown学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-19T18:57:44+08:00">
-                2018-04-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">in</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/learning/" itemprop="url" rel="index">
-                    <span itemprop="name">learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-<h1 id="初识-Markdown"><a href="#初识-Markdown" class="headerlink" title="初识 Markdown"></a>初识 Markdown</h1><p>MarkDown，我总结它是一种写作的方式方法，也可称之为一种轻量级的语言。这种写作方式最大的特点是用“符号”表示“格式”。所以使用MarkDown的时候，随着你对文字的编辑，同时能够把整篇文章的格式也顺便“打”出来。而不需要写好某些内容，再选中，利用工具栏设置它的格式，而是一次性完成。</p>
-<h2 id="Markdown-的优势"><a href="#Markdown-的优势" class="headerlink" title="Markdown 的优势"></a>Markdown 的优势</h2><h3 id="书写简洁"><a href="#书写简洁" class="headerlink" title="书写简洁"></a>书写简洁</h3><p>Markdown的语法简洁明了、知识点相对于HTML来说，只是其一小部分，所以对于我们来说，学习起来相对容易，应用起来也更简便；而且功能比纯文本更强，因此有很多人用它来写博客。</p>
-<h3 id="专注写作"><a href="#专注写作" class="headerlink" title="专注写作"></a>专注写作</h3><p>在使用MarkDown写作的时候，设置你所编写文本的格式时，直接通过MarkDown相关语法符号设置，以便内容编写起来更加顺畅。当写到标题的时候，自然地输入“##标题”，就能达到传统写作，再次选中进行格式设置的效果。不由的让我想到，我在进行传统写作的时候，把文章内容写好，再去编辑各个部分的格式的场景。</p>
-<h3 id="书写错误易发现"><a href="#书写错误易发现" class="headerlink" title="书写错误易发现"></a>书写错误易发现</h3><p>MarkDown 由于是使用标记符号来控制排版格式的，所以你在预览时发现的错误都可以直接在文稿中去查看，轻松修正过来。很多时候我们不会意识到这也是一个优势，但是在长期的使用中，就会体会到能快速发现问题和解决问题就是一种优势。</p>
-<h1 id="熟练MarkDown"><a href="#熟练MarkDown" class="headerlink" title="熟练MarkDown"></a>熟练MarkDown</h1><h2 id="MarkDown语法基础"><a href="#MarkDown语法基础" class="headerlink" title="MarkDown语法基础"></a>MarkDown语法基础</h2><h3 id="1-对文字样式的编辑"><a href="#1-对文字样式的编辑" class="headerlink" title="1.对文字样式的编辑"></a>1.对文字样式的编辑</h3><ol>
-<li>斜体 ：<br><em>斜体</em>　(<code>*斜体*</code>)</li>
-<li>粗体 ：<br><strong>粗体</strong>　(<code>**粗体**</code>)</li>
-<li>加粗斜体 ：<br><strong><em>加粗斜体</em></strong>　(<code>***加粗斜体***</code>)</li>
-<li>删除线 ：<br><del>删除线</del>　(<code>~~删除线~~</code>)</li>
-</ol>
-<h3 id="2-分级标题"><a href="#2-分级标题" class="headerlink" title="2.分级标题"></a>2.分级标题</h3><h4 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h4><pre><code>这是一级标题
-==========
-
-这是二级标题
------------
-</code></pre><h4 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h4><pre><code># 一级标题
-## 二级标题
-### 三级标题
-......
-......
-###### 六级标题
-</code></pre><h3 id="3-超链接"><a href="#3-超链接" class="headerlink" title="3.超链接"></a>3.超链接</h3><h4 id="行内式"><a href="#行内式" class="headerlink" title="行内式"></a>行内式</h4><pre><code>欢迎来到[百度](http://www.baidu.com &quot;百度一下，你就知道了&quot;)
-</code></pre><p>欢迎来到<a href="http://www.baidu.com" title="百度一下，你就知道了" target="_blank" rel="noopener">百度</a></p>
-<h4 id="参考式"><a href="#参考式" class="headerlink" title="参考式"></a>参考式</h4><pre><code>我经常去的几个网站[新华网][1]、[百度][2]以及[中国网][3]
-
-[1]:http://www.xinhuanet.com/ &quot;新华网&quot;
-[2]:http://www.baidu.com &quot;baidu&quot;
-[3]:http://www.china.com.cn/ &quot;中国网&quot;
-</code></pre><p>我经常去的几个网站<a href="http://www.xinhuanet.com/" title="新华网" target="_blank" rel="noopener">新华网</a>、<a href="http://www.baidu.com" title="baidu" target="_blank" rel="noopener">百度</a>以及<a href="http://www.china.com.cn/" title="中国网" target="_blank" rel="noopener">中国网</a></p>
-<h4 id="自动链接"><a href="#自动链接" class="headerlink" title="自动链接"></a>自动链接</h4><pre><code>&lt;http://www.china.com.cn/&gt;  
-&lt;1205678400@qq.com&gt;
-</code></pre><p><a href="http://www.china.com.cn/" target="_blank" rel="noopener">http://www.china.com.cn/</a><br><a href="mailto:&#49;&#50;&#x30;&#53;&#54;&#x37;&#56;&#52;&#x30;&#48;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;" target="_blank" rel="noopener">&#49;&#50;&#x30;&#53;&#54;&#x37;&#56;&#52;&#x30;&#48;&#x40;&#x71;&#x71;&#x2e;&#x63;&#111;&#x6d;</a></p>
-<h3 id="4-列表"><a href="#4-列表" class="headerlink" title="4.列表"></a>4.列表</h3><h4 id="无序列表1"><a href="#无序列表1" class="headerlink" title="无序列表1"></a>无序列表1</h4><pre><code>* 无序列表一
-* 无序列表二
-* 无序列表三
-</code></pre><ul>
-<li>无序列表一</li>
-<li>无序列表二</li>
-<li>无序列表三</li>
-</ul>
-<h4 id="无序列表2"><a href="#无序列表2" class="headerlink" title="无序列表2"></a>无序列表2</h4><pre><code>+ 无序列表一
-+ 无序列表二
-+ 无序列表三
-</code></pre><ul>
-<li>无序列表一</li>
-<li>无序列表二</li>
-<li>无序列表三</li>
-</ul>
-<h4 id="无序列表3"><a href="#无序列表3" class="headerlink" title="无序列表3"></a>无序列表3</h4><pre><code>- 无序列表一
-- 无序列表二
-- 无序列表三
-</code></pre><ul>
-<li>无序列表一</li>
-<li>无序列表二</li>
-<li>无序列表三</li>
-</ul>
-<h4 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h4><p>语法：数字+英文句点+空格  </p>
-<pre><code>1. 有序列表一
-2. 有序列表二
-3. 有序列表三
-</code></pre><ol>
-<li>有序列表一</li>
-<li>有序列表二</li>
-<li>有序列表三</li>
-</ol>
-<h3 id="5-引用"><a href="#5-引用" class="headerlink" title="5.引用"></a>5.引用</h3><pre><code>&gt; 这是一个有两段文字的引用,
-
-&gt; 无意义的占行文字1.
-
-&gt; 无意义的占行文字2.
-&gt;
-&gt; 无意义的占行文字3.
-
-&gt; 无意义的占行文字4.
-</code></pre><blockquote>
-<p>这是一个有两段文字的引用,</p>
-</blockquote>
-<blockquote>
-<p>无意义的占行文字1.</p>
-</blockquote>
-<blockquote>
-<p>无意义的占行文字2.</p>
-<p>无意义的占行文字3.</p>
-</blockquote>
-<blockquote>
-<p>无意义的占行文字4.</p>
-</blockquote>
-<h3 id="6-分隔线"><a href="#6-分隔线" class="headerlink" title="6.分隔线"></a>6.分隔线</h3><pre><code>* * *
-***
-*****
-- - -
----------------------------------------
-_________
-</code></pre><hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<h3 id="7-插入代码"><a href="#7-插入代码" class="headerlink" title="7.插入代码"></a>7.插入代码</h3><h4 id="行内式-1"><a href="#行内式-1" class="headerlink" title="行内式"></a>行内式</h4><pre><code>C语言里的函数 `scanf()` 怎么使用？
-</code></pre><p>C语言里的函数 <code>scanf()</code> 怎么使用？</p>
-<h4 id="多行代码"><a href="#多行代码" class="headerlink" title="多行代码"></a>多行代码</h4><h5 id="缩进式多行代码"><a href="#缩进式多行代码" class="headerlink" title="缩进式多行代码"></a>缩进式多行代码</h5><pre><code>（每行都进行缩进）
-#include &lt;stdio.h&gt;
-int main(void)
-{
-    printf(&quot;Hello world\n&quot;);
-}
-</code></pre><h2 id="MarkDown语法进阶"><a href="#MarkDown语法进阶" class="headerlink" title="MarkDown语法进阶"></a>MarkDown语法进阶</h2><h3 id="1-多层嵌套"><a href="#1-多层嵌套" class="headerlink" title="1.多层嵌套"></a>1.多层嵌套</h3><pre><code>&gt;&gt;&gt; 请问 Markdwon 怎么用？ - 小白
-
-&gt;&gt; 自己看教程！ - 愤青
-
-&gt; 教程在哪？ - 小白
-</code></pre><blockquote>
-<blockquote>
-<blockquote>
-<p>请问 Markdwon 怎么用？ - 小白</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>自己看教程！ - 愤青</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>教程在哪？ - 小白</p>
-</blockquote>
-<h3 id="2-插入图片"><a href="#2-插入图片" class="headerlink" title="2.插入图片"></a>2.插入图片</h3><h4 id="行内式-2"><a href="#行内式-2" class="headerlink" title="行内式"></a>行内式</h4><pre><code>![中国](https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg &quot;中国&quot;)
-</code></pre><p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg" alt="中国" title="中国"></p>
-<h4 id="参考式-1"><a href="#参考式-1" class="headerlink" title="参考式"></a>参考式</h4><pre><code>![中国][China]
-[China]: https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg  &quot;中国&quot;
-</code></pre><p>![中国][China]<br>[China]:    <a href="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg" target="_blank" rel="noopener">https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1524138037063&amp;di=171938e75165c92edf008c9f82b1a7c1&amp;imgtype=0&amp;src=http%3A%2F%2Fimages.enet.com.cn%2Fegames%2Farticleimage%2F201211%2F20121101094002687.jpg</a>  “中国”</p>
-<h3 id="3-注脚"><a href="#3-注脚" class="headerlink" title="3.注脚"></a>3.注脚</h3><h4 id="语法说明"><a href="#语法说明" class="headerlink" title="语法说明"></a>语法说明</h4><p>在需要添加注脚的文字后加上脚注名字[^注脚名字],称为加注。 然后在文本的任意位置(一般在最后)添加脚注，脚注前必须有对应的脚注名字。</p>
-<p>注意：经测试注脚与注脚之间必须空一行，不然会失效。成功后会发现，即使你没有把注脚写在文末，经Markdown转换后，也会自动归类到文章的最后。注脚在使用MarkDown(Extra)处理时可以显示效果，其他地方效果可能不显示。</p>
-<h4 id="代码及效果"><a href="#代码及效果" class="headerlink" title="代码及效果"></a>代码及效果</h4><pre><code>使用 Markdown[^1]可以效率的书写文档,   
-
-不知道的话，你就百度[^Le]。
-
-[^1]:Markdown是一种纯文本标记语言   
-
-[^Le]:百度一下，你就知道了。
-</code></pre><p>使用 Markdown<a href="Markdown是一种纯文本标记语言">^1</a>可以效率的书写文档,   </p>
-<p>不知道的话，你就百度<a href="百度一下，你就知道了。">^Le</a>。</p>
-<h3 id="4-表格"><a href="#4-表格" class="headerlink" title="4.表格"></a>4.表格</h3><h4 id="语法说明-1"><a href="#语法说明-1" class="headerlink" title="语法说明"></a>语法说明</h4><p>不管是哪种方式，第一行为表头，第二行分隔表头和主体部分，第三行开始每一行为一个表格行。</p>
-<p>列于列之间用管道符|隔开。原生方式的表格每一行的两边也要有管道符。</p>
-<p>第二行还可以为不同的列指定对齐方向。默认为左对齐，在-右边加上:就右对齐。</p>
-<h4 id="代码及效果-1"><a href="#代码及效果-1" class="headerlink" title="代码及效果"></a>代码及效果</h4><h5 id="简单方式写表格"><a href="#简单方式写表格" class="headerlink" title="简单方式写表格"></a>简单方式写表格</h5><pre><code>学号|姓名|分数    
--|-|-   
-小明|男|75  
-小红|女|79   
-小陆|男|92 
-</code></pre><table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-<th>分数    </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>小明</td>
-<td>男</td>
-<td>75  </td>
-</tr>
-<tr>
-<td>小红</td>
-<td>女</td>
-<td>79   </td>
-</tr>
-<tr>
-<td>小陆</td>
-<td>男</td>
-<td>92 </td>
-</tr>
-</tbody>
-</table>
-<h5 id="原生方式写表格"><a href="#原生方式写表格" class="headerlink" title="原生方式写表格"></a>原生方式写表格</h5><pre><code>|学号|姓名|分数|  
-|-|-|-|  
-|小明|男|75|  
-|小红|女|79|  
-|小陆|男|92|
-</code></pre><table>
-<thead>
-<tr>
-<th>学号</th>
-<th>姓名</th>
-<th>分数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>小明</td>
-<td>男</td>
-<td>75</td>
-</tr>
-<tr>
-<td>小红</td>
-<td>女</td>
-<td>79</td>
-</tr>
-<tr>
-<td>小陆</td>
-<td>男</td>
-<td>92</td>
-</tr>
-</tbody>
-</table>
-<h5 id="为表格第二列指定方向"><a href="#为表格第二列指定方向" class="headerlink" title="为表格第二列指定方向"></a>为表格第二列指定方向</h5><pre><code>产品|价格  
--|-:  
-Leanote 高级账号|60元/年  
-Leanote 超级账号|120元/年
-</code></pre><table>
-<thead>
-<tr>
-<th>产品</th>
-<th style="text-align:right">价格  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Leanote 高级账号</td>
-<td style="text-align:right">60元/年  </td>
-</tr>
-<tr>
-<td>Leanote 超级账号</td>
-<td style="text-align:right">120元/年</td>
-</tr>
-</tbody>
-</table>
-
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/java a=a++引发的思考.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1093,7 +419,7 @@ Leanote 超级账号|120元/年
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1117,9 +443,9 @@ Leanote 超级账号|120元/年
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-22T09:28:03+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-22T09:28:03+08:00">
                 2018-03-22
               </time>
             
@@ -1138,7 +464,7 @@ Leanote 超级账号|120元/年
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1154,6 +480,17 @@ Leanote 超级账号|120元/年
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P17.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P17.html" class="cy_cmt_count" data-xid="aticle/P17.html" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -1181,17 +518,21 @@ Leanote 超级账号|120元/年
       
         
           
-            <p><strong>第一步：建立git仓库</strong><br>cd到你的本地项目根目录下，执行git命令</p>
-<pre><code>git init
-</code></pre><p><strong>第二步：将项目的所有文件添加到仓库中</strong>  </p>
-<pre><code>git add .  
+          第一步：建立git仓库cd到你的本地项目根目录下，执行git命令
+git init
+第二步：将项目的所有文件添加到仓库中  
+git add .  
 如果想添加某个特定的文件，只需把.换成特定的文件名即可
-</code></pre><p><strong>第三步：将add的文件commit到仓库</strong>  </p>
-<pre><code>git commit -m &quot;注释语句&quot;  
-</code></pre><p><strong>第四步：将commit的文件push到仓库</strong>  </p>
-<pre><code>git push -u origin dev
-</code></pre>
-          
+第三步：将add的文件commit到仓库  
+git commit -m &quot;注释语句
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P17.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1243,7 +584,7 @@ Leanote 超级账号|120元/年
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1267,9 +608,9 @@ Leanote 超级账号|120元/年
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T09:19:22+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T09:19:22+08:00">
                 2018-03-13
               </time>
             
@@ -1288,7 +629,7 @@ Leanote 超级账号|120元/年
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1304,6 +645,17 @@ Leanote 超级账号|120元/年
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P10.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P10.html" class="cy_cmt_count" data-xid="aticle/P10.html" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -1331,24 +683,16 @@ Leanote 超级账号|120元/年
       
         
           
-            <p>1.接口里允许使用default关键字，为接口声明添加非抽象的方法实现。这个特性又被称为扩展方法。默认方法可以直接使用。默认方法无法在lambda表达式内部被访问。(test1)</p>
-<p>2.一个所谓的函数式接口必须要有且仅有一个抽象方法声明。每个与之对应的lambda表达式必须要与抽象方法的声明相匹配。由于默认方法不是抽象的，因此你可以在你的函数式接口里任意添加默认方法。(test1)</p>
-<p>3.Java8允许你通过::关键字获取方法或者构造函数的的引用。(test1)</p>
-<p>4.我们通过Person::new来创建一个Person类构造函数的引用。Java编译器会自动地选择合适的构造函数来匹配PersonFactory.create函数的签名，并选择正确的构造函数形式。(test2)</p>
-<p>5.lambda表达式可以访问外部的final局部变量，变量并不需要一定是final，然而，在编译的时候被隐式地当做final变量来处理。(test2,test3)</p>
-<p>6.lambda表达式可以访问全部变量。(test3)</p>
-<p>7.当一个函数不修改数据流的底层数据源，它就是无干扰的。即没有任何lambda表达式通过添加或删除修改元素。(test4)</p>
-<p>8.当一个函数的操作的执行是确定性的，它就是无状态的。即在上面的例子中，没有任何lambda表达式依赖于外部作用域中任何在操作过程中可变的变量或状态。(test4)</p>
-<p>9.数据流基础操作。(test5)</p>
-<p>9数据流衔接操作只在终止操作调用时被执行。(test6)</p>
-<p>10.衔接操作是垂直进行的，数据流执行顺序研究.(test6)</p>
-<p>11.Java8的数据流不能被复用。一旦你调用了任何终止操作，数据流就关闭了.(test7)</p>
-<p>12.要克服第10点这个限制，我们需要为每个我们想要执行的终止操作创建新的数据流调用链。例如，我们创建一个数据流供应器，来构建新的数据流，并且设置好所有衔接操作。(test7)</p>
-<p>13.Executors类提供了便利的工厂方法来创建不同类型的 executor services。Executors必须显式的停止。(test8)</p>
-<p>14.executor 可以返回一个Future类型的结果，它可以用来在稍后某个时间取出实际的结果。(test9)</p>
-<p>PS:括号内为测试代码，代码地址：<a href="https://github.com/reallinxu/java8Test" target="_blank" rel="noopener">https://github.com/reallinxu/java8Test</a></p>
-
-          
+          1.接口里允许使用default关键字，为接口声明添加非抽象的方法实现。这个特性又被称为扩展方法。默认方法可以直接使用。默认方法无法在lambda表达式内部被访问。(test1)
+2.一个所谓的函数式接口必须要有且仅有一个抽象方法声明。每个与之对应的lambda表达式必须要与抽象方法的声明相匹配。由
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P10.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1400,7 +744,7 @@ Leanote 超级账号|120元/年
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1424,9 +768,9 @@ Leanote 超级账号|120元/年
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-29T15:08:53+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-29T15:08:53+08:00">
                 2018-01-29
               </time>
             
@@ -1445,7 +789,7 @@ Leanote 超级账号|120元/年
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1461,6 +805,17 @@ Leanote 超级账号|120元/年
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P8.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P8.html" class="cy_cmt_count" data-xid="aticle/P8.html" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -1488,53 +843,17 @@ Leanote 超级账号|120元/年
       
         
           
-            <p>1.在腾讯云申请SSL证书<a href="https://buy.cloud.tencent.com/ssl?fromSource=ssl，此时选择了个人配置DNS，具体使用方法请参照官网说明。" target="_blank" rel="noopener">https://buy.cloud.tencent.com/ssl?fromSource=ssl，此时选择了个人配置DNS，具体使用方法请参照官网说明。</a></p>
-<p>2.证书申请成功后，下载证书上传到服务器，将crt和key两个文件放到/usr/local/httpscrt文件夹中</p>
-<p>3.修改nginx配置文件如下：</p>
-<p><pre class="lang:default decode:true ">vi /etc/nginx/conf.d/virtual.conf     #没有该文件，直接新建，内容如下</pre></p>
-<p>#转发给wordpress网站<br>server {<br>    listen 80;<br>    listen 443 ssl;     #此处监听443端口，https默认443，下面注释ssl on同时支持http和https<br>    server_name <a href="http://www.reallinxu.com" target="_blank" rel="noopener">www.reallinxu.com</a>;<br>    access_log /var/log/nginx/aaa/access.log;   #access_log属于ngx_http_log_module的设置, 缺省level为info<br>    error_log /var/log/nginx/aaa/error.log;     #error_log属于core module, 缺省的level是error </p>
-<pre><code>#ssl on;    #此处注释
-ssl_certificate /usr/local/httpscrt/1_www.reallinxu.com_bundle.crt;  #证书位置
-ssl_certificate_key /usr/local/httpscrt/2_www.reallinxu.com.key;   #key位置
-
-location / {
-         root /data/www/www.reallinxu.com;
-         index index.php index.html index.htm;     #由于是PHP类型的动态页面为主，所以把index.php放在前面效率会更高些
-         try_files $uri $uri/ /index.php?$args;   #普通php网站因为没有rewrite的话，这个不需要
-}
-
-error_page 404 /404.html;         #error_page errcode uri (也就是说出现了404错误，会请求/404.html)
-location = /404.html {            #这是一个典型的location
-         root /data/www/www.reallinxu.com;
-}
-
-error_page 500 502 503 504 /50x.html;
-location = /50x.html {
-         root /data/www/www.reallinxu.com;
-}
-
-# 这种写法可以防止把恶意程序伪装成.jpg之类的攻击，（其实有个更简单的方法，就是把php.ini中的cgi.fix_pathinfo=0，但有时候简单的修改cgi.fix_pathinfo会造成有的php脚本出错)
-location ~ [^/]\.php(/|$) {
-         root /data/www/www.reallinxu.com;
-         fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-         if (!-f $document_root$fastcgi_script_name) {
-                 return 404;
-         }
-         #try_files $uri =404;         #这个try_files说明：对于.php文件，直接执行$uri, 如果找不到这个$uri,直接给出404错误，（和 location / 定义不同！），主要是为了防止 伪装成图片的攻击  (目前看，最安全的方式，是用上面那一句话，官方推荐的）
-         # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-         fastcgi_pass 127.0.0.1:9000;
-         fastcgi_index index.php;
-         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-         include fastcgi_params;
-}
-location ~ /\.ht {
-         deny all;
-}
-
-rewrite /wp-admin$ $scheme://$host$uri/ permanent;
-</code></pre><p> }<br><br>4.重启nginx即可。</p>
-
-          
+          1.在腾讯云申请SSL证书https://buy.cloud.tencent.com/ssl?fromSource=ssl，此时选择了个人配置DNS，具体使用方法请参照官网说明。
+2.证书申请成功后，下载证书上传到服务器，将crt和key两个文件放到/usr/local/httpscrt文件夹中
+3
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P8.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1586,7 +905,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1610,9 +929,9 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-29T15:02:48+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-29T15:02:48+08:00">
                 2018-01-29
               </time>
             
@@ -1631,7 +950,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1647,6 +966,17 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P15.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P15.html" class="cy_cmt_count" data-xid="aticle/P15.html" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -1674,61 +1004,19 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
       
         
           
-            <p>参考：<a href="http://xxx.onlymyzhongyi.com/?p=345" target="_blank" rel="noopener">http://xxx.onlymyzhongyi.com/?p=345</a></p>
-<p>1.停掉httpd当前服务，禁用重启</p>
-<p><pre class="lang:default decode:true ">#停掉httpd<br>service httpd stop</pre></p>
-<p>#开机重启后，apache服务不再启动p<br>chkconfig httpd off<br>2.安装nginx</p>
-<p><pre class="lang:default decode:true ">yum -y install nginx</pre><br>3.安装php-fpm</p>
-<p><pre class="lang:default decode:true">yum install php-fpm<br>/etc/init.d/php-fpm start  #该目录下没有执行文件，采用直接下一步设置开机自启<br>chkconfig php-fpm on</pre><br>4.编辑nginx配置文件</p>
-<p><pre class="lang:default decode:true ">vi /etc/nginx/conf.d/virtual.conf     #没有该文件，直接新建，内容如下</pre></p>
-<p>#转发给wordpress网站<br>server {<br>    listen 80;<br>    server_name <a href="http://www.reallinxu.com" target="_blank" rel="noopener">www.reallinxu.com</a>;<br>    access_log /var/log/nginx/aaa/access.log;   #access_log属于ngx_http_log_module的设置, 缺省level为info<br>    error_log /var/log/nginx/aaa/error.log;     #error_log属于core module, 缺省的level是error </p>
-<pre><code>location / {
-         root /data/www/www.reallinxu.com;
-         index index.php index.html index.htm;     #由于是PHP类型的动态页面为主，所以把index.php放在前面效率会更高些
-         try_files $uri $uri/ /index.php?$args;   #普通php网站因为没有rewrite的话，这个不需要
-}
-
-error_page 404 /404.html;         #error_page errcode uri (也就是说出现了404错误，会请求/404.html)
-location = /404.html {            #这是一个典型的location
-         root /data/www/www.reallinxu.com;
-}
-
-error_page 500 502 503 504 /50x.html;
-location = /50x.html {
-         root /data/www/www.reallinxu.com;
-}
-
-# 这种写法可以防止把恶意程序伪装成.jpg之类的攻击，（其实有个更简单的方法，就是把php.ini中的cgi.fix_pathinfo=0，但有时候简单的修改cgi.fix_pathinfo会造成有的php脚本出错)
-location ~ [^/]\.php(/|$) {
-         root /data/www/www.reallinxu.com;
-         fastcgi_split_path_info ^(.+?\.php)(/.*)$;
-         if (!-f $document_root$fastcgi_script_name) {
-                 return 404;
-         }
-         #try_files $uri =404;         #这个try_files说明：对于.php文件，直接执行$uri, 如果找不到这个$uri,直接给出404错误，（和 location / 定义不同！），主要是为了防止 伪装成图片的攻击  (目前看，最安全的方式，是用上面那一句话，官方推荐的）
-         # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-         fastcgi_pass 127.0.0.1:9000;
-         fastcgi_index index.php;
-         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-         include fastcgi_params;
-}
-location ~ /\.ht {
-         deny all;
-}
-
-rewrite /wp-admin$ $scheme://$host$uri/ permanent;
-</code></pre><p> }<br><br>5.新建日志目录并赋权限</p>
-<p><pre class="lang:default decode:true ">mkdir -p /var/log/nginx/aaa<br>chown -R nginx:adm /var/log/nginx/aaa</pre><br>6.安装最新的php-mysql</p>
-<p><pre class="lang:default decode:true ">yum update<br>yum install php-mysql</pre><br>7.启动nginx</p>
-<p><pre class="lang:default decode:true ">service nginx start</pre><br>8.此时访问可能会出现数据库错误</p>
-<p><pre class="lang:default decode:true ">vi wp-config.php</pre></p>
-<p>#修改以下部分<br>define( ‘WP_DEBUG’, true );<br>再进行访问时，会出现具体错误，此时发现是数据库连接错误，本人是需要修改配置文件如下</p>
-<p><pre class="lang:default decode:true">define( ‘DB_HOST’, ‘127.0.0.1’ );   #原为localhost</pre><br>9.修改线程数，优化内存</p>
-<p><pre class="lang:default decode:true ">vi /etc/php-fpm.d/<a href="http://www.conf" target="_blank" rel="noopener">www.conf</a>   #修改如下<br>;最大线程数<br>pm.max_children = 3<br>;初始线程数<br>pm.start_servers = 1<br>;最小空余线程数<br>pm.min_spare_servers = 1<br>;最大空余线程数<br>pm.max_spare_servers = 1<br>;php_admin内存最大限制<br>php_admin_value[memory_limit] = 128M</pre><br>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-
-          
+          参考：http://xxx.onlymyzhongyi.com/?p=345
+1.停掉httpd当前服务，禁用重启
+#停掉httpdservice httpd stop
+#开机重启后，apache服务不再启动pchkconfig httpd off2.安装nginx
+yum -y install n
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P15.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1780,7 +1068,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1804,9 +1092,9 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-26T14:36:50+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-26T14:36:50+08:00">
                 2018-01-26
               </time>
             
@@ -1825,7 +1113,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1841,6 +1129,17 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P12.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P12.html" class="cy_cmt_count" data-xid="aticle/P12.html" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -1868,22 +1167,18 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
       
         
           
-            <p>redis安装请参考：</p>
-<p><a href="http://www.reallinxu.com/2018/01/24/redis%E5%85%A5%E9%97%A8/" target="_blank" rel="noopener">http://www.reallinxu.com/2018/01/24/redis%E5%85%A5%E9%97%A8/</a></p>
-<p>1.单台机器redis集群搭建</p>
-<p><pre class="lang:default decode:true ">[root@linxu ~]# mkdir /usr/local/redis-cluster #创建集群目录<br>[root@linxu ~]# cd /usr/local/redis-cluster<br>[root@linxu redis-cluster]# mkdir -p 9001/data 9002/data 9003/data 9004/data 9005/data 9006/data  #创建六个节点目录<br>[root@linxu redis-cluster]# mkdir bin<br>[root@linxu bin]# cd /usr/local/redis/redis-4.0.6/src   #redis安装目录下src<br>[root@linxu src]# cp <em> /usr/local/redis-cluster/bin  #将redis安装目录src文件copy到bin中<br>[root@linxu redis-4.0.6]# cd /usr/local/redis/redis-4.0.6   #redis安装目录<br>[root@linxu redis-4.0.6]# cp </em> /usr/local/redis-cluster/9001   #其他9002-9006同样操作<br>[root@linxu 9001]# cd /usr/local/redis-cluster/9001            #先修改9001，其他几台需要同样操作<br>[root@linxu redis-4.0.6]# vi redis.conf                        #修改配置文件<br>port 9001（每个节点的端口号）<br>daemonize yes(修改daemonize为yes，即默认以后台程序方式运行，效果同使用&amp;号强制后台运行)<br>bind 192.168.43.163（绑定当前机器 IP）<br>dir /usr/local/redis-cluster/9001/data/（数据文件存放位置）<br>pidfile /var/run/redis_9001.pid（pid 9001和port要对应）<br>cluster-enabled yes（启动集群模式）<br>cluster-config-file nodes-9001.conf（9001和port要对应）<br>cluster-node-timeout 15000<br>appendonly yes(是否开启AOF，默认关闭no)</pre></p>
-<p>PS:9002-9006同样修改，只是端口号不同，此处省略，可以将9001的redis.conf拷贝到所有目录，通过vi的:%s/9001/9002替换(此处9001替换为9002)，共四处修改</p>
-<p>[root@linxu bin]# cd /usr/local/redis-cluster/bin<br>[root@linxu bin]# ./redis-server  ../9001/redis.conf  #启动六个节点<br>[root@linxu bin]# ./redis-server  ../9002/redis.conf<br>[root@linxu bin]# ./redis-server  ../9003/redis.conf<br>[root@linxu bin]# ./redis-server  ../9004/redis.conf<br>[root@linxu bin]# ./redis-server  ../9005/redis.conf<br>[root@linxu bin]# ./redis-server  ../9006/redis.conf<br>[root@linxu bin]# ps -ef|grep redis  #查看是否启动成功（成功有六个redis进程）<br>[root@linxu bin]# cd  #返回根目录<br>[root@linxu ~]# wget <a href="https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.0.tar.gz" target="_blank" rel="noopener">https://cache.ruby-lang.org/pub/ruby/2.5/ruby-2.5.0.tar.gz</a> #下载rubby，yum下载为2.0.0版本，redis支持版本需大于2.2.2，此处为官网下载<br>[root@linxu ~]# tar zxvf ruby-2.5.0.tar.gz<br>[root@linxu ~]# mv ruby-2.5.0 /usr/local/ruby/<br>[root@linxu ~]# cd /usr/local/ruby/ruby-2.5.0<br>[root@linxu ruby-2.5.0]# ./configure<br>[root@linxu ruby-2.5.0]# make<br>[root@linxu ruby-2.5.0]# make install<br>[root@linxu ruby-2.5.0]# ruby -v   #查看版本<br>[root@linxu ruby-2.5.0]# yum install rubygems  #安装rubygems<br>[root@linxu ~]# gem install redis</p>
-<p>PS：此处如果先通过yum安装ruby版本低于2.2.2会报错，可以移除旧版本，再安装新版本,再安装rvm进行，步骤如下<br>    [root@linxu ~]# yum install curl  #安装curl<br>    [root@linxu ~]# curl -L get.rvm.io | bash -s stable<br>    如果执行无法完成，替换为\curl -sSL <a href="https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer" target="_blank" rel="noopener">https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer</a> | bash<br>    [root@linxu ~]#  source /etc/profile.d/rvm.sh<br>    此时再执行[root@linxu ~]# gem install redis即可</p>
-<p>[root@linxu bin]# ./redis-trib.rb create –replicas 1 192.168.43.216:9001 192.168.43.216:9002 192.168.43.216:9003 192.168.43.216:9004 192.168.43.216:9005 192.168.43.216:9006  #搭建集群<br>[root@linxu bin]# ./redis-cli  -c -h 192.168.43.216 -p 9001  #验证<br>192.168.43.216:9001&gt; set name da<br>-&gt; Redirected to slot [5798] located at 192.168.43.216:9002<br>OK<br>192.168.43.216:9002&gt; </p>
-<p>PS：此处需要加参数-c，否则不会自动跳转到分配的节点，会报错(error) MOVED 5798 192.168.43.216:9002<br><br>2.不同机器搭建redis集群</p>
-<p><pre class="lang:default decode:true">#此处使用两台机器，通过单台机器一样的方法在每台机器各创建三个节点</pre></p>
-<p>#第一台  192.168.43.216 节点 10001 10002 10003</p>
-<p>#第二台  192.168.43.163 节点 10004 10005 10006</p>
-<p>#将六个节点全部启动<br>[root@linxu bin]# ./redis-server ../10001/redis.conf  #其他节点同样启动</p>
-<p>#启动后创建集群<br>./redis-trib.rb  create  –replicas  1   192.168.43.163:10004 192.168.43.163:10005 192.168.43.163:10006 192.168.43.216:10001 192.168.43.216:10002 192.168.43.216:10003<br>[root@linxu bin]# ./redis-cli  -c -h 192.168.43.216 -p 10001  #验证<br>192.168.43.216:10001&gt; set a 1<br>-&gt; Redirected to slot [15495] located at 192.168.43.163:10005<br>OK<br><br>&nbsp;</p>
-
-          
+          redis安装请参考：
+http://www.reallinxu.com/2018/01/24/redis%E5%85%A5%E9%97%A8/
+1.单台机器redis集群搭建
+[root@linxu ~]# mkdir /usr/local/redis-cluster #创建集群目录[root@l
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P12.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1935,7 +1230,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1959,9 +1254,9 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-24T18:59:56+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T18:59:56+08:00">
                 2018-01-24
               </time>
             
@@ -1980,7 +1275,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -1996,6 +1291,17 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P14.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P14.html" class="cy_cmt_count" data-xid="aticle/P14.html" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -2023,11 +1329,18 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
       
         
           
-            <p>在vi文件时出现  Found a swap file by the name <span class="string">“.Test.java.swp”</span>   提示，是因为之前vi异常中断.</p>
-<p>ls -a可以查看隐藏文件*.swap</p>
-<p>rm *.swap即可</p>
+          在vi文件时出现  Found a swap file by the name “.Test.java.swp”   提示，是因为之前vi异常中断.
+ls -a可以查看隐藏文件*.swap
+rm *.swap即可
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P14.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2079,7 +1392,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Reallinxu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/touxiang.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2103,9 +1416,9 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-24T18:53:33+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-24T18:53:33+08:00">
                 2018-01-24
               </time>
             
@@ -2124,7 +1437,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">in</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
@@ -2140,6 +1453,17 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
           
 
           
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P11.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P11.html" class="cy_cmt_count" data-xid="aticle/P11.html" itemprop="commentsCount" ></span>
+                </a>
+              
             
           
 
@@ -2167,27 +1491,353 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
       
         
           
-            <p>1.安装redis</p>
-<p><pre class="lang:default decode:true ">[root@linxu ~]# wget <a href="http://download.redis.io/releases/redis-4.0.6.tar.gz" target="_blank" rel="noopener">http://download.redis.io/releases/redis-4.0.6.tar.gz</a><br>[root@linxu ~]# tar xzf redis-4.0.6.tar.gz<br>[root@linxu ~]# mkdir /usr/local/redis<br>[root@linxu ~]# mv redis-4.0.6 /usr/local/redis<br>[root@linxu ~]# cd /usr/local/redis/redis-4.0.6<br>[root@linxu redis-4.0.6]# make<br>[root@linxu redis]# cd src<br>[root@linxu src]# ./redis-server  #运行<br>[root@linxu src]# ./redis-server redis.conf  #使用指定配置文件运行</pre><br>2.测试redis</p>
-<p><pre class="lang:default decode:true">第一个窗口:<br>[root@linxu ~]# cd /usr/local/redis/redis-4.0.6/src<br>[root@linxu src]# ./redis-server redis.conf  #使用指定配置文件运行<br>第二个窗口:<br>[root@linxu ~]# cd /usr/local/redis/redis-4.0.6/src<br>[root@linxu src]# ./redis-cli<br>127.0.0.1:6379&gt; set test hahaah<br>OK<br>127.0.0.1:6379&gt; get test<br>“hahaah”<br>127.0.0.1:6379&gt;<br></pre><br>3.利用jedis测试java连接redis</p>
-<p><pre class="lang:default decode:true">//pom.xml中添加<br>&lt;dependency&gt;<br>    &lt;groupId&gt;redis.clients&lt;/groupId&gt;<br>    &lt;artifactId&gt;jedis&lt;/artifactId&gt;<br>    &lt;version&gt;2.9.0&lt;/version&gt;<br>&lt;/dependency&gt;</pre><br>测试代码：</p>
-<p><pre class="lang:default decode:true">package com.redis.demo;</pre></p>
-<p>import redis.clients.jedis.Jedis;</p>
-<p>public class TestRedis {</p>
-<pre><code>public static void main(String[] args) {
-    //连接本地的 Redis 服务
-    Jedis jedis = new Jedis(&quot;192.168.43.163&quot;,6379);
-    System.out.println(&quot;连接成功&quot;);
-    //查看服务是否运行
-    System.out.println(&quot;服务正在运行: &quot;+jedis.ping());
-}
-</code></pre><p>}<br>运行时报异常：</p>
-<p><pre class="lang:default decode:true ">Exception in thread “main” redis.clients.jedis.exceptions.JedisDataException: DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified, no authentication password is requested to clients. In this mode connections are only accepted from the loopback interface. If you want to connect from external computers to Redis you may adopt one of the following solutions: 1) Just disable protected mode sending the command ‘CONFIG SET protected-mode no’ from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. 2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to ‘no’, and then restarting the server. 3) If you started the server manually just for testing, restart it with the ‘–protected-mode no’ option. 4) Setup a bind address or an authentication password. NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside.</pre><br>此时需要修改配置文件redis.conf，修改如下</p>
-<p><pre class="lang:default decode:true">1.#注释掉bind</pre></p>
-<p>#bind 127.0.0.1<br>2.protected-mode yes<br>改为<br>protected-mode no<br>重新启动redis即可</p>
-<p>&nbsp;</p>
+          1.安装redis
+[root@linxu ~]# wget http://download.redis.io/releases/redis-4.0.6.tar.gz[root@linxu ~]# tar xzf redis-4.0.6.tar.gz[root@linxu ~]# mkdir /us
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P11.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P6.html" itemprop="url"> 更新本地代码到github		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T16:28:47+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index">
+                    <span itemprop="name">github</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P6.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P6.html" class="cy_cmt_count" data-xid="aticle/P6.html" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          第一步：查看当前的git仓库状态，可以使用git status
+git status
+
+第二步：更新全部
+git add *
+
+第三步：接着输入git commit -m “更新说明”
+git commit -m "更新说明"
+
+第四步：先git pull,拉取当前分支最新代码
+git pull
+
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P6.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/aticle/P7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HackBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/aticle/P7.html" itemprop="url"> 本地代码上传到github		</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T16:22:40+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index">
+                    <span itemprop="name">github</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/P7.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/aticle/P7.html" class="cy_cmt_count" data-xid="aticle/P7.html" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          第一步：建立git仓库cd到你的本地项目根目录下，执行git命令
+git init
+**第二步：将项目的所有文件添加到仓库中**
+git add .
+**如果想添加某个特定的文件，只需把.换成特定的文件名即可**
+
+**第三步：将add的文件commit到仓库**
+git commit -m "注释
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/aticle/P7.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2260,6 +1910,10 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="Reallinxu" />
+            
               <p class="site-author-name" itemprop="name">Reallinxu</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -2271,8 +1925,8 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -2281,10 +1935,10 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
               
               
               <div class="site-state-item site-state-categories">
-                
-                  <span class="site-state-item-count">11</span>
-                  <span class="site-state-item-name">Kategorien</span>
-                
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
               </div>
             
 
@@ -2292,23 +1946,58 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
               
               
               <div class="site-state-item site-state-tags">
-                
-                  <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">Tags</span>
-                
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
               </div>
             
 
           </nav>
 
           
-
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/reallinxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
           
 
           
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xiajunyi.com/" title="夏军谊的小站" target="_blank">夏军谊的小站</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://team19.abstiger.com/" title="华东19部博客" target="_blank">华东19部博客</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           
@@ -2340,7 +2029,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -2348,7 +2037,7 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -2481,6 +2170,10 @@ rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 
 
 
+
+  
+    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cytAlyQWm"></script>
+  
 
 
 
