@@ -180,7 +180,30 @@ docker的安装非常简单，centOs中直接使用
 9. 删除镜像
 	```
 	docker rmi reallinxu/ubuntu1:test
-	docker rmi `docker images -a -q`  #小技巧，返回所有镜像ID，再移除  
+	docker rmi `docker images -a -q`  #小技巧，返回所有镜像ID，再移除
 	```
+
 # Docker进阶 #
-待补充
+## 启动阿里云加速 ##
+docker的镜像仓库在国外，下载会很慢，启用阿里云加速。在/etc/docker目录下创建daemon.json文件，添加如下内容  
+	```
+	{
+		"registry-mirrors": ["https://almtd3fa.mirror.aliyuncs.com"]
+	}
+	#https://almtd3fa.mirror.aliyuncs.com为阿里云的加速地址。修改后，重启docker
+	systemctl daemon-reload
+	service docker restart
+	```
+## Docker中运行jar ##
+1. 下载java8镜像：
+	```
+	docker pull frolvlad/alpine-oraclejdk8
+	```
+2. 创建一个简单的spring-boot项目，开放8080端口，生成可执行的jar文件。
+3. 将demo-0.0.1-SNAPSHOT.jar放到/usr下，执行命令创建容器并执行jar
+	```
+	docker run -d -p 8080:8080 -v /usr/demo-0.0.1-SNAPSHOT.jar:/usr/demo-0.0.1-SNAPSHOT.jar --name springboot frolvlad/alpine-oraclejdk8 java -jar /usr/demo-0.0.1-SNAPSHOT.jar
+	#-d 容器后台运行
+	#-p 主机端口与容器端口映射
+	```
+4. 浏览器中输入ip:8080验证是否启动成功。
