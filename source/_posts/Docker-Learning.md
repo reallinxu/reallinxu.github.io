@@ -176,6 +176,7 @@ docker的安装非常简单，centOs中直接使用
 8. 镜像推送到dockerhub
 	```
 	sudo docker commit 9de0d8b43b0f reallinxu/ubuntu1:test #构建镜像的时候最好加上tag，不加可能会报错
+	sudo docker push 9de0d8b43b0f reallinxu/ubuntu1:test #推送到dockerhub
 	```
 9. 删除镜像
 	```
