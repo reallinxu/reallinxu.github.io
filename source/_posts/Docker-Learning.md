@@ -122,7 +122,7 @@ docker的安装非常简单，centOs中直接使用
 	```
 
 ## 使用docker镜像和仓库 ##  
-1. 拉取指定仓库的所有镜像
+1. 拉取指定仓库的镜像，默认为latest
 	```
 	docker pull ubuntu
 	```
@@ -208,3 +208,19 @@ docker的镜像仓库在国外，下载会很慢，启用阿里云加速。在/e
 	#-p 主机端口与容器端口映射
 	```
 4. 浏览器中输入ip:8080验证是否启动成功。
+
+## docker宿主机与容器文件交互 ##  
+
+1. 从主机复制到容器  
+	```
+	sudo docker cp host_path containerID:container_path
+	```
+   从容器复制到主机
+	```
+	sudo docker cp containerID:container_path host_path
+	```
+2. 挂载数据卷
+	```
+	docker run -v /path/to/hostdir:/mnt $container(image name or image id)  在容器内拷贝  
+	cp /mnt/sourcefile /path/to/destfile 
+	```
