@@ -4,6 +4,7 @@ node_js: stable
 # S: Build Lifecycle
 install:
 	- npm cache clean --force
+	- npm install -g npm
   #- npm rebuild node-sass --force
   - npm install
   #- npm install hexo-renderer-sass --save 
