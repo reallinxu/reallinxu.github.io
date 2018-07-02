@@ -12,7 +12,7 @@ install:
   #- npm install hexo-renderer-stylus --save
 
 before_script:
-  - chmod -R 777 ./node_modules
+  #- chmod -R 777 ./node_modules
   #- npm install -g gulp
 
 script:
