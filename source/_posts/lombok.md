@@ -46,7 +46,7 @@ lombok常用注解如下：
 ## idea ##
 1. 安装lombok插件，File-->Settings-->plugins-->Browse Repositories，搜索lombok plugin，选择install，重启idea。
 2. 如果上面下载不了，或者太慢，且本地有shadowsocks翻墙支持，可以在当前窗口进入HTTP Proxy Settings，选择Manual proxy configuration，设置如图：
-	![Http Proxy](/img/lombokhttpproxy.JPG)
+	![Http Proxy](/imgs/lombokhttpproxy.JPG)
 3. 添加maven配置：  
  
 ``` java
