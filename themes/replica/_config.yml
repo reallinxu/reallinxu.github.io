@@ -1,0 +1,22 @@
+# left-side user profile
+avatar: https://i.imgur.com/4OxnYkO.jpg
+location:
+email:
+social:
+  github: https://github.com/reallinxu
+  weibo: https://www.weibo.com/2918130145/profile?topnav=1&wvr=6
+  linkedin:
+
+# navbar menu
+menu:
+ archives: true
+ tags: true
+ categories: true
+
+rss_dir: atom.xml
+
+# widget
+ga: # google analytics tracking code UA-XXXXXXX-X
+baidutongji: # baidutongji tracking code
+duoshuo: # duoshuo username
+gsc: # google custom search code

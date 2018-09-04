@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2018-09-04T02:20:40.073Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://www.reallinxu.com/"/>
+  <updated>2018-09-04T02:54:41.659Z</updated>
+  <id>http://www.reallinxu.com/</id>
   
   <author>
     <name>Reallinxu</name>
@@ -18,12 +18,12 @@
   
   <entry>
     <title>lombok</title>
-    <link href="http://yoursite.com/aticle/lombok.html"/>
-    <id>http://yoursite.com/aticle/lombok.html</id>
+    <link href="http://www.reallinxu.com/aticle/lombok.html"/>
+    <id>http://www.reallinxu.com/aticle/lombok.html</id>
     <published>2018-09-04T02:20:31.000Z</published>
-    <updated>2018-09-04T02:20:40.073Z</updated>
+    <updated>2018-09-04T02:54:41.659Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>“发明起源于懒”，当你在java开发中需要不停地重复编写set，get，tostring方法时，当你觉得这些代码很浪费时间，影响美观时，lombok你需要了解一下。</p><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>lombok可以通过简单注解实现bean的set，get，tostring等方法，不再需要额外编写。<br>lombok常用注解如下：  </p><ul><li>@Data 注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了equals、canEqual、 hashCode、toString 方法</li><li>@Setter ：注解在属性上；为属性提供 setting 方法</li><li>@Setter ：注解在属性上；为属性提供 getting 方法</li><li>@Log4j ：注解在类上；为类提供一个 属性名为log 的 log4j 日志对象</li><li>@NoArgsConstructor ：注解在类上；为类提供一个无参的构造方法</li><li>@AllArgsConstructor ：注解在类上；为类提供一个全参的构造方法</li><li>@Cleanup : 可以关闭流</li><li>@Builder ： 被注解的类加个构造者模式</li><li>@Synchronized ： 加个同步锁</li><li>@SneakyThrows : 等同于try/catch 捕获异常</li><li>@NonNull : 如果给参数加个这个注解 参数为null会抛出空指针异常</li><li>@Value : 注解和@Data类似，区别在于它会把所有成员变量默认定义为private final修饰，并且不会生成set方法。</li></ul><h1 id="IDE使用lombok"><a href="#IDE使用lombok" class="headerlink" title="IDE使用lombok"></a>IDE使用lombok</h1><h2 id="eclipse"><a href="#eclipse" class="headerlink" title="eclipse"></a>eclipse</h2><ol><li>下载lombok，<a href="https://projectlombok.org/download" target="_blank" rel="noopener">Click</a></li><li>双击lombok.jar直接安装，如果安装不了，将lombok放入到eclipse安装目录，编辑eclipse.ini，在最后一行加上 -javaagent:lombok.jar，重启eclipse。</li><li>添加maven配置：  </li></ol><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.16.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">## idea ##</span><br><span class="line"><span class="number">1</span>. 安装lombok插件，File--&gt;Settings--&gt;plugins--&gt;Browse Repositories，搜索lombok plugin，选择install，重启idea。</span><br><span class="line"><span class="number">2</span>. 如果上面下载不了，或者太慢，且本地有shadowsocks翻墙支持，可以在当前窗口进入HTTP Proxy Settings，选择Manual proxy configuration,设置如图。</span><br><span class="line">![Http Proxy](/img/lombok http proxy.JPG)</span><br><span class="line"><span class="number">3</span>. 添加maven配置：  </span><br><span class="line"> </span><br><span class="line">``` java</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.16.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>“发明起源于懒”，当你在java开发中需要不停地重复编写set，get，tostring方法时，当你觉得这些代码很浪费时间，影响美观时，lombok你需要了解一下。</p><h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>lombok可以通过简单注解实现bean的set，get，tostring等方法，不再需要额外编写。<br>lombok常用注解如下：  </p><ul><li>@Data 注解在类上；提供类所有属性的 getting 和 setting 方法，此外还提供了equals、canEqual、 hashCode、toString 方法</li><li>@Setter ：注解在属性上；为属性提供 setting 方法</li><li>@Setter ：注解在属性上；为属性提供 getting 方法</li><li>@Log4j ：注解在类上；为类提供一个 属性名为log 的 log4j 日志对象</li><li>@NoArgsConstructor ：注解在类上；为类提供一个无参的构造方法</li><li>@AllArgsConstructor ：注解在类上；为类提供一个全参的构造方法</li><li>@Cleanup : 可以关闭流</li><li>@Builder ： 被注解的类加个构造者模式</li><li>@Synchronized ： 加个同步锁</li><li>@SneakyThrows : 等同于try/catch 捕获异常</li><li>@NonNull : 如果给参数加个这个注解 参数为null会抛出空指针异常</li><li>@Value : 注解和@Data类似，区别在于它会把所有成员变量默认定义为private final修饰，并且不会生成set方法。</li></ul><h1 id="IDE使用lombok"><a href="#IDE使用lombok" class="headerlink" title="IDE使用lombok"></a>IDE使用lombok</h1><h2 id="eclipse"><a href="#eclipse" class="headerlink" title="eclipse"></a>eclipse</h2><ol><li>下载lombok，<a href="https://projectlombok.org/download" target="_blank" rel="noopener">click</a></li><li>双击lombok.jar直接安装，如果安装不了，将lombok放入到eclipse安装目录，编辑eclipse.ini，在最后一行加上 -javaagent:lombok.jar，重启eclipse。</li><li>添加maven配置：  </li></ol><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.16.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><ol><li>安装lombok插件，File–&gt;Settings–&gt;plugins–&gt;Browse Repositories，搜索lombok plugin，选择install，重启idea。</li><li>如果上面下载不了，或者太慢，且本地有shadowsocks翻墙支持，可以在当前窗口进入HTTP Proxy Settings，选择Manual proxy configuration，设置如图：<br> <img src="/img/lombokhttpproxy.JPG" alt="Http Proxy"></li><li>添加maven配置：  </li></ol><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;</span><br><span class="line">&lt;artifactId&gt;lombok&lt;/artifactId&gt;</span><br><span class="line">&lt;version&gt;1.16.10&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -34,17 +34,17 @@
     
     </summary>
     
-      <category term="lombok" scheme="http://yoursite.com/categories/lombok/"/>
+      <category term="lombok" scheme="http://www.reallinxu.com/categories/lombok/"/>
     
     
-      <category term="lombok" scheme="http://yoursite.com/tags/lombok/"/>
+      <category term="lombok" scheme="http://www.reallinxu.com/tags/lombok/"/>
     
   </entry>
   
   <entry>
     <title>SpringBoot小知识点</title>
-    <link href="http://yoursite.com/aticle/spring-boot%E7%9F%A5%E8%AF%86%E7%82%B9.html"/>
-    <id>http://yoursite.com/aticle/spring-boot知识点.html</id>
+    <link href="http://www.reallinxu.com/aticle/spring-boot%E7%9F%A5%E8%AF%86%E7%82%B9.html"/>
+    <id>http://www.reallinxu.com/aticle/spring-boot知识点.html</id>
     <published>2018-07-22T06:17:01.000Z</published>
     <updated>2018-09-03T03:05:21.060Z</updated>
     
@@ -59,15 +59,15 @@
     
     </summary>
     
-      <category term="WordPress" scheme="http://yoursite.com/categories/WordPress/"/>
+      <category term="WordPress" scheme="http://www.reallinxu.com/categories/WordPress/"/>
     
     
   </entry>
   
   <entry>
     <title>Docker容器中搭建Redis集群</title>
-    <link href="http://yoursite.com/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BARedis%E9%9B%86%E7%BE%A4.html"/>
-    <id>http://yoursite.com/aticle/Docker容器中搭建Redis集群.html</id>
+    <link href="http://www.reallinxu.com/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BARedis%E9%9B%86%E7%BE%A4.html"/>
+    <id>http://www.reallinxu.com/aticle/Docker容器中搭建Redis集群.html</id>
     <published>2018-05-30T10:00:00.000Z</published>
     <updated>2018-05-30T10:13:13.384Z</updated>
     
@@ -82,17 +82,17 @@
     
     </summary>
     
-      <category term="noname" scheme="http://yoursite.com/categories/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/categories/noname/"/>
     
     
-      <category term="noname" scheme="http://yoursite.com/tags/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/tags/noname/"/>
     
   </entry>
   
   <entry>
     <title>Docker容器中搭建rabbitmq集群</title>
-    <link href="http://yoursite.com/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BArabbitmq%E9%9B%86%E7%BE%A4.html"/>
-    <id>http://yoursite.com/aticle/Docker容器中搭建rabbitmq集群.html</id>
+    <link href="http://www.reallinxu.com/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BArabbitmq%E9%9B%86%E7%BE%A4.html"/>
+    <id>http://www.reallinxu.com/aticle/Docker容器中搭建rabbitmq集群.html</id>
     <published>2018-05-29T10:00:00.000Z</published>
     <updated>2018-05-31T03:39:06.475Z</updated>
     
@@ -108,17 +108,17 @@
     
     </summary>
     
-      <category term="noname" scheme="http://yoursite.com/categories/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/categories/noname/"/>
     
     
-      <category term="noname" scheme="http://yoursite.com/tags/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/tags/noname/"/>
     
   </entry>
   
   <entry>
     <title>Docker容器中构建mysql环境</title>
-    <link href="http://yoursite.com/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%9E%84%E5%BB%BAmysql%E7%8E%AF%E5%A2%83.html"/>
-    <id>http://yoursite.com/aticle/Docker容器中构建mysql环境.html</id>
+    <link href="http://www.reallinxu.com/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%9E%84%E5%BB%BAmysql%E7%8E%AF%E5%A2%83.html"/>
+    <id>http://www.reallinxu.com/aticle/Docker容器中构建mysql环境.html</id>
     <published>2018-05-28T10:20:31.000Z</published>
     <updated>2018-05-30T11:21:17.252Z</updated>
     
@@ -133,17 +133,17 @@
     
     </summary>
     
-      <category term="noname" scheme="http://yoursite.com/categories/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/categories/noname/"/>
     
     
-      <category term="noname" scheme="http://yoursite.com/tags/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/tags/noname/"/>
     
   </entry>
   
   <entry>
     <title>Dockerfile构建java环境镜像</title>
-    <link href="http://yoursite.com/aticle/Dockerfile%E6%9E%84%E5%BB%BAjava%E7%8E%AF%E5%A2%83%E9%95%9C%E5%83%8F.html"/>
-    <id>http://yoursite.com/aticle/Dockerfile构建java环境镜像.html</id>
+    <link href="http://www.reallinxu.com/aticle/Dockerfile%E6%9E%84%E5%BB%BAjava%E7%8E%AF%E5%A2%83%E9%95%9C%E5%83%8F.html"/>
+    <id>http://www.reallinxu.com/aticle/Dockerfile构建java环境镜像.html</id>
     <published>2018-05-28T10:20:31.000Z</published>
     <updated>2018-05-30T11:16:42.233Z</updated>
     
@@ -158,17 +158,17 @@
     
     </summary>
     
-      <category term="noname" scheme="http://yoursite.com/categories/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/categories/noname/"/>
     
     
-      <category term="noname" scheme="http://yoursite.com/tags/noname/"/>
+      <category term="noname" scheme="http://www.reallinxu.com/tags/noname/"/>
     
   </entry>
   
   <entry>
     <title>Docker入门及基础命令</title>
-    <link href="http://yoursite.com/aticle/Docker-Learning.html"/>
-    <id>http://yoursite.com/aticle/Docker-Learning.html</id>
+    <link href="http://www.reallinxu.com/aticle/Docker-Learning.html"/>
+    <id>http://www.reallinxu.com/aticle/Docker-Learning.html</id>
     <published>2018-05-16T02:20:31.000Z</published>
     <updated>2018-05-31T03:28:43.402Z</updated>
     
@@ -184,17 +184,17 @@
     
     </summary>
     
-      <category term="Docker" scheme="http://yoursite.com/categories/Docker/"/>
+      <category term="Docker" scheme="http://www.reallinxu.com/categories/Docker/"/>
     
     
-      <category term="Docker" scheme="http://yoursite.com/tags/Docker/"/>
+      <category term="Docker" scheme="http://www.reallinxu.com/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>a=a++引发的思考</title>
-    <link href="http://yoursite.com/aticle/java%20a=a++%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83.html"/>
-    <id>http://yoursite.com/aticle/java a=a++引发的思考.html</id>
+    <link href="http://www.reallinxu.com/aticle/java%20a=a++%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83.html"/>
+    <id>http://www.reallinxu.com/aticle/java a=a++引发的思考.html</id>
     <published>2018-04-26T02:20:31.000Z</published>
     <updated>2018-04-28T03:19:35.145Z</updated>
     
@@ -209,17 +209,17 @@
     
     </summary>
     
-      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+      <category term="java" scheme="http://www.reallinxu.com/categories/java/"/>
     
     
-      <category term="java基础" scheme="http://yoursite.com/tags/java%E5%9F%BA%E7%A1%80/"/>
+      <category term="java基础" scheme="http://www.reallinxu.com/tags/java%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
   <entry>
     <title> java8初识		</title>
-    <link href="http://yoursite.com/aticle/P10.html"/>
-    <id>http://yoursite.com/aticle/P10.html</id>
+    <link href="http://www.reallinxu.com/aticle/P10.html"/>
+    <id>http://www.reallinxu.com/aticle/P10.html</id>
     <published>2018-03-13T01:19:22.000Z</published>
     <updated>2018-05-10T02:45:56.173Z</updated>
     
@@ -237,15 +237,15 @@
     
     </summary>
     
-      <category term="杂项" scheme="http://yoursite.com/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="http://www.reallinxu.com/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
   </entry>
   
   <entry>
     <title> 网站同时支持http和https访问		</title>
-    <link href="http://yoursite.com/aticle/P8.html"/>
-    <id>http://yoursite.com/aticle/P8.html</id>
+    <link href="http://www.reallinxu.com/aticle/P8.html"/>
+    <id>http://www.reallinxu.com/aticle/P8.html</id>
     <published>2018-01-29T07:08:53.000Z</published>
     <updated>2018-05-10T02:27:55.781Z</updated>
     
@@ -260,15 +260,15 @@
     
     </summary>
     
-      <category term="WordPress" scheme="http://yoursite.com/categories/WordPress/"/>
+      <category term="WordPress" scheme="http://www.reallinxu.com/categories/WordPress/"/>
     
     
   </entry>
   
   <entry>
     <title> WordPress从Apache迁移到nginx		</title>
-    <link href="http://yoursite.com/aticle/P15.html"/>
-    <id>http://yoursite.com/aticle/P15.html</id>
+    <link href="http://www.reallinxu.com/aticle/P15.html"/>
+    <id>http://www.reallinxu.com/aticle/P15.html</id>
     <published>2018-01-29T07:02:48.000Z</published>
     <updated>2018-05-10T02:45:03.670Z</updated>
     
@@ -288,15 +288,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="WordPress" scheme="http://yoursite.com/categories/WordPress/"/>
+      <category term="WordPress" scheme="http://www.reallinxu.com/categories/WordPress/"/>
     
     
   </entry>
   
   <entry>
     <title> Redis集群搭建		</title>
-    <link href="http://yoursite.com/aticle/P12.html"/>
-    <id>http://yoursite.com/aticle/P12.html</id>
+    <link href="http://www.reallinxu.com/aticle/P12.html"/>
+    <id>http://www.reallinxu.com/aticle/P12.html</id>
     <published>2018-01-26T06:36:50.000Z</published>
     <updated>2018-05-10T02:39:04.906Z</updated>
     
@@ -312,15 +312,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="Redis" scheme="http://yoursite.com/categories/Redis/"/>
+      <category term="Redis" scheme="http://www.reallinxu.com/categories/Redis/"/>
     
     
   </entry>
   
   <entry>
     <title> vi文件Found a swap file by the name 		</title>
-    <link href="http://yoursite.com/aticle/P14.html"/>
-    <id>http://yoursite.com/aticle/P14.html</id>
+    <link href="http://www.reallinxu.com/aticle/P14.html"/>
+    <id>http://www.reallinxu.com/aticle/P14.html</id>
     <published>2018-01-24T10:59:56.000Z</published>
     <updated>2018-03-22T01:28:03.520Z</updated>
     
@@ -337,15 +337,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="杂项" scheme="http://yoursite.com/categories/%E6%9D%82%E9%A1%B9/"/>
+      <category term="杂项" scheme="http://www.reallinxu.com/categories/%E6%9D%82%E9%A1%B9/"/>
     
     
   </entry>
   
   <entry>
     <title> redis入门		</title>
-    <link href="http://yoursite.com/aticle/P11.html"/>
-    <id>http://yoursite.com/aticle/P11.html</id>
+    <link href="http://www.reallinxu.com/aticle/P11.html"/>
+    <id>http://www.reallinxu.com/aticle/P11.html</id>
     <published>2018-01-24T10:53:33.000Z</published>
     <updated>2018-05-10T02:35:13.578Z</updated>
     
@@ -360,15 +360,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="Redis" scheme="http://yoursite.com/categories/Redis/"/>
+      <category term="Redis" scheme="http://www.reallinxu.com/categories/Redis/"/>
     
     
   </entry>
   
   <entry>
     <title>git常用命令</title>
-    <link href="http://yoursite.com/aticle/P6.html"/>
-    <id>http://yoursite.com/aticle/P6.html</id>
+    <link href="http://www.reallinxu.com/aticle/P6.html"/>
+    <id>http://www.reallinxu.com/aticle/P6.html</id>
     <published>2018-01-23T08:28:47.000Z</published>
     <updated>2018-09-03T02:41:44.119Z</updated>
     
@@ -384,15 +384,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="github" scheme="http://yoursite.com/categories/github/"/>
+      <category term="github" scheme="http://www.reallinxu.com/categories/github/"/>
     
     
   </entry>
   
   <entry>
     <title> Dubbo+Zookeeper+Spring-boot+dubbo-simple 搭建入门</title>
-    <link href="http://yoursite.com/aticle/P3.html"/>
-    <id>http://yoursite.com/aticle/P3.html</id>
+    <link href="http://www.reallinxu.com/aticle/P3.html"/>
+    <id>http://www.reallinxu.com/aticle/P3.html</id>
     <published>2018-01-23T08:16:32.000Z</published>
     <updated>2018-05-10T02:19:49.760Z</updated>
     
@@ -407,15 +407,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="Dubbo" scheme="http://yoursite.com/categories/Dubbo/"/>
+      <category term="Dubbo" scheme="http://www.reallinxu.com/categories/Dubbo/"/>
     
     
   </entry>
   
   <entry>
     <title> centos服务器安装mysql</title>
-    <link href="http://yoursite.com/aticle/P4.html"/>
-    <id>http://yoursite.com/aticle/P4.html</id>
+    <link href="http://www.reallinxu.com/aticle/P4.html"/>
+    <id>http://www.reallinxu.com/aticle/P4.html</id>
     <published>2018-01-12T08:14:23.000Z</published>
     <updated>2018-05-10T02:21:49.515Z</updated>
     
@@ -430,15 +430,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="CentOS" scheme="http://yoursite.com/categories/CentOS/"/>
+      <category term="CentOS" scheme="http://www.reallinxu.com/categories/CentOS/"/>
     
     
   </entry>
   
   <entry>
     <title> Spring-batch restart重拉机制		</title>
-    <link href="http://yoursite.com/aticle/P13.html"/>
-    <id>http://yoursite.com/aticle/P13.html</id>
+    <link href="http://www.reallinxu.com/aticle/P13.html"/>
+    <id>http://www.reallinxu.com/aticle/P13.html</id>
     <published>2017-12-22T06:27:28.000Z</published>
     <updated>2018-05-10T02:41:08.629Z</updated>
     
@@ -456,15 +456,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="Spring-batch" scheme="http://yoursite.com/categories/Spring-batch/"/>
+      <category term="Spring-batch" scheme="http://www.reallinxu.com/categories/Spring-batch/"/>
     
     
   </entry>
   
   <entry>
     <title> WordPress搭建		</title>
-    <link href="http://yoursite.com/aticle/P16.html"/>
-    <id>http://yoursite.com/aticle/P16.html</id>
+    <link href="http://www.reallinxu.com/aticle/P16.html"/>
+    <id>http://www.reallinxu.com/aticle/P16.html</id>
     <published>2017-12-22T06:17:01.000Z</published>
     <updated>2018-03-22T01:28:03.520Z</updated>
     
@@ -481,15 +481,15 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="WordPress" scheme="http://yoursite.com/categories/WordPress/"/>
+      <category term="WordPress" scheme="http://www.reallinxu.com/categories/WordPress/"/>
     
     
   </entry>
   
   <entry>
     <title> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</title>
-    <link href="http://yoursite.com/aticle/P5.html"/>
-    <id>http://yoursite.com/aticle/P5.html</id>
+    <link href="http://www.reallinxu.com/aticle/P5.html"/>
+    <id>http://www.reallinxu.com/aticle/P5.html</id>
     <published>2017-12-22T02:20:31.000Z</published>
     <updated>2018-05-10T02:12:19.634Z</updated>
     
@@ -504,10 +504,10 @@ chkconfig httpd off
     
     </summary>
     
-      <category term="CentOS" scheme="http://yoursite.com/categories/CentOS/"/>
+      <category term="CentOS" scheme="http://www.reallinxu.com/categories/CentOS/"/>
     
     
-      <category term="CentOS" scheme="http://yoursite.com/tags/CentOS/"/>
+      <category term="CentOS" scheme="http://www.reallinxu.com/tags/CentOS/"/>
     
   </entry>
   

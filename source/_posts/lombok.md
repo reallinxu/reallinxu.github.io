@@ -31,7 +31,7 @@ lombok常用注解如下：
 
 # IDE使用lombok #
 ## eclipse ##
-1. 下载lombok，[Click](https://projectlombok.org/download)
+1. 下载lombok，[click](https://projectlombok.org/download)
 2. 双击lombok.jar直接安装，如果安装不了，将lombok放入到eclipse安装目录，编辑eclipse.ini，在最后一行加上 -javaagent:lombok.jar，重启eclipse。
 3. 添加maven配置：  
   
@@ -41,12 +41,12 @@ lombok常用注解如下：
 		<artifactId>lombok</artifactId>
 		<version>1.16.10</version>
 	</dependency>
-```  
+```
 
 ## idea ##
 1. 安装lombok插件，File-->Settings-->plugins-->Browse Repositories，搜索lombok plugin，选择install，重启idea。
-2. 如果上面下载不了，或者太慢，且本地有shadowsocks翻墙支持，可以在当前窗口进入HTTP Proxy Settings，选择Manual proxy configuration,设置如图。
-	![Http Proxy](img/lombok http proxy.JPG)
+2. 如果上面下载不了，或者太慢，且本地有shadowsocks翻墙支持，可以在当前窗口进入HTTP Proxy Settings，选择Manual proxy configuration，设置如图：
+	![Http Proxy](/img/lombokhttpproxy.JPG)
 3. 添加maven配置：  
  
 ``` java
