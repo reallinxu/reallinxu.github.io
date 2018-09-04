@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		 | Reallinxu's Blog</title><link rel="stylesheet" type="text/css" href="//fonts.neworld.org/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.1"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.1"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden"> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</h1><a id="logo" href="/.">Reallinxu's Blog</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="Arama"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title"> CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群		</h1><div class="post-meta"><a href="/aticle/P5.html#comments" class="comment-count"><i id="changyan_count_unit" data-xid="aticle/P5.html"></i>留言,<i id="changyan_parti_unit" data-xid="aticle/P5.html"></i>参与</a><p><span class="date">Dec 22, 2017</span><span><a href="/categories/CentOS/" class="category">CentOS</a></span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>点击</i></i></span></p></div><div class="post-content"><h1 id="CentOS联网设置"><a href="#CentOS联网设置" class="headerlink" title="CentOS联网设置"></a>CentOS联网设置</h1><pre><code>[root@localhost ~]# vi /etc/sysconfig/network-scripts/ifcfg-ens33
+Intel Corporation 82545EM Gigabit Ethernet Controller (Copper)
+TYPE=Ethernet       #网卡类型
+DEVICE=eth0         #网卡接口名称
+ONBOOT=yes          #系统启动时是否自动加载
+BOOTPROTO=static    #启用地址协议 --static:静态协议 --bootp协议 --dhcp协议
+IPADDR=192.168.1.11      #网卡IP地址
+NETMASK=255.255.255.0    #网卡网络地址
+GATEWAY=192.168.1.1      #网卡网关地址
+DNS1=10.203.104.41       #网卡DNS地址
+HWADDR=00:0C:29:13:5D:74 #网卡设备MAC地址
+BROADCAST=192.168.1.255  #网卡广播地址 
+
+PS:该文件名ifcfg-ens33不固定，找差不多类型文件即可。联网只要设置为自动加载即可，即ONBOOT设置为yes(一般默认为no)。设置完后reboot重启，命令ifconfig查看ip。
+</code></pre><h1 id="CentOS安装jdk"><a href="#CentOS安装jdk" class="headerlink" title="CentOS安装jdk"></a>CentOS安装jdk</h1><p>使用WinSCP连接虚拟机，centOS可以直接通过FTP和SSH连接。将jdk-8u144-linux-x64.tar.gz下载好通过WinSCP放入root目录下。使用SecureCRT连接虚拟机，开始准备安装jdk。</p>
+<h2 id="创建Java文件夹"><a href="#创建Java文件夹" class="headerlink" title="创建Java文件夹"></a>创建Java文件夹</h2><pre><code>[root@localhost ~]# cd /usr/local
+[root@localhost local]# mkdir java
+[root@localhost local]# ls
+bin  etc  games  include  java  lib  lib64  libexec  sbin  share  src
+</code></pre><h2 id="将jdk-8u144-linux-x64-tar-gz解压，再移到java文件夹下"><a href="#将jdk-8u144-linux-x64-tar-gz解压，再移到java文件夹下" class="headerlink" title="将jdk-8u144-linux-x64.tar.gz解压，再移到java文件夹下"></a>将jdk-8u144-linux-x64.tar.gz解压，再移到java文件夹下</h2><pre><code>[root@localhost ~]# tar zxvf jdk-8u144-linux-x64.tar.gz
+[root@localhost ~]# mv jdk1.8.0_144 /usr/local/java
+</code></pre><h2 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h2><pre><code>[root@localhost ~]# vi ~/.bashrc
+文件末尾加上以下几行：
+export JAVA_HOME=/usr/local/java/jdk1.8.0_144
+export CLASSPATH=.:${JAVA_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+使生效：
+[root@localhost jdk1.8.0_144]# source ~/.bashrc
+</code></pre><h2 id="验证是否安装成功"><a href="#验证是否安装成功" class="headerlink" title="验证是否安装成功"></a>验证是否安装成功</h2><pre><code>[root@localhost jdk1.8.0_144]# java
+[root@localhost jdk1.8.0_144]# javac
+[root@localhost jdk1.8.0_144]# java -version
+</code></pre><h1 id="CentOS安装Nexus"><a href="#CentOS安装Nexus" class="headerlink" title="CentOS安装Nexus"></a>CentOS安装Nexus</h1><p>将nexus-3.5.2-01-unix.tar.gz通过WInSCP放入root目录下。使用SecureCRT连接虚拟机，开始准备安装nexus。</p>
+<h2 id="创建Nexus文件夹"><a href="#创建Nexus文件夹" class="headerlink" title="创建Nexus文件夹"></a>创建Nexus文件夹</h2><pre><code>[root@localhost ~]# cd /usr/local
+[root@localhost local]# ls
+bin  etc  games  include  java  lib  lib64  libexec  sbin  share  src
+[root@localhost local]# mkdir nexus
+[root@localhost local]# ls
+bin  etc  games  include  java  lib  lib64  libexec  nexus  sbin  share  src
+</code></pre><h2 id="将nexus-3-5-2-01-unix-tar-gz移到nexus文件夹下再解压"><a href="#将nexus-3-5-2-01-unix-tar-gz移到nexus文件夹下再解压" class="headerlink" title="将nexus-3.5.2-01-unix.tar.gz移到nexus文件夹下再解压"></a>将nexus-3.5.2-01-unix.tar.gz移到nexus文件夹下再解压</h2><pre><code>[root@localhost ~]# mv nexus-3.5.2-01-unix.tar.gz /usr/local/nexus
+[root@localhost ~]# cd /usr/local/nexus
+[root@localhost ~]# tar zxvf nexus-3.5.2-01-unix.tar.gz
+</code></pre><h2 id="启动nexus"><a href="#启动nexus" class="headerlink" title="启动nexus"></a>启动nexus</h2><pre><code>[root@localhost ~]# cd /usr/local/nexus/nexus-3.5.2-01/bin
+[root@localhost bin]# ./nexus start
+WARNING: ************************************************************
+WARNING: Detected execution as &quot;root&quot; user.  This is NOT recommended!
+WARNING: ************************************************************
+Starting nexus
+[root@localhost bin]# ./nexus status
+WARNING: ************************************************************
+WARNING: Detected execution as &quot;root&quot; user.  This is NOT recommended!
+WARNING: ************************************************************
+nexus is running.
+</code></pre><h2 id="验证是否启动成功"><a href="#验证是否启动成功" class="headerlink" title="验证是否启动成功"></a>验证是否启动成功</h2><p>在浏览器中输入{ip}:8081(默认为8081端口)。此时并不能打开，因为防火墙的原因，此处我是关闭防火墙(也可以开放相应端口解决)，为了简单直接关闭啦。关闭防火墙命令如下：  </p>
+<pre><code>[root@localhost bin]# systemctl stop firewalld.service #停止firewall(此时重启后防火墙会自动开启)
+[root@localhost bin]# systemctl disable firewalld.service #禁止firewall开机启动
+[root@localhost bin]# firewall-cmd --state #查看默认防火墙状态（关闭后显示notrunning，开启后显示running）
+</code></pre><p>此时再通过浏览器进入即可。</p>
+<h1 id="CentOS安装Tomcat"><a href="#CentOS安装Tomcat" class="headerlink" title="CentOS安装Tomcat"></a>CentOS安装Tomcat</h1><p>将apache-tomcat-8.5.23.tar.gz通过WInSCP放入root目录下。使用SecureCRT连接虚拟机，开始准备安装tomcat。</p>
+<h2 id="创建Tomcat文件夹"><a href="#创建Tomcat文件夹" class="headerlink" title="创建Tomcat文件夹"></a>创建Tomcat文件夹</h2><pre><code>[root@localhost ~]# cd /usr/local
+[root@localhost local]# mkdir tomcat
+[root@localhost local]# ls
+bin  etc  games  include  java  lib  lib64  libexec  nexus  sbin  share  src  tomcat
+</code></pre><h2 id="将apache-tomcat-8-5-23-tar-gz移到tomcat文件夹下再解压"><a href="#将apache-tomcat-8-5-23-tar-gz移到tomcat文件夹下再解压" class="headerlink" title="将apache-tomcat-8.5.23.tar.gz移到tomcat文件夹下再解压"></a>将apache-tomcat-8.5.23.tar.gz移到tomcat文件夹下再解压</h2><pre><code>[root@localhost ~]# mv apache-tomcat-8.5.23.tar.gz /usr/local/tomcat/
+[root@localhost ~]# cd /usr/local/tomcat/
+[root@localhost tomcat]# tar zxvf apache-tomcat-8.5.23.tar.gz 
+</code></pre><h2 id="启动Tomcat"><a href="#启动Tomcat" class="headerlink" title="启动Tomcat"></a>启动Tomcat</h2><pre><code>[root@localhost ~]# cd /usr/local/tomcat/apache-tomcat-8.5.23/bin
+[root@localhost bin]# ./startup.sh 
+Using CATALINA_BASE:   /usr/local/tomcat/apache-tomcat-8.5.23
+Using CATALINA_HOME:   /usr/local/tomcat/apache-tomcat-8.5.23
+Using CATALINA_TMPDIR: /usr/local/tomcat/apache-tomcat-8.5.23/temp
+Using JRE_HOME:        /usr/local/java/jdk1.8.0_144
+Using CLASSPATH:       /usr/local/tomcat/apache-tomcat-8.5.23/bin/bootstrap.jar:/usr/local/tomcat/apache-tomcat-8.5.23/bin/tomcat-juli.jar
+Tomcat started.
+</code></pre><h2 id="验证是否安装成功-1"><a href="#验证是否安装成功-1" class="headerlink" title="验证是否安装成功"></a>验证是否安装成功</h2><p>用浏览器输入{IP}:8080(默认为8080端口)。 PS：注意防火墙设置。</p>
+<h1 id="CentOS安装RabbitMq"><a href="#CentOS安装RabbitMq" class="headerlink" title="CentOS安装RabbitMq"></a>CentOS安装RabbitMq</h1><h2 id="安装Erlang"><a href="#安装Erlang" class="headerlink" title="安装Erlang"></a>安装Erlang</h2><p>使用SecureCRT连接虚拟机，开始准备安装Erlang。  </p>
+<pre><code>[root@localhost bin]# rpm -ivh http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+[root@localhost bin]# yum install erlang
+安装  1 软件包 (+110 依赖软件包)
+
+总下载量：51 M
+安装大小：117 M
+Is this ok [y/d/N]: 
+输入：y
+是否继续？[y/N]：
+输入: y
+</code></pre><h2 id="安装RabbitMq"><a href="#安装RabbitMq" class="headerlink" title="安装RabbitMq"></a>安装RabbitMq</h2><p>将rabbitmq-signing-key-public.asc、rabbitmq-server-3.3.5-1.noarch.rpm通过WInSCP放入root目录下。使用SecureCRT连接虚拟机，开始准备安装RabbitMq。  </p>
+<pre><code>[root@localhost ~]# rpm --import rabbitmq-signing-key-public.asc
+[root@localhost ~]# rpm -ivh rabbitmq-server-3.3.5-1.noarch.rpm
+准备中...                          ################################# [100%]
+正在升级/安装...
+1:rabbitmq-server-3.3.5-1          ################################# [100%]
+[root@localhost ~]# rabbitmq-plugins enable rabbitmq_management
+The following plugins have been enabled:
+mochiweb
+webmachine
+rabbitmq_web_dispatch
+amqp_client
+rabbitmq_management_agent
+rabbitmq_management
+Plugin configuration has changed. Restart RabbitMQ for changes to take effect.
+[root@localhost ~]# chkconfig --level 3 rabbitmq-server on
+</code></pre><p>配置文件路径  </p>
+<pre><code>[root@localhost ~]# vi /etc/init.d/rabbitmq-server
+寻找行：PID_FILE=/var/run/rabbitmq/pid
+在以上内容之下，插入行
+export RABBITMQ_MNESIA=/rabbitmq/mnesia
+</code></pre><p>配置访问权限  </p>
+<pre><code>[root@localhost ~]# chmod 644 /etc/rabbitmq/enabled_plugins
+</code></pre><p>启动RabbitMq  </p>
+<pre><code>[root@localhost ~]# service rabbitmq-server start
+[root@localhost ~]# rabbitmqctl add_user admin admin
+[root@localhost ~]# rabbitmqctl set_user_tags admin administrator
+</code></pre><p>验证RabbitMq<br>    用浏览器输入{Ip}:15672查看后管。(PS：注意防火墙)</p>
+<h2 id="配置RabbitMq集群"><a href="#配置RabbitMq集群" class="headerlink" title="配置RabbitMq集群"></a>配置RabbitMq集群</h2><p>修改hosts文件  </p>
+<pre><code>vi /etc/hosts
+将两台虚拟机的Ip配置进去：
+192.168.43.69 test1
+192.168.43.216 test2
+重启两台虚拟机reboot
+</code></pre><p>启动第一台虚拟机的Rabbitmq:  </p>
+<pre><code>service rabbitmq-server start
+将/var/lib/rabbitmq的.erlang.cookie文件拷贝到第二台虚拟机相同位置覆盖
+更改.erlang.cookie的访问权限为400
+chmod 400 /var/lib/rabbitmq/.erlang.cookie
+更改.erlang.cookie的文件所有人为rabbitmq
+chown rabbitmq:rabbitmq /var/lib/rabbitmq/.erlang.cookie
+启动第二台虚拟机的Rabbitmq：
+service rabbitmq-server start
+rabbitmqctl stop_app
+rabbitmqctl join_cluster rabbit@test1
+rabbitmqctl start_app
+</code></pre><p>验证集群是否成功<br>用浏览器输入{Ip}:15672查看后管。(PS：注意防火墙)<br>PS：cookie文件会有两处都存在，root目录下cookie可以直接删除。如果使用虚拟机使用桥接模式，主机名hostname会自动修改成和hosts配置一致，如果使用仅主机网络等，hostname没有修改，可以使用hostnamectl set-hostname test1命令就行修改。</p>
+<p>软件包地址：<a href="http://download.csdn.net/download/anonymous_l/10021072" target="_blank" rel="noopener">http://download.csdn.net/download/anonymous_l/10021072</a></p>
+</div><div class="tags"><a href="/tags/CentOS/">CentOS</a></div><div class="post-share"><div class="bdsharebuttonbox"><span style="float:left;line-height: 28px;height: 28px;font-size:16px;font-weight:blod">分享到：</span><a href="#" data-cmd="more" class="bds_more"></a><a href="#" data-cmd="mshare" title="分享到一键分享" class="bds_mshare"></a><a href="#" data-cmd="fbook" title="分享到Facebook" class="bds_fbook"></a><a href="#" data-cmd="twi" title="分享到Twitter" class="bds_twi"></a><a href="#" data-cmd="linkedin" title="分享到linkedin" class="bds_linkedin"></a><a href="#" data-cmd="youdao" title="分享到有道云笔记" class="bds_youdao"></a><a href="#" data-cmd="evernotecn" title="分享到印象笔记" class="bds_evernotecn"></a><a href="#" data-cmd="weixin" title="分享到微信" class="bds_weixin"></a><a href="#" data-cmd="qzone" title="分享到QQ空间" class="bds_qzone"></a><a href="#" data-cmd="tsina" title="分享到新浪微博" class="bds_tsina"></a></div></div><div class="post-nav"><a href="/aticle/P16.html" class="pre"> WordPress搭建		</a><a href="/aticle/P1.html" class="next"> 微信小程序初探</a></div><div id="comments"><div id="SOHUCS" sid="aticle/P5.html"></div></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">文章目录</i></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS联网设置"><span class="toc-text">CentOS联网设置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS安装jdk"><span class="toc-text">CentOS安装jdk</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Java文件夹"><span class="toc-text">创建Java文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将jdk-8u144-linux-x64-tar-gz解压，再移到java文件夹下"><span class="toc-text">将jdk-8u144-linux-x64.tar.gz解压，再移到java文件夹下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置环境变量"><span class="toc-text">设置环境变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证是否安装成功"><span class="toc-text">验证是否安装成功</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS安装Nexus"><span class="toc-text">CentOS安装Nexus</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Nexus文件夹"><span class="toc-text">创建Nexus文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将nexus-3-5-2-01-unix-tar-gz移到nexus文件夹下再解压"><span class="toc-text">将nexus-3.5.2-01-unix.tar.gz移到nexus文件夹下再解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动nexus"><span class="toc-text">启动nexus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证是否启动成功"><span class="toc-text">验证是否启动成功</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS安装Tomcat"><span class="toc-text">CentOS安装Tomcat</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#创建Tomcat文件夹"><span class="toc-text">创建Tomcat文件夹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将apache-tomcat-8-5-23-tar-gz移到tomcat文件夹下再解压"><span class="toc-text">将apache-tomcat-8.5.23.tar.gz移到tomcat文件夹下再解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Tomcat"><span class="toc-text">启动Tomcat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#验证是否安装成功-1"><span class="toc-text">验证是否安装成功</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS安装RabbitMq"><span class="toc-text">CentOS安装RabbitMq</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Erlang"><span class="toc-text">安装Erlang</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装RabbitMq"><span class="toc-text">安装RabbitMq</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置RabbitMq集群"><span class="toc-text">配置RabbitMq集群</span></a></li></ol></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/aticle/lombok.html">lombok</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/spring-boot知识点.html">SpringBoot小知识点</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/Docker容器中搭建Redis集群.html">Docker容器中搭建Redis集群</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/Docker容器中搭建rabbitmq集群.html">Docker容器中搭建rabbitmq集群</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/Docker容器中构建mysql环境.html">Docker容器中构建mysql环境</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/Dockerfile构建java环境镜像.html">Dockerfile构建java环境镜像</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/Docker-Learning.html">Docker入门及基础命令</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/java a=a++引发的思考.html">a=a++引发的思考</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/P10.html"> java8初识		</a></li><li class="post-list-item"><a class="post-list-link" href="/aticle/P8.html"> 网站同时支持http和https访问		</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-gui"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS/">CentOS</a><span class="category-list-count">3</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS/杂项/">杂项</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Dubbo/">Dubbo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Redis/">Redis</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Spring-batch/">Spring-batch</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WeChat小程序/">WeChat小程序</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/WordPress/">WordPress</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/github/">github</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/lombok/">lombok</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/noname/">noname</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂项/">杂项</a><span class="category-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> 标签</i></div><div class="tagcloud"><a href="/tags/noname/" style="font-size: 15px;">noname</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/微信，小程序/" style="font-size: 15px;">微信，小程序</a> <a href="/tags/CentOS/" style="font-size: 15px;">CentOS</a> <a href="/tags/java基础/" style="font-size: 15px;">java基础</a> <a href="/tags/lombok/" style="font-size: 15px;">lombok</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> 归档</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> 友情链接</i></div><ul></ul><a href="https://www.xiajunyi.com/" title="夏军谊的小站" target="_blank">夏军谊的小站</a><ul></ul><a href="https://team19.abstiger.com/" title="华东19部博客" target="_blank">华东19部博客</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Baidu Site Haritası</a> |  <a href="/atom.xml">订阅</a> |  <a href="/about/">关于</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次</p><p><span> Copyright &copy;<a href="/." rel="nofollow">Reallinxu.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.1"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.1" async></script><script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","weixin","tsina","qzone","linkedin","fbook","twi","print","renren","sqq","evernotecn","bdysc","tqq","tqf","bdxc","kaixin001","tieba","douban","bdhome","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","h163","copy"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","weixin","fbook","twi","linkedin","youdao","evernotecn","mshare"]}};with(document)0[(getElementsByTagName('head')[0]||head).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script><script>window._config = { showScore: true };
+(function(){ 
+  var appid = 'cytAlyQWm'; 
+  var conf = 'd5d7bbd2d2b42a6115dd8d8287c1b43b'; 
+  var width = window.innerWidth || document.documentElement.clientWidth; 
+  var nodes =document.getElementsByTagName("head")[0]||document.head||document.documentElement;
+  if (/(Android|iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent) && width < 750) {  
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+  }
+  else { 
+    var loadJs=function(d,a){
+      var b=document.createElement("script");b.setAttribute("type","text/javascript");
+      b.setAttribute("charset","UTF-8");
+      b.setAttribute("src",d);
+      if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+      nodes.appendChild(b)
+    };
+    loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})}); 
+  } 
+  var loadCss = function(cssString){  
+    var style=document.createElement("style");  
+    style.setAttribute("type", "text/css");  
+    if(style.styleSheet){// IE  
+        style.styleSheet.cssText = cssString;  
+    } else {// w3c  
+        var cssText = document.createTextNode(cssString);  
+        style.appendChild(cssText);  
+    }
+    nodes.appendChild(style);
+  }
+  window.onload=function(){loadCss('.module-hot-topic,.module-cmt-float-bar{display:none!important}#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .wrap-action-w .cbox-prompt-w span.prompt-empty-w,#SOHUCS #SOHU_MAIN .module-cmt-float-bar .wrap-cont-w .cont-form-w .form-text-w span.text-null,#SOHUCS #SOHU_MAIN .module-cmt-float-bar .wrap-cont-w .cont-minwidth-w div.cont-comment-w a.comment-link-w,#SOHUCS #SOHU_MAIN .module-cmt-float-bar .wrap-cont-w .cont-minwidth-w div.cont-comment-w span.comment-text-w,#SOHUCS #SOHU_MAIN .module-cmt-footer .section-service-w div.service-wrap-w a:hover,#SOHUCS #SOHU_MAIN .module-cmt-header .section-cbox-w .block-head-w div.header-login,#SOHUCS #SOHU_MAIN .module-cmt-header .section-title-w .title-user-w .user-wrap-w span.wrap-name-w,#SOHUCS #SOHU_MAIN .module-cmt-list .action-click-gw span.click-disable-eg a em.icon-name-bg,#SOHUCS #SOHU_MAIN .module-cmt-list .block-title-gw ul li div.title-name-gw,#SOHUCS #SOHU_MAIN .module-cmt-list .cmt-list-type .cmt-list-number .comment-number span.cy-number,#SOHUCS #SOHU_MAIN .module-cmt-list .cmt-list-type .cmt-list-number span.comment-number,#SOHUCS #SOHU_MAIN .module-cmt-list .cmt-list-type .type-lists li.active,#SOHUCS #SOHU_MAIN .module-cmt-list .msg-wrap-gw .wrap-action-gw .action-click-gw span a:hover,#SOHUCS #SOHU_MAIN .module-cmt-list .picture-box-gw div.box-action-gw a:hover,#SOHUCS #SOHU_MAIN .module-cmt-list .wrap-action-gw .action-click-gw span a:hover em.icon-name-bg,#SOHUCS #SOHU_MAIN .module-cmt-list .wrap-user-gw span.user-name-gw a{color:#40759b!important}#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .post-wrap-border-t div.post-wrap-border-t-r,#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w div.post-wrap-border-l,#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w div.post-wrap-border-r{display:none!important}#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .post-wrap-border-t div.post-wrap-border-t-l{background:#FFF!important;top:-2px!important}#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .wrap-action-w .action-function-w .uploading-wrapper-dw div.wrapper-image-dw,#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w div.post-wrap-main,#SOHUCS #SOHU_MAIN .module-cmt-float-bar .wrap-cont-w .cont-form-w div.form-text-w,#SOHUCS #SOHU_MAIN .module-cmt-header .section-cbox-w .block-head-w div.header-login,#SOHUCS #SOHU_MAIN .module-cmt-list .module-cmt-box .post-wrap-w div.post-wrap-main{border:1px solid #e6e6e6!important;border-radius:20px 20px 20px 20px;margin:0!important}#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .wrap-action-w .action-issue-w .issue-btn-w a .btn-fw{width:130px!important;height:34px!important;line-height:33px!important;font-size:17px!important;background:#5483b1!important;border-radius:20px!important;color:#FFF!important;-webkit-box-shadow:0 -1px 4px #5483b1 inset;box-shadow:0 -1px 10px #5483b1 inset}#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .wrap-action-w .action-issue-w .issue-btn-w a .btn-fw:before{content:"发表评论"}#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .wrap-action-w .action-issue-w .issue-btn-w a:hover .btn-fw{color:#40759b!important;background:#FFF!important}#SOHUCS #SOHU_MAIN .module-cmt-list .cmt-list-type .type-lists li{background:none!important;border-bottom:1px solid #e6e6e6}#SOHUCS #SOHU_MAIN .module-cmt-list .cmt-list-type .type-lists li.active{border:1px solid #e6e6e6;border-radius:10px 10px 0 0;border-bottom:none}#SOHUCS #SOHU_MAIN .module-cmt-list .block-title-gw ul li .title-name-gw div.title-name-gw-tag{background:#5483b1!important;border-radius:3px}#SOHUCS #SOHU_MAIN .module-cmt-list .cmt-list-type div.cmt-list-border{background-color:#e6e6e6!important}#SOHUCS #SOHU_MAIN .module-cmt-notice ul.nt-list li.nt-item{border:1px solid #e6e6e6!important}#SOHUCS #SOHU_MAIN .module-cmt-notice ul.nt-list li.nt-item .nt-logo{text-align:center;line-height:40px;border-radius:50%!important;background:#e6e6e6!important}#SOHUCS #SOHU_MAIN .module-cmt-notice ul.nt-list li.nt-item .nt-logo:before{content:"畅";font-size:22px;color:#FFF}#SOHUCS #SOHU_MAIN .module-cmt-notice ul.nt-list li.nt-item a.nt-text,#SOHUCS #SOHU_MAIN .module-cmt-notice ul.nt-list li.nt-item a.nt-text i{color:#5483b1!important}#SOHUCS #SOHU_MAIN .module-cmt-header .section-title-w .title-user-w .user-wrap-w{background:#FFF!important}');};
+})();</script><script src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script></body></html>
