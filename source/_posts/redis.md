@@ -1,5 +1,5 @@
 ---
-title: " redis入门\t\t"
+title: " redis入门"
 id: 102
 categories:
   - Redis

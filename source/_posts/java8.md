@@ -1,10 +1,10 @@
 ---
-title: " java8初识\t\t"
+title: " java8初识"
 id: 156
 categories:
-  - 杂项
+  - Java
 date: 2018-03-13 09:19:22
-tags:
+tags: java
 ---
 
 1. 接口里允许使用default关键字，为接口声明添加非抽象的方法实现。这个特性又被称为扩展方法。默认方法可以直接使用。默认方法无法在lambda表达式内部被访问。(test1)

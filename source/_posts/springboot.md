@@ -1,5 +1,5 @@
 ---
-title: " Spring-batch restart重拉机制\t\t"
+title: " Spring-batch restart重拉机制"
 id: 64
 categories:
   - Spring-batch

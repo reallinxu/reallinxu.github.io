@@ -2,7 +2,7 @@
 title: "git常用命令"
 id: 93
 categories:
-  - github
+  - Github
 date: 2018-01-23 16:28:47
 tags:
 ---

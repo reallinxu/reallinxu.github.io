@@ -1,5 +1,5 @@
 ---
-title: " WordPress从Apache迁移到nginx\t\t"
+title: " WordPress从Apache迁移到nginx"
 id: 130
 categories:
   - WordPress

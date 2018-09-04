@@ -1,5 +1,5 @@
 ---
-title: " CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群\t\t"
+title: " CentOS下安装JDK、NEXUS、TOMCAT、RABBITMQ集群"
 tags:
   - CentOS
 id: 48

@@ -1,5 +1,5 @@
 ---
-title: " WordPress搭建\t\t"
+title: "WordPress搭建"
 id: 62
 categories:
   - WordPress

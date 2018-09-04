@@ -1,10 +1,10 @@
 ---
 title: "Docker容器中搭建rabbitmq集群"
 tags:
-  - noname
+  - docker
 id: 522
 categories:
-  - noname
+  - Docker
 date: 2018-05-29 18:00:00
 author: 
   - linxu

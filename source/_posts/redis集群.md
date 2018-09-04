@@ -1,5 +1,5 @@
 ---
-title: " Redis集群搭建\t\t"
+title: " Redis集群搭建"
 id: 108
 categories:
   - Redis

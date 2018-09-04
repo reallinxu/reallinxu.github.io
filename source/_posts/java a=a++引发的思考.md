@@ -4,7 +4,7 @@ tags:
   - java基础
 id: 67
 categories:
-  - java
+  - Java
 date: 2018-04-26 10:20:31
 author: 
   - linxu

@@ -1,10 +1,10 @@
 ---
 title: "Dockerfile构建java环境镜像"
 tags:
-  - noname
+  - docker
 id: 521
 categories:
-  - noname
+  - Docker
 date: 2018-05-28 18:20:31
 author: 
   - linxu

@@ -1,10 +1,10 @@
 ---
 title: "Docker容器中搭建Redis集群"
 tags:
-  - noname
+  - docker
 id: 523
 categories:
-  - noname
+  - Docker
 date: 2018-05-30 18:00:00
 author: 
   - linxu
