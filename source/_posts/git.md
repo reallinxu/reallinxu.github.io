@@ -97,3 +97,9 @@ cd到你的本地项目根目录下，执行git命令
 ** 第八步:提交到仓库 **
 	
 	git push
+
+## git日常笔记 ##
++ 查看当前commit记录
+	git cherry -v
++ 合并其他分支commit记录
+	git cherry-pick <commit SHA>
