@@ -2,7 +2,7 @@
 title: "git常用命令"
 id: 93
 categories:
-  - Github
+  - Git
 date: 2018-01-23 16:28:47
 tags:
 ---
@@ -103,3 +103,7 @@ cd到你的本地项目根目录下，执行git命令
 	git cherry -v
 + 合并其他分支commit记录
 	git cherry-pick <commit SHA>
++ git撤销到某次commit
+	git reset --hard <commit_id> （commit_id为撤销到的id）
++ git撤销某次commit
+	git revert <commit_id>
