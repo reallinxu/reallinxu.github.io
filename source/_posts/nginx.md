@@ -43,10 +43,10 @@ Nginx提供的动静分离是指把动态请求和静态请求分离开，合适
 ``` config
 server {
     listen       443 ssl;
-    server_name  anxin.sitproduct.techbao.cn;
+    server_name  xxx.cn;
     ssl on;  #开启ssl证书
-	ssl_certificate "/home/project/httpscrt/1_anxin.sitproduct.techbao.cn_bundle.crt";  #证书位置
-     ssl_certificate_key "/home/project/httpscrt/2_anxin.sitproduct.techbao.cn.key";   #key位置
+	ssl_certificate "/home/project/httpscrt/1_xxx.cn_bundle.crt";  #证书位置
+     ssl_certificate_key "/home/project/httpscrt/2_xxx.cn.key";   #key位置
 
     location / {
     proxy_pass http://127.0.0.1:28081;  #转发到本地28081端口
@@ -63,7 +63,7 @@ server {
 
 server {
 	listen 8081;
-    server_name blog.techbao.cn;
+    server_name xxx.cn;
     root /home/project/bbs/upload;   #静态网站目录
 	location / {
 			
