@@ -7,9 +7,9 @@ install:
   - npm install
   - npm install hexo-renderer-sass --save 
   - npm install hexo-renderer-scss --save
-  - cnpm install hexo-renderer-sass --save
-  - cnpm install hexo-renderer-scss --save
-  - cnpm install hexo-generator-json-content --save
+  #- cnpm install hexo-renderer-sass --save
+  #- cnpm install hexo-renderer-scss --save
+  #- cnpm install hexo-generator-json-content --save
   - npm install hexo-generator-json-content --save
   - npm install hexo-renderer-jade@0.3.0 --save
   - npm install hexo-renderer-stylus --save
