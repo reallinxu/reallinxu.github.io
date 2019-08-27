@@ -10,15 +10,15 @@ author:
   - linxu
 ---
 
-# 队列 #
+
 ## 非阻塞队列
 > 非阻塞队列在添加（移除）时如果队列满（空）时会返回异常或者直接返回null，方法未做同步措施  
 
 非阻塞队列有：  
 
-1. PriorityQueue  
+* PriorityQueue  
 类实质上维护了一个有序列表。加入到 Queue 中的元素根据它们的天然排序（通过其 java.util.Comparable 实现）或者根据传递给构造函数的 java.util.Comparator 实现来定位  
-2. ConcurrentLinkedQueue  
+* ConcurrentLinkedQueue  
 ConcurrentLinkedQueue 是基于链接节点的、线程安全的队列。并发访问不需要同步。因为它在队列的尾部添加元素并从头部删除它们，所以只要不需要知道队列的大小，ConcurrentLinkedQueue 对公共集合的共享访问就可以工作得很好，收集关于队列大小的信息会很慢，需要遍历队列。  
  
 非阻塞队列提供的主要方法如下：  
@@ -51,6 +51,17 @@ ArrayListBlockingQueue是有界的，是一个有界缓存的等待队列。基�
 * LinkedBlockingDeque  
 一个由链表结构组成的双向阻塞队列。即可以从队列的两端插入和移除元素。双向队列因为多了一个操作队列的入口，在多线程同时入队时，也就减少了一半的竞争。 LinkedBlockingDeque多了addFirst、addLast、peekFirst、peekLast等方法，以first结尾的方法，表示插入、获取获移除双端队列的第一个元素。以last结尾的方法，表示插入、获取获移除双端队列的最后一个元素。 
 
+ 
+阻塞队列提供的主要方法如下：  
+
+* add：增加一个元索，如果队列已满，则抛出一个IIIegaISlabEepeplian异常  
+* remove：移除并返回队列头部的元素，如果队列为空，则抛出一个NoSuchElementException异常  
+* element：返回队列头部的元素，如果队列为空，则抛出一个NoSuchElementException异常  
+* offer：添加一个元素并返回true，如果队列已满，则返回false  
+* poll：移除并返问队列头部的元素，如果队列为空，则返回null  
+* peek：返回队列头部的元素，如果队列为空，则返回null  
+* put：添加一个元素，如果队列满，则阻塞  
+* take：移除并返回队列头部的元素，如果队列为空，则阻塞  
 
 
 
