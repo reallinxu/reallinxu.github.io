@@ -1,0 +1,59 @@
+---
+title: "[数据结构]1.队列"
+tags:
+  - 数据结构
+id: 2019
+categories:
+  - 数据结构
+date: 2019-08-27 15:20:00
+author: 
+  - linxu
+---
+
+# 队列 #
+## 非阻塞队列
+> 非阻塞队列在添加（移除）时如果队列满（空）时会返回异常或者直接返回null，方法未做同步措施  
+
+非阻塞队列有：  
+
+1. PriorityQueue  
+类实质上维护了一个有序列表。加入到 Queue 中的元素根据它们的天然排序（通过其 java.util.Comparable 实现）或者根据传递给构造函数的 java.util.Comparator 实现来定位  
+2. ConcurrentLinkedQueue  
+ConcurrentLinkedQueue 是基于链接节点的、线程安全的队列。并发访问不需要同步。因为它在队列的尾部添加元素并从头部删除它们，所以只要不需要知道队列的大小，ConcurrentLinkedQueue 对公共集合的共享访问就可以工作得很好，收集关于队列大小的信息会很慢，需要遍历队列。  
+ 
+非阻塞队列提供的主要方法如下：  
+
+* add(E e)：将元素e插入到队列末尾，如果插入成功，则返回true；如果插入失败（即队列已满），则会抛出异常；  
+* remove()：移除队首元素，若移除成功，则返回true；如果移除失败（队列为空），则会抛出异常；  
+* offer(E e)：将元素e插入到队列末尾，如果插入成功，则返回true；如果插入失败（即队列已满），则返回false；  
+* poll()：移除并获取队首元素，若成功，则返回队首元素；否则返回null；  
+* peek()：获取队首元素，若成功，则返回队首元素；否则返回null  
+
+对于非阻塞队列，一般情况下建议使用offer、poll和peek三个方法，不建议使用add和remove方法。因为使用offer、poll和peek三个方法可以通过返回值判断操作成功与否，而使用add和remove方法却不能达到这样的效果。注意，非阻塞队列中的方法都没有进行同步措施。
+
+## 阻塞队列
+> 阻塞队列在添加（移除）时如果队列满（空）时会等待（或超时退出），方法做同步措施
+
+阻塞队列有：
+
+* ArrayBlockingQueue  
+ArrayListBlockingQueue是有界的，是一个有界缓存的等待队列。基于数组的阻塞队列，同LinkedBlockingQueue类似，内部维持着一个定长数据缓冲队列（该队列由数组构成）。ArrayBlockingQueue内部保存着两个整形变量标识着队列的头部和尾部在数组中的位置。生产者放入数据和消费者获取数据，都是共用同一个锁对象，由此两者无法真正并行运行，这点不同于LinkedBlockingQueue；ArrayBlockingQueue在插入或删除元素时不会产生或销毁任何额外的对象实例，而后者则会生成一个额外的Node对象。这在长时间内需要高效并发地处理大批量数据的系统中，其对于GC的影响还是存在一定的区别。
+* LinkedBlockingQueue  
+可以设定大小，可以理解为由链表结构组成的一个缓存的有界等待队列。生产者端和消费者端分别采用了独立的锁来控制数据同步。
+* PriorityBlockingQueue  
+一个支持优先级排序的无界阻塞队列。元素按优先级顺序被移除，该队列也没有上限，注意的是有序的队列需要进入的元素具有比较能力。
+* DelayQueue  
+一个使用优先级队列实现的无界阻塞队列。是一个存放 Delayed 元素的无界阻塞队列，只有在延迟期满时才能从中提取元素。该队列的头部是延迟期满后保存时间最长的 Delayed 元素。如果延迟都还没有期满，则队列没有头部，并且poll将返回null。当一个元素的 getDelay(TimeUnit.NANOSECONDS) 方法返回一个小于或等于零的值时，则出现期满，poll就以移除这个元素了。此队列不允许使用 null 元素。
+* SynchronousQueue  
+一个不存储元素的阻塞队列。是一种无缓冲的等待队列，但是由于该Queue本身的特性，在某次添加元素后必须等待其他线程取走后才能继续添加；可以认为SynchronousQueue是一个缓存值为1的阻塞队列，但是 isEmpty()方法永远返回是true，remainingCapacity() 方法永远返回是0，remove()和removeAll() 方法永远返回是false，iterator()方法永远返回空，peek()方法永远返回null。没有存储功能，因此put和take会一直阻塞，直到有另一个线程已经准备好参与到交付过程中。
+* LinkedTransferQueue  
+一个由链表结构组成的无界阻塞队列。相对于其他阻塞队列，LinkedTransferQueue多了tryTransfer和transfer方法。LinkedTransferQueue采用一种预占模式。意思就是消费者线程取元素时，如果队列不为空，则直接取走数据，若队列为空，那就生成一个节点（节点元素为null）入队，然后消费者线程被等待在这个节点上，后面生产者线程入队时发现有一个元素为null的节点，生产者线程就不入队了，直接就将元素填充到该节点，并唤醒该节点等待的线程，被唤醒的消费者线程取走元素，从调用的方法返回。我们称这种节点操作为“匹配”方式。
+* LinkedBlockingDeque  
+一个由链表结构组成的双向阻塞队列。即可以从队列的两端插入和移除元素。双向队列因为多了一个操作队列的入口，在多线程同时入队时，也就减少了一半的竞争。 LinkedBlockingDeque多了addFirst、addLast、peekFirst、peekLast等方法，以first结尾的方法，表示插入、获取获移除双端队列的第一个元素。以last结尾的方法，表示插入、获取获移除双端队列的最后一个元素。 
+
+
+
+
+> 参考博客：  
+https://www.cnblogs.com/tiancai/p/9935770.html  
+https://www.cnblogs.com/lemon-flm/p/7877898.html
