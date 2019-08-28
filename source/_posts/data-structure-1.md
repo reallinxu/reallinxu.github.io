@@ -1,5 +1,5 @@
 ---
-title: "[数据结构]1.队列"
+title: "[数据结构]1.集合"
 tags:
   - 数据结构
 id: 2019
@@ -11,7 +11,34 @@ author:
 ---
 
 
-## 非阻塞队列
+## Map
+* HashMap  
+基于数组+链表，默认大于8使用红黑树，小于6改为链表，默认容量是16，负载因子默认为0.75，HashMap每次put操作是都会检查一遍 size（当前容量）>initailCapacity*loadFactor 是否成立。如果不成立则HashMap扩容为以前的两倍，HashMap中计算Hash值封装为：(key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16)，原因是hashCode是32位的，length 绝大多数情况小于2的16次方。所以始终是hashcode 的低16位参与运算，这样做是使高16位也参与运算，会让得到的下标更加散列。
+* LinkHashMap
+继承于HashMap，是基于HashMap和双向链表来实现的。LinkedHashMap有序，可分为插入顺序和访问顺序两种（默认插入顺序，可在构造方法中指定），如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾(其实是先删除再插入)。
+* Hashtable  
+线程安全，TODO：
+* ConcurrentMap  
+ConcurrentHashmap和Hashtable都是支持并发的，这样会有一个问题，当你通过get(k)获取对应的value时，如果获取到的是null时，你无法判断，它是put（k,v）的时候value为null，还是这个key从来没有做过映射。HashMap是非并发的，可以通过contains(key)来做这个判断。而支持并发的Map在调用m.contains（key）和m.get(key),m可能已经不同了。
+
+## List
+* ArrayList 
+基于数组实现，存储在连续的内存空间上，查询很快，但是中间部分的插入和删除很慢。默认数据长度为10，当第一个元素添加时候初始化（如果使用传参构造方法会直接初始化），每次扩容为增加50%(size >> 1)
+* LinkedList 
+基于双向链表实现，查询相对较慢(需移动指针)，删除和添加比较占优势。
+* Vector
+底层是基于数组实现，线程安全，默认长度为10，直接初始化，可以设置扩容增量，如果未设置，每次为增加原来的一倍。Vector和ArrayList最大容量都为（Integer.MAX_VALUE - 8），是因为一些虚拟机在数组中保留一些头字，会导致OOM。
+
+## Set
+* HashSet
+HashMap实现，key为存入的元素，value为一个static的空对象。判断元素是否重复为 由于HashMap中的key值不能修改，所以HashSet不能进行修改元素的操作。
+* LinkedHashSet
+继承自HashSet，基于LinkedHashMap，继承了HashSet的全部特性，元素不重复，快速查找，快速插入，并且新增了一个重要特性，那就是有序。
+* TreeSet  
+TreeSet是基于TreeMap实现的，TreeSet的元素支持2种排序方式：自然排序或者根据提供的Comparator进行排序。TreeSet可以直接对其进行存储，如String，Integer等,因为这些类已经实现了Comparable接口，当元素是对象时需要手动实现Comparable接口，覆盖其compareTo方法。
+
+## Queue
+### 非阻塞队列
 > 非阻塞队列在添加（移除）时如果队列满（空）时会返回异常或者直接返回null，方法未做同步措施，采用CAS机制  
 
 非阻塞队列有：  
@@ -31,7 +58,7 @@ ConcurrentLinkedQueue 是基于链接节点的、线程安全的队列。并发�
 
 对于非阻塞队列，一般情况下建议使用offer、poll和peek三个方法，不建议使用add和remove方法。因为使用offer、poll和peek三个方法可以通过返回值判断操作成功与否，而使用add和remove方法却不能达到这样的效果。注意，非阻塞队列中的方法都没有进行同步措施。
 
-## 阻塞队列
+### 阻塞队列
 > 阻塞队列在添加（移除）时如果队列满（空）时会等待（或超时退出），方法做同步措施，使用 ReentrantLock 锁
 
 阻塞队列有：
