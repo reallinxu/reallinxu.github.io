@@ -17,9 +17,9 @@ author:
 * LinkHashMap
 继承于HashMap，是基于HashMap和双向链表来实现的。LinkedHashMap有序，可分为插入顺序和访问顺序两种（默认插入顺序，可在构造方法中指定），如果是访问顺序，那put和get操作已存在的Entry时，都会把Entry移动到双向链表的表尾(其实是先删除再插入)。
 * Hashtable  
-线程安全，TODO：
-* ConcurrentMap  
-ConcurrentHashmap和Hashtable都是支持并发的，这样会有一个问题，当你通过get(k)获取对应的value时，如果获取到的是null时，你无法判断，它是put（k,v）的时候value为null，还是这个key从来没有做过映射。HashMap是非并发的，可以通过contains(key)来做这个判断。而支持并发的Map在调用m.contains（key）和m.get(key),m可能已经不同了。
+线程安全，基于数组和链表，集成自Dictionary（此类已过时），Hashtable基本上被弃用，由ConcurrentHashMap替代
+* ConcurrentHashMap  
+分段锁实现（获取size等时需要全部加锁并按顺序释放，否则可能死锁），包含一个Segment数组，Segment的结构和HashMap类似，数据结构为数组+链表+红黑树。ConcurrentHashMap中还包含一个重要属性sizeCtl，其是一个控制标识符，不同的值代表不同的意思：其为0时，表示hash表还未初始化，而为正数时这个数值表示初始化或下一次扩容的大小，相当于一个阈值；即如果hash表的实际大小>=sizeCtl，则进行扩容，默认情况下其是当前ConcurrentHashMap容量的0.75倍；而如果sizeCtl为-1，表示正在进行初始化操作；而为-N时，则表示有N-1个线程正在进行扩容。ConcurrentHashMap和Hashtable都是支持并发的，这样会有一个问题，当你通过get(k)获取对应的value时，如果获取到的是null时，你无法判断，它是put（k,v）的时候value为null，还是这个key从来没有做过映射。HashMap是非并发的，可以通过contains(key)来做这个判断。而支持并发的Map在调用m.contains（key）和m.get(key),m可能已经不同了。
 
 ## List
 * ArrayList 
