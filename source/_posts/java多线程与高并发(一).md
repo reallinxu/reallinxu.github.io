@@ -2,7 +2,7 @@
 title: "java多线程与高并发---(一)线程与锁基础"
 tags:
   - java多线程与高并发
-id: 48
+id: 1000
 categories:
   - java多线程与高并发
 date: 2019-12-28 20:00:00
@@ -26,7 +26,7 @@ BLOCKED：线程处于阻塞状态，等待监视锁，可以重新进行同步�
 WAITING：等待状态 
 TIMED_WAITING：计时等待
 TERMINATED：线程执行完毕，已经退出，不再可重新转为其他状态  
-![线程状态图](https://ftp.bmp.ovh/imgs/2019/12/42453dd60c771886.png)
+![线程状态图](/imgs/线程状态图.png)
 
 ## 锁基础
 1. sychoronise关键字，锁住的是对象，不能锁定String常量（常量公用），Interger，Long等基础数据类型（超过一个值还会new 对象）。判断是hotpot64位地址的的前两位，子类重写父类方法，两个都加了sychoronised，锁住的都是this，同一个对象。程序中出现异常，默认锁会释放，这时可能会出现其他线程的乱入，获取了错误的数据。早起为重量级锁，直接通过os申请，后续升级为hospot通过对象的前两位markword标记这个线程id偏向锁,如果线程争用升级为自旋锁，自旋10次后升级为重量锁。
