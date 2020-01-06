@@ -107,3 +107,7 @@ cd到你的本地项目根目录下，执行git命令
 	git reset --hard <commit_id> （commit_id为撤销到的id）
 + git撤销某次commit
 	git revert <commit_id>
++ git撤销已经push的记录（log中也不显示）  
+	git log  
+	git reset --soft 43dc0de914173a1a8793a7eac31dbb26057bbee4（回退到的版本号）
+	git push origin master --force
