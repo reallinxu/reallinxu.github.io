@@ -4,10 +4,10 @@ node_js: stable
 # S: Build Lifecycle
 install:
   - npm rebuild node-sass --force
-  - npm rebuild hexo-renderer-sass --save 
+  #- npm rebuild hexo-renderer-sass --save 
   - npm install
   - npm install hexo-renderer-scss --save
-  #- cnpm install hexo-renderer-sass --save
+  - cnpm install hexo-renderer-sass --save
   #- cnpm install hexo-renderer-scss --save
   #- cnpm install hexo-generator-json-content --save
   - npm install hexo-generator-json-content --save
