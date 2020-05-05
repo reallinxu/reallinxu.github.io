@@ -3,16 +3,16 @@ node_js: stable
 
 # S: Build Lifecycle
 install:
-  - npm rebuild node-sass --force
+  # - npm rebuild node-sass --force
   - npm install
-  - npm install hexo-renderer-sass --save 
-  - npm install hexo-renderer-scss --save
+  # - npm install hexo-renderer-sass --save 
+  # - npm install hexo-renderer-scss --save
   #- cnpm install hexo-renderer-sass --save
   #- cnpm install hexo-renderer-scss --save
   #- cnpm install hexo-generator-json-content --save
-  - npm install hexo-generator-json-content --save
-  - npm install hexo-renderer-jade@0.3.0 --save
-  - npm install hexo-renderer-stylus --save
+  #- npm install hexo-generator-json-content --save
+  #- npm install hexo-renderer-jade@0.3.0 --save
+  #- npm install hexo-renderer-stylus --save
 
 before_script:
   - chmod -R 777 ./node_modules
