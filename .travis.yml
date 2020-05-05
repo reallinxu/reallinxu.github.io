@@ -3,24 +3,25 @@ node_js: stable
 
 # S: Build Lifecycle
 install:
-  #- npm uninstall --save hexo-renderer-sass 
-  #- npm uninstall --save hexo-renderer-scss
-  #- npm rebuild hexo-renderer-sass --save
-  #- npm rebuild hexo-renderer-scss --save
+  #- npm config set registry https://registry.npm.taobao.org
   #- npm rebuild node-sass --force
-  - npm install
-  # - npm install hexo-renderer-sass --save 
-  # - npm install hexo-renderer-scss --save
-  #- cnpm install hexo-renderer-sass --save
-  #- cnpm install hexo-renderer-scss --save
-  #- cnpm install hexo-generator-json-content --save
-  #- npm install hexo-generator-json-content --save
-  #- npm install hexo-renderer-jade@0.3.0 --save
-  #- npm install hexo-renderer-stylus --save
+  - npm install 
+  #- npm config set registry https://registry.npm.taobao.org
+  #- npm install hexo-renderer-sass --save
+  #- npm install hexo-renderer-scss --save
+    #- npm install hexo-renderer-sass --save
+    #- npm install hexo-renderer-scss --save
+    #- npm install node-sass@latest
+    #- cnpm install hexo-renderer-sass --save
+    #- cnpm install hexo-renderer-scss --save
+    #- cnpm install hexo-generator-json-content --save
+    #- npm install hexo-generator-json-content --save
+    #- npm install hexo-renderer-jade@0.3.0 --save
+    #- npm install hexo-renderer-stylus --save
 
 before_script:
   - chmod -R 777 ./node_modules
-  #- npm install -g gulp
+    #- npm install -g gulp
 
 script:
   - hexo g
@@ -40,4 +41,5 @@ branches:
     - dev
 env:
  global:
+
    - GH_REF: github.com/reallinxu/reallinxu.github.io.git
