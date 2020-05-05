@@ -4,6 +4,7 @@ node_js: stable
 # S: Build Lifecycle
 install:
   - npm install 
+  - npm install hexo-fs --save
 
 before_script:
   - chmod -R 777 ./node_modules
