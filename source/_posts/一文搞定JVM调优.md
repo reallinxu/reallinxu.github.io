@@ -78,9 +78,9 @@
 
 ## JVM调优实战
 
-### 1. java.lang.OutOfMemoryError: GC overhead limit exceeded
+### 1. java.lang.OutOfMemoryError: Java heap space
 
-原因：该error出现是JVM花费了98%的时间进行垃圾回收，而只得到2%可用的内存，频繁的进行内存回收(最起码已经进行了5次连续的垃圾回收)
+原因：在JVM中如果98％的时间是用于GC且可用的 Heap size 不足2％的时候将抛出此异常信息。
 
 实例：写一个无限循环并设置jvm参数如下：
 
@@ -109,4 +109,6 @@ public class Test {
 ![dump2](/imgs/jvm/dump2.jpg)
 
 可以看到此时main线程错误，String实例和占用内存最多，如果是对象实例过多，此处会显示对应的对象。
+
+### 
 
