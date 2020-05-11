@@ -114,16 +114,11 @@ OOM后会在对应运行目录下生成dump快照文件，例如:java_pid33176.h
 
 ## Arthas性能调优
 
-下载 [arthas-boot](https://alibaba.github.io/arthas/arthas-boot.jar)，当前目录下执行
+官方地址：https://github.com/alibaba/arthas
 
-```java
-java -jar arthas-boot.jar 
-java -jar arthas-boot.jar -h //获取帮助信息
-```
+官方教程：https://alibaba.github.io/arthas/arthas-tutorials
 
 未完待续~~
-
-
 
 
 
