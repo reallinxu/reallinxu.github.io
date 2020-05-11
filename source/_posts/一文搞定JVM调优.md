@@ -1,5 +1,3 @@
-# 一文搞定JVM调优（原创干货）
-
 ## JVM内存模型
 
 ![jvm模型](/imgs/jvm/jvm模型.png)
@@ -76,16 +74,16 @@
 
 + -XX:+UseG1GC：G1+G1，jdk1.8后可用
 
-## JVM调优实战
+## dump快照分析
 
-### 1. java.lang.OutOfMemoryError: Java heap space
+场景：java.lang.OutOfMemoryError: Java heap space错误
 
 原因：在JVM中如果98％的时间是用于GC且可用的 Heap size 不足2％的时候将抛出此异常信息。
 
 实例：写一个无限循环并设置jvm参数如下：
 
 ```java
-JVM参数: -Xms1m -Xmx1m -XX:+HeapDumpOnOutOfMemoryError 
+JVM参数: -Xms1m -Xmx1m -XX:+HeapDumpOnOutOfMemoryError -XX:+PrintGCDetails
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +98,11 @@ public class Test {
 }
 ```
 
-执行后会在对应运行目录下生成dump快照文件，例如:java_pid33176.hprof
+首先我们可以看到GC日志，可以看到youngGC与fullGc触发前后的内存变化和执行时间
+
+![dump3](/imgs/jvm/dump3.png)
+
+OOM后会在对应运行目录下生成dump快照文件，例如:java_pid33176.hprof
 
 此时win+R ==>  cmd ==>  jvisualvm ==> 文件 ==> 装入该文件
 
@@ -110,5 +112,20 @@ public class Test {
 
 可以看到此时main线程错误，String实例和占用内存最多，如果是对象实例过多，此处会显示对应的对象。
 
-### 
+## Arthas性能调优
+
+下载 [arthas-boot](https://alibaba.github.io/arthas/arthas-boot.jar)，当前目录下执行
+
+```java
+java -jar arthas-boot.jar 
+java -jar arthas-boot.jar -h //获取帮助信息
+```
+
+未完待续~~
+
+
+
+
+
+
 
