@@ -20,7 +20,7 @@
 
 ## 常用JVM参数
 
-+ -Xms ：程序启动时占用内存大小，初始堆大小
++ -Xms ：程序启动时占用内存大小，初始堆大小，一般Xms和Xmx设置相同，避免gc后调整堆大小。
 
 + -Xmx ：程序运行期间最大可占用的内存大小，最大堆大小，超出会抛出OutOfMemory异常。
 
@@ -73,6 +73,46 @@
 + -XX:+UseParallelOldGC：Parallel Scavenge+Parallel Old，常用
 
 + -XX:+UseG1GC：G1+G1，jdk1.8后可用
+
+## 常用JVM命令
+
++ jps
+
+  + jps -q：只显示当前进程的pid，后续命令需要使用
+
+  + jps -v：可以显示jvm参数
+  + jps -l ：输出完全的包名，应用主类名，jar的完全路径名
+
++ jinfo
+
+  + jinfo <pid>：可以查看JVM的运行参数
+  + jinfo -flag name <pid>：查看对应参数的值
+  + jinfo -flag [+|-]name <pid>：开启(+)/关闭(-)对应名称的参数
+  + jinfo -flag name=value <pid>: 修改对应名称参数的值
+
++ jstat
+
+  + jstat -class <pid>：查看类加载数量和占用内存，未加载数量和占用内存，加载时长
+  + jstat -compiler <pid>: 查看类编译数量，失败数量，不可用数量，编译时长，失败类型和方法
+  + jstat -gc <pid>: 垃圾回收统计，每个分代的大小和已使用大小等
+  + jstat -gccapacity <pid>: 堆内存统计，可以查看分代的容量和gc的次数等
+  + jstat -gcnew <pid>: 年轻代内存情况以及ygc次数和消耗总时间等
+  + jstat -gcold <pid>: 老年代内存情况以及fgc次数和消耗时间等
+  + jstat -gcutil <pid>: 垃圾回收统计，分代内存使用比例
+
++ jstack
+
+  + jstack <pid>: 查看进程中线程的堆栈信息，查看线程的状态，可以定位死锁，每个线程都有tid(线程编号)和nid(线程id)
+  + top -Hp <pid>: 查看进程内所有线程的CPU和内存使用情况，找到对应的CPU内存最高的通过printf “%x%n” <pid>转换为16进制
+  + jstack <pid> | grep <16进制> -A 10：打印对应线程的堆栈信息
+
++ jmap
+
+  + jmap -dump:[live],format=b,file=myjmapfile.txt <pid>: [live]可选参数,如果就用live，则输出活的对象到内存文件，慎用，会暂停应用
+  + jmap -finalizerinfo <pid>: 打印正在回收对象的数量和信息
+  + jmap -heap <pid>: 查看GC使用的算法，堆的配置及JVM堆内存的使用情况，慎用，可能导致进程挂起
+  + jmap -histo:live <pid>: 查询每个class的实例数目和内存占用，会先触发gc再统计
+  + jmap -permstat <pid>: 打印所有classLoad以及class的加载数和内存，慎用，暂停应用
 
 ## dump快照分析
 
