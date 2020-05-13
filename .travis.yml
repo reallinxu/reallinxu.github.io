@@ -5,6 +5,7 @@ node_js: 13
 install:
   - npm install 
   - npm install hexo-fs --save
+  - npm i --save hexo-wordcount
 
 before_script:
   - chmod -R 777 ./node_modules
