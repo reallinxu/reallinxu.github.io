@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="financial cloud," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Reallinxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="CMQ简介腾讯云消息队列（Cloud Message Queue，CMQ）是一种分布式消息队列服务，它能够提供可靠的基于消息的异步通信机制，能够将分布式部署的不同应用（或同一应用的不同组件）之间的收发消息，存储在可靠有效的 CMQ 队列中，防止消息丢失。CMQ 支持多进程同时读写，收发互不干扰，无需各应用或组件始终处于运行状态。   对比RabbitMQ的优势 CMQ-QPS优秀：在保证高可靠前提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯专有云解决方案--部分功能介绍">
+<meta property="og:url" content="https://reallinxu.github.io/aticle/%E9%87%91%E8%9E%8D%E4%BA%91.html">
+<meta property="og:site_name" content="Reallinxu&#39;s Blog">
+<meta property="og:description" content="CMQ简介腾讯云消息队列（Cloud Message Queue，CMQ）是一种分布式消息队列服务，它能够提供可靠的基于消息的异步通信机制，能够将分布式部署的不同应用（或同一应用的不同组件）之间的收发消息，存储在可靠有效的 CMQ 队列中，防止消息丢失。CMQ 支持多进程同时读写，收发互不干扰，无需各应用或组件始终处于运行状态。   对比RabbitMQ的优势 CMQ-QPS优秀：在保证高可靠前提">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/msglive.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/MsgRewind.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/DBCB-1.png">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/DBCB-2.png">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/DBCB-3.png">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/TSF.JPG">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/TCC.jpg">
+<meta property="article:published_time" content="2018-09-10T14:17:01.000Z">
+<meta property="article:modified_time" content="2020-09-28T01:18:22.879Z">
+<meta property="article:author" content="Reallinxu">
+<meta property="article:tag" content="financial cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://reallinxu.github.io/imgs/msglive.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '123456',
+      author: 'TenKen'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://reallinxu.github.io/aticle/金融云.html"/>
+
+
+
+
+
+  <title>腾讯专有云解决方案--部分功能介绍 | Reallinxu's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+		<a href="https://github.com/reallinxu" target="_blank" rel="noopener"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Reallinxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://reallinxu.github.io/aticle/%E9%87%91%E8%9E%8D%E4%BA%91.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reallinxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">腾讯专有云解决方案--部分功能介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T14:17:01+00:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tencent-financial-cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">Tencent financial cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/%E9%87%91%E8%9E%8D%E4%BA%91.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="aticle/金融云.html" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="CMQ"><a href="#CMQ" class="headerlink" title="CMQ"></a>CMQ</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>腾讯云消息队列（Cloud Message Queue，CMQ）是一种分布式消息队列服务，它能够提供可靠的基于消息的异步通信机制，能够将分布式部署的不同应用（或同一应用的不同组件）之间的收发消息，存储在可靠有效的 CMQ 队列中，防止消息丢失。CMQ 支持多进程同时读写，收发互不干扰，无需各应用或组件始终处于运行状态。  </p>
+<h2 id="对比RabbitMQ的优势"><a href="#对比RabbitMQ的优势" class="headerlink" title="对比RabbitMQ的优势"></a>对比RabbitMQ的优势</h2><ul>
+<li>CMQ-QPS优秀：在保证高可靠前提下，同等物理设备，CMQ 吞吐量优于RabbitMQ的四倍以上。单集群QPS超过10万。</li>
+<li>RabbitMQ不支持消息回溯：rabbitMQ不支持消息回溯，CMQ支持按照时间来回溯消息，例如从一天之前的某时某分某秒开始重新消费消息。典型业务场景如consumer做订单分析，但是由于程序逻辑或者依赖的系统发生故障等原因，导致今天消费的消息全部无效，需要重新从昨天零点开始消费，那么以时间为起点的消息重放功能对于业务非常有帮助。</li>
+<li>一致性算法对比：CMQ 和 RabbitMQ 都能够使用多台机器进行热备份，提高可用性。CMQ 基于 Raft 算法实现，简单易维护。RabbitMQ 使用自创的GM算法（Guaranteed Multicast），学习难度较高。</li>
+<li>RabbitMQ运维难度大：RabbitMQ的开发语言用的是erlang，较小众、学习成本高。  </li>
+</ul>
+<h2 id="两种模型"><a href="#两种模型" class="headerlink" title="两种模型"></a>两种模型</h2><ul>
+<li>消息队列模型(Queue)<br>point to point，消息生产者生产消息发送到queue中，消息消费者从queue中取出并且消费消息。</li>
+<li>消息主题模型(Topic)<br>发布订阅，消息生产者生产消息发布到Topic，Topic投递到各个订阅者(CMQ支持标签筛选)。 CMQ支持通过 URL、Queue 订阅，目前只允许Topic发送给同一个账户下的Queue。</li>
+</ul>
+<h2 id="消息生命周期"><a href="#消息生命周期" class="headerlink" title="消息生命周期"></a>消息生命周期</h2><p><img src="/imgs/msglive.jpg" alt="Message lifecycle"></p>
+<ol>
+<li><p>Component 1 将 Message A 发送到一个队列，该消息在CMQ服务器间提供多份冗余, Message A 是 Active状态。</p>
+</li>
+<li><p>当 Component 2 准备好处理消息时，就从队列检索消息，然后 Message A 返回，此时 Message A 是 Inactive 状态，仍然停留在队列中，但其他业务不可获取。 </p>
+</li>
+<li><p>Component 2 可从队列删除 Message A，此时 Message A 为 Deleted 状态，消息的最长存活时间由创建队列时指定的 MessageRetentionPeriod 属性值决定，超过此时间后消息状态变成 Expired 并将被回收。 如果Component 2 未进行删除，在取出消息隐藏时长(VisibilityTimeout) 后该消息会被再次接受并处理。  </p>
+</li>
+</ol>
+<p>CMQ可以支持消息回溯，在消息未被彻底回收，都可以回溯到之前的一个时间点，以消息生产的时间为排序标准。<br><img src="/imgs/MsgRewind.jpg" alt="Message Rewind"></p>
+<h2 id="CMQ-Demo"><a href="#CMQ-Demo" class="headerlink" title="CMQ Demo"></a>CMQ Demo</h2><p>官网案例: <a href="https://cloud.tencent.com/document/product/406/6127" target="_blank" rel="noopener">https://cloud.tencent.com/document/product/406/6127</a><br>Github: </p>
+<h1 id="DCDB"><a href="#DCDB" class="headerlink" title="DCDB"></a>DCDB</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p>DCDB是部署在腾讯云公有云上的一种支持自动水平拆分的share nothing架构的分布式数据库。分布式数据库即业务获取是完整的逻辑库表，后端却将库表均匀的拆分到多个物理分片节点。目前，DCDB默认部署主备架构且提供了容灾、备份、恢复、监控、迁移等方面的全套解决方案，适用于TB或PB级的海量数据库场景。</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
+<li>超高性能：单分片最大性能可达超 24 万 QPS，整个实例性能随着分片数量增加线性扩展。强同步性能与异步同步相当，能让您在数据不丢失的情况下，也拥有较高的性能。</li>
+<li>专业可靠：提供完善的数据备份、容灾、一键升级等方案。完善的监控和报警体系，大部分故障都通过自动化程序或腾讯值班同事处理恢复。分布式数据库领域领先功能，如分布式多表 JOIN，小表广播，分布式事务，SQL 透传等。</li>
+<li>简单易用：除少量语法与原生 MySQL/PostgreSQL 不同以外，使用起来就像使用单机数据库，分片过程对业务透明且无需干预。兼容 MySQL 协议（支持 Percona、MariaDB 等内核）。支持 WEB 控制台，读写分离能力、专有运维管理指令等。</li>
+</ul>
+<h2 id="DCDB简单原理"><a href="#DCDB简单原理" class="headerlink" title="DCDB简单原理"></a>DCDB简单原理</h2><ol>
+<li><p>水平拆分<br>水平切分是按照某种规则，将一个表的数据分散到多个物理独立的数据库服务器中，这些“独立”的数据库“分片”；多个分片组成一个逻辑完整的数据库实例。<br><img src="/imgs/DBCB-1.png" alt="split horizon"></p>
+<blockquote>
+<p>shardkey，建表默认需要设置shardkey，对于shardkey的选择有两点：</p>
+<ol>
+<li>主键以及所有唯一索引的一部分</li>
+<li>建议选择业务特点和数据库中每张表里实体关系，找到一个与大多数表都相关的实体字段作为shardkey。  </li>
+</ol>
+</blockquote>
+</li>
+<li><p>数据聚合（合并）<br><img src="/imgs/DBCB-2.png" alt="Data aggregation"></p>
+<blockquote>
+<p>各个set(物理分片)数据会在proxy层进行缓存，然后进行聚合。<br>在执行 SELECT 语句时，建议您带上 shardkey 字段，否则会导致数据需要全表扫描然后网关才对执行结果进行聚合。全表扫描响应较慢，对性能影响很大。  </p>
+</blockquote>
+</li>
+<li><p>读写分离<br>读写分离 基本的原理是让主节点 (master) 处理事务性增、改、删操作（INSERT、UPDATE、DELETE），让从节点 (slave) 处理查询操作（SELECT）。<br><img src="/imgs/DBCB-3.png" alt="Separation of reading and writing"></p>
+</li>
+</ol>
+<h1 id="TSF"><a href="#TSF" class="headerlink" title="TSF"></a>TSF</h1><h2 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h2><p>Tencent Distributed Service Framework，腾讯分布式服务框架。是一个围绕着应用和微服务的 PaaS平台。TSF 提供了 RESTful 调用方式和自研的高性能 RPC 框架，能够构建高可用、高性能的分布式系统。在TSF 控制台上，可以一站式完成应用生命周期的管理，包括创建、部署、启动、停止，也支持扩容、缩容操作。监控服务器资源的磁盘IO、内存、CPU、网络等指标，以监控图标形式展示，精准掌控服务器健康状况。支持设置自定义告警阈值，当指标触发告警条件时，会向您发送及时的告警信息，预防突发情况。</p>
+<blockquote>
+<p>PaaS是Platform-as-a-Service的缩写，意思是平台即服务。 把服务器平台作为一种服务提供的商业模式。)</p>
+</blockquote>
+<h2 id="产品优势"><a href="#产品优势" class="headerlink" title="产品优势"></a>产品优势</h2><p><img src="/imgs/TSF.JPG" alt="TSF advantage"></p>
+<h2 id="TSF分布式事务"><a href="#TSF分布式事务" class="headerlink" title="TSF分布式事务"></a>TSF分布式事务</h2><p>TSF提供基于TCC(try-confirm-cancel)的事务方案。</p>
+<p>TCC 模式的事务执行流程：</p>
+<ol>
+<li>依次调用从业务系统的 Try 接口</li>
+<li>若 Try 阶段成功，则依次调用从业务系统的 Confirm 接口</li>
+<li>若在 Try 阶段出现失败，则调用从业务系统的 Cancel 接口，对 Try 接口的操作进行恢复</li>
+<li>若在 Confirm 阶段出现失败，则重试，设置重试次数。若重试仍然失败，则需要事后处理</li>
+<li>若调用 Cancel 接口失败，也进行重试操作。<br><img src="/imgs/TCC.jpg" alt="TCC"><blockquote>
+<p>如果Try A成功，Try B失败，则会Cancle A。<br>如果confirm失败，一般是一直重试，重试时间间隔会越来越长。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="TSF-Demo"><a href="#TSF-Demo" class="headerlink" title="TSF Demo"></a>TSF Demo</h2><p>官网案例: <a href="https://cloud.tencent.com/document/product/649/16619" target="_blank" rel="noopener">https://cloud.tencent.com/document/product/649/16619</a></p>
+
+      
+    </div>
+    
+    
+    
+
+      <div>
+        
+        	﻿<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢你的支持!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Reallinxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Reallinxu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/financial-cloud/" rel="tag"><i class="fa fa-tag"></i> financial cloud</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/aticle/lombok.html" rel="next" title="lombok">
+                <i class="fa fa-chevron-left"></i> lombok
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/aticle/nginx.html" rel="prev" title="nginx入门">
+                nginx入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="Reallinxu" />
+            
+              <p class="site-author-name" itemprop="name">Reallinxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/reallinxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xiajunyi.com/" title="夏军谊的小站" target="_blank">夏军谊的小站</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CMQ"><span class="nav-number">1.</span> <span class="nav-text">CMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对比RabbitMQ的优势"><span class="nav-number">1.2.</span> <span class="nav-text">对比RabbitMQ的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两种模型"><span class="nav-number">1.3.</span> <span class="nav-text">两种模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息生命周期"><span class="nav-number">1.4.</span> <span class="nav-text">消息生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMQ-Demo"><span class="nav-number">1.5.</span> <span class="nav-text">CMQ Demo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DCDB"><span class="nav-number">2.</span> <span class="nav-text">DCDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-1"><span class="nav-number">2.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优点"><span class="nav-number">2.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCDB简单原理"><span class="nav-number">2.3.</span> <span class="nav-text">DCDB简单原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TSF"><span class="nav-number">3.</span> <span class="nav-text">TSF</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-2"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#产品优势"><span class="nav-number">3.2.</span> <span class="nav-text">产品优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TSF分布式事务"><span class="nav-number">3.3.</span> <span class="nav-text">TSF分布式事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TSF-Demo"><span class="nav-number">3.4.</span> <span class="nav-text">TSF Demo</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Reallinxu</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共37.5k字</span>
+</div>
+ 
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyuiE3NCX';
+      var conf = '75024d54fce3b1095005671b7d316cf3';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

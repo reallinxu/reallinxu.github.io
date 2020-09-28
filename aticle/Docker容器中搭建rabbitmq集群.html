@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Reallinxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="RabbitMq简介 AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于组件之间的解耦，消息的发送者无需知道消息使用者的存在，反之亦然。AMQP的主要特征是面向消息、队列、路由（包括点对点和发布&#x2F;订阅）、可靠性、安全。  RabbitMQ是一个开源的AMQP实现，服务器端用Erla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker容器中搭建rabbitmq集群">
+<meta property="og:url" content="https://reallinxu.github.io/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BArabbitmq%E9%9B%86%E7%BE%A4.html">
+<meta property="og:site_name" content="Reallinxu&#39;s Blog">
+<meta property="og:description" content="RabbitMq简介 AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于组件之间的解耦，消息的发送者无需知道消息使用者的存在，反之亦然。AMQP的主要特征是面向消息、队列、路由（包括点对点和发布&#x2F;订阅）、可靠性、安全。  RabbitMQ是一个开源的AMQP实现，服务器端用Erla">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-05-29T18:00:00.000Z">
+<meta property="article:modified_time" content="2020-09-28T01:18:22.879Z">
+<meta property="article:author" content="Reallinxu">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '123456',
+      author: 'TenKen'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://reallinxu.github.io/aticle/Docker容器中搭建rabbitmq集群.html"/>
+
+
+
+
+
+  <title>Docker容器中搭建rabbitmq集群 | Reallinxu's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+		<a href="https://github.com/reallinxu" target="_blank" rel="noopener"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Reallinxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://reallinxu.github.io/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BArabbitmq%E9%9B%86%E7%BE%A4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reallinxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker容器中搭建rabbitmq集群</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-29T18:00:00+00:00">
+                2018-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BArabbitmq%E9%9B%86%E7%BE%A4.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="aticle/Docker容器中搭建rabbitmq集群.html" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RabbitMq简介"><a href="#RabbitMq简介" class="headerlink" title="RabbitMq简介"></a>RabbitMq简介</h1><blockquote>
+<p>AMQP，即Advanced Message Queuing Protocol，高级消息队列协议，是应用层协议的一个开放标准，为面向消息的中间件设计。消息中间件主要用于组件之间的解耦，消息的发送者无需知道消息使用者的存在，反之亦然。AMQP的主要特征是面向消息、队列、路由（包括点对点和发布/订阅）、可靠性、安全。</p>
+</blockquote>
+<p>RabbitMQ是一个开源的AMQP实现，服务器端用Erlang语言编写，支持多种客户端。使用Rabbitmq可以使程序间不再需要彼此调用，只需要将消息放入消息队列中，通过对队列的监听，对消息进行对应处理，而且消息队列在当消息接收方服务忙或不可用时，提供了一个消息暂存的功能，等服务可用时，继续对消息进行处理。</p>
+<h1 id="RabbitMq几个基本概念"><a href="#RabbitMq几个基本概念" class="headerlink" title="RabbitMq几个基本概念"></a>RabbitMq几个基本概念</h1><ol>
+<li>Connection、Channel<br> Connection是RabbitMQ的socket链接，它封装了socket协议相关部分逻辑。Channel是可以定义Queue、定义Exchange、绑定Queue与Exchange、发布消息等的最重要的一个接口。</li>
+<li>Queue<br> Queue（队列）是RabbitMQ的内部对象，生产者将消息投递到queue中，消费者从queue中获取消息。多个消费者可以订阅同一个queue，这时queue的消息会均摊给多个消费者。</li>
+<li>Message acknowledgment<br> 消费者收到queue消息后，为了避免没有处理完成就宕机导致消息丢失，在消费者完成后会发送一个回执给rabbitmq，rabbit收到消息回执(ack)才会移除消息,如果rabbitmq检测到消费者已断开但是仍未收到回执，则会将消息发送给其他消费者。</li>
+<li>Message durability<br> 如果需要在rabbitmq重启时也不丢失消息，可以将queue和message设置为可持久化的。这种情况可能存在还没有持久化rabbitmq就停的小概率事件，这就需要rabbitmq的事务。</li>
+<li>Prefetch count<br> 设置prefetchCount来限制Queue每次发送给每个消费者的消息数，比如我们设置prefetchCount=1，则Queue每次给每个消费者发送一条消息，消费者处理完这条消息后Queue会再给该消费者发送一条消息。</li>
+<li>Exchange<br> 生产者通过Exchange将消息投入queue中，由Exchange将消息路由到一个或多个Queue中(或者丢弃)。</li>
+<li>routing key<br> 生产者可以在发送消息给Exchange时，通过指定routing key来决定消息流向哪里。</li>
+<li>Binding<br> RabbitMQ中通过Binding将Exchange与Queue关联起来。</li>
+<li>Binding key<br> binding key与routing key相匹配时，消息将会被路由到对应的Queue中。</li>
+<li>Exchange Types<br>fanout：所有发送到该Exchange的消息路由到所有与它绑定的Queue中。<br>direct：消息路由到那些binding key与routing key完全匹配的Queue中。<br>topic：topic与direct相似，可以使用<em>与#做模糊匹配，</em>匹配一个单词，#匹配多个单词（可以是零个）<br>headers：不依赖于key的规则，而是根据发送的消息内容中的headers属性进行匹配。在绑定Queue与Exchange时指定一组键值对，当消息发送到Exchange时，RabbitMQ会取到该消息的headers（也是一个键值对的形式），对比其中的键值对是否完全匹配Queue与Exchange绑定时指定的键值对。</li>
+<li>RPC<br>客户端发送请求消息时，在消息的属性（MessageProperties）中设置两个值replyTo（一个Queue名称，用于告诉服务器处理完成后将通知我的消息发送到这个Queue中）和correlationId（此次请求的标识号，服务器处理完成后需要将此属性返还，客户端将根据这个id了解哪条请求被成功执行了或执行失败）。</li>
+</ol>
+<h1 id="Docker容器搭建rabbitmq集群"><a href="#Docker容器搭建rabbitmq集群" class="headerlink" title="Docker容器搭建rabbitmq集群"></a>Docker容器搭建rabbitmq集群</h1><h2 id="Dockerfile文件"><a href="#Dockerfile文件" class="headerlink" title="Dockerfile文件"></a>Dockerfile文件</h2><p>将rabbitmq-signing-key-public.asc，rabbitmq-server-3.3.5-1.noarch.rpm放入Dockerfile同目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">from centos</span><br><span class="line">MAINTAINER reallinxu</span><br><span class="line"></span><br><span class="line">RUN rpm -ivh http:&#x2F;&#x2F;download.fedoraproject.org&#x2F;pub&#x2F;epel&#x2F;6&#x2F;i386&#x2F;epel-release-6-8.noarch.rpm</span><br><span class="line">RUN yum install -y erlang</span><br><span class="line">COPY rabbitmq-signing-key-public.asc &#x2F;usr&#x2F;software&#x2F;rabbitmq-signing-key-public.asc</span><br><span class="line">COPY rabbitmq-server-3.3.5-1.noarch.rpm &#x2F;usr&#x2F;software&#x2F;rabbitmq-server-3.3.5-1.noarch.rpm</span><br><span class="line">RUN rpm --import &#x2F;usr&#x2F;software&#x2F;rabbitmq-signing-key-public.asc</span><br><span class="line">RUN rpm -ivh &#x2F;usr&#x2F;software&#x2F;rabbitmq-server-3.3.5-1.noarch.rpm  --force --nodeps</span><br><span class="line">RUN rabbitmq-plugins enable rabbitmq_management</span><br><span class="line">RUN chkconfig --level 3 rabbitmq-server on</span><br><span class="line">RUN sed -i &#39;s&#x2F;PID_FILE&#x3D;\&#x2F;var\&#x2F;run\&#x2F;rabbitmq\&#x2F;pid&#x2F;&amp;\nexport RABBITMQ_MNESIA&#x3D;\&#x2F;rabbitmq\&#x2F;mnesia&#x2F;&#39; &#x2F;etc&#x2F;init.d&#x2F;rabbitmq-server</span><br><span class="line">RUN chmod 644 &#x2F;etc&#x2F;rabbitmq&#x2F;enabled_plugins</span><br><span class="line">RUN rm -rf &#x2F;usr&#x2F;software&#x2F;rabbitmq-signing-key-public.asc</span><br><span class="line">RUN rm -rf &#x2F;usr&#x2F;software&#x2F;rabbitmq-server-3.3.5-1.noarch.rpm</span><br><span class="line">EXPOSE 8080 15672 5672</span><br></pre></td></tr></table></figure>
+<h2 id="构建镜像"><a href="#构建镜像" class="headerlink" title="构建镜像"></a>构建镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t&#x3D;&quot;reallinxu&#x2F;rabbit:v1&quot; .</span><br></pre></td></tr></table></figure>
+<h2 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h2><h3 id="创建第一个容器"><a href="#创建第一个容器" class="headerlink" title="创建第一个容器"></a>创建第一个容器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 15672:15672 -i -t --name rabbit1 reallinxu&#x2F;rabbit:1 </span><br><span class="line">#查看hosts</span><br><span class="line">cat &#x2F;etc&#x2F;hosts</span><br><span class="line">127.0.0.1       localhost</span><br><span class="line">::1     localhost ip6-localhost ip6-loopback</span><br><span class="line">fe00::0 ip6-localnet</span><br><span class="line">ff00::0 ip6-mcastprefix</span><br><span class="line">ff02::1 ip6-allnodes</span><br><span class="line">ff02::2 ip6-allrouters</span><br><span class="line">172.17.0.3      c0543dbe04fe</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建后续容器"><a href="#创建后续容器" class="headerlink" title="创建后续容器"></a>创建后续容器</h3><p>因为要搭建集群，后面的hosts文件需要配置第一台的配置，这时候我们使用-v进行挂载容器，将/etc/hosts指定使用宿主机的/user/hosts文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#&#x2F;user&#x2F;hosts</span><br><span class="line">127.0.0.1       localhost</span><br><span class="line">::1     localhost ip6-localhost ip6-loopback</span><br><span class="line">fe00::0 ip6-localnet</span><br><span class="line">ff00::0 ip6-mcastprefix</span><br><span class="line">ff02::1 ip6-allnodes</span><br><span class="line">ff02::2 ip6-allrouters</span><br><span class="line">172.17.0.3      c0543dbe04fe</span><br></pre></td></tr></table></figure>
+<p>创建容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -i -t -p 15670:15672 --name rabbit2 -v &#x2F;user&#x2F;hosts:&#x2F;etc&#x2F;hosts reallinxu&#x2F;rabbit:1</span><br></pre></td></tr></table></figure>
+
+<h3 id="实现集群"><a href="#实现集群" class="headerlink" title="实现集群"></a>实现集群</h3><p>第一个容器中启动rabbitmq</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server -detached # -detached后台运行</span><br><span class="line">rabbitmqctl add_user admin admin</span><br><span class="line">rabbitmqctl set_user_tags admin administrator</span><br></pre></td></tr></table></figure>
+<p>将/var/lib/rabbitmq的.erlang.cookie文件拷贝到宿主机中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp c0543dbe04fe:&#x2F;var&#x2F;lib&#x2F;rabbitmq &#x2F;user</span><br></pre></td></tr></table></figure>
+<p>将第一个容器中/root下cookie覆盖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp &#x2F;user&#x2F;rabbitmq&#x2F;.erlang.cookie c0543dbe04fe:&#x2F;root</span><br></pre></td></tr></table></figure>
+<p>将宿主机的cookie文件覆盖到其他容器中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp &#x2F;user&#x2F;rabbitmq&#x2F;.erlang.cookie 780f23c07ef7:&#x2F;root</span><br><span class="line">docker cp &#x2F;user&#x2F;rabbitmq&#x2F;.erlang.cookie 780f23c07ef7:&#x2F;var&#x2F;lib&#x2F;rabbitmq</span><br></pre></td></tr></table></figure>
+<p>更改.erlang.cookie的访问权限为400</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 &#x2F;var&#x2F;lib&#x2F;rabbitmq&#x2F;.erlang.cookie</span><br></pre></td></tr></table></figure>
+<p>更改.erlang.cookie的文件所有人为rabbitmq</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown rabbitmq:rabbitmq &#x2F;var&#x2F;lib&#x2F;rabbitmq&#x2F;.erlang.cookie</span><br></pre></td></tr></table></figure>
+<p>启动后续容器并做如下操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rabbitmq-server -detached</span><br><span class="line">rabbitmqctl stop_app</span><br><span class="line">rabbitmqctl join_cluster rabbit@c0543dbe04fe</span><br><span class="line">rabbitmqctl start_app</span><br></pre></td></tr></table></figure>
+<p>查看rabbitmq后台界面，可以发现集群搭建成功。不过因为直接挂载，导致容器自身映射端口并没有生效，所以在后面需要将自己的hosts配置进去，在hosts文件后面追加下面语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">172.17.0.3	780f23c07ef7</span><br></pre></td></tr></table></figure>
+<p>容器ID请按照自己创建容器ID来替换。</p>
+<h1 id="小知识"><a href="#小知识" class="headerlink" title="小知识"></a>小知识</h1><h2 id="sed命令"><a href="#sed命令" class="headerlink" title="sed命令"></a>sed命令</h2><p>sed -i ‘s/指定的字符/要插入的字符&amp;/‘  文件  #前插<br>sed -i ‘s/指定的字符/&amp;要插入的字符/‘  文件  #后插<br>sed ‘s/原字符串/替换字符串/‘ 文件            #替换<br>sed ‘s/原字符串/替换字符串/g’ 文件            #替换所有<br>\n 换行符  \转义</p>
+<h2 id="查看容器端口映射"><a href="#查看容器端口映射" class="headerlink" title="查看容器端口映射"></a>查看容器端口映射</h2><p>docker port <NAME></p>
+<h2 id="失败解决"><a href="#失败解决" class="headerlink" title="失败解决"></a>失败解决</h2><p>安装rpm包如果出现“Exiting on user Command”的错误，请在yum命令后加上“-y”选项</p>
+<h2 id="systemctl"><a href="#systemctl" class="headerlink" title="systemctl"></a>systemctl</h2><p>不可以使用，尽量避免，网上说可以CMD或者entrypoint设置为/usr/sbin/init，但是创建容器时一直没有反应，所以放弃了</p>
+
+      
+    </div>
+    
+    
+    
+
+      <div>
+        
+        	﻿<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢你的支持!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Reallinxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Reallinxu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"><i class="fa fa-tag"></i> docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/aticle/Dockerfile%E6%9E%84%E5%BB%BAjava%E7%8E%AF%E5%A2%83%E9%95%9C%E5%83%8F.html" rel="next" title="Dockerfile构建java环境镜像">
+                <i class="fa fa-chevron-left"></i> Dockerfile构建java环境镜像
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/aticle/Docker%E5%AE%B9%E5%99%A8%E4%B8%AD%E6%90%AD%E5%BB%BARedis%E9%9B%86%E7%BE%A4.html" rel="prev" title="Docker容器中搭建Redis集群">
+                Docker容器中搭建Redis集群 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="Reallinxu" />
+            
+              <p class="site-author-name" itemprop="name">Reallinxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/reallinxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xiajunyi.com/" title="夏军谊的小站" target="_blank">夏军谊的小站</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMq简介"><span class="nav-number">1.</span> <span class="nav-text">RabbitMq简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMq几个基本概念"><span class="nav-number">2.</span> <span class="nav-text">RabbitMq几个基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker容器搭建rabbitmq集群"><span class="nav-number">3.</span> <span class="nav-text">Docker容器搭建rabbitmq集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile文件"><span class="nav-number">3.1.</span> <span class="nav-text">Dockerfile文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建镜像"><span class="nav-number">3.2.</span> <span class="nav-text">构建镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建容器"><span class="nav-number">3.3.</span> <span class="nav-text">创建容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建第一个容器"><span class="nav-number">3.3.1.</span> <span class="nav-text">创建第一个容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建后续容器"><span class="nav-number">3.3.2.</span> <span class="nav-text">创建后续容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现集群"><span class="nav-number">3.3.3.</span> <span class="nav-text">实现集群</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小知识"><span class="nav-number">4.</span> <span class="nav-text">小知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sed命令"><span class="nav-number">4.1.</span> <span class="nav-text">sed命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看容器端口映射"><span class="nav-number">4.2.</span> <span class="nav-text">查看容器端口映射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#失败解决"><span class="nav-number">4.3.</span> <span class="nav-text">失败解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#systemctl"><span class="nav-number">4.4.</span> <span class="nav-text">systemctl</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Reallinxu</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共37.5k字</span>
+</div>
+ 
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyuiE3NCX';
+      var conf = '75024d54fce3b1095005671b7d316cf3';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

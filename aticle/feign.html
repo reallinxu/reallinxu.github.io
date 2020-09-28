@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="spring cloud," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Reallinxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="使用Feign发送http请求以及源码分析简介Feign是一个http请求调用的轻量级框架，可以用Java接口注解的方式调用Http请求，而不用像Java中通过封装HTTP请求报文的方式直接调用。  注解(Annotation)   注解 作用域 用法    @RequestLine 方法 定义HttpMethod和UriTemplate请求。 {expression}使用大括号括起来的值使用其相">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Feign发送http请求以及源码分析">
+<meta property="og:url" content="https://reallinxu.github.io/aticle/feign.html">
+<meta property="og:site_name" content="Reallinxu&#39;s Blog">
+<meta property="og:description" content="使用Feign发送http请求以及源码分析简介Feign是一个http请求调用的轻量级框架，可以用Java接口注解的方式调用Http请求，而不用像Java中通过封装HTTP请求报文的方式直接调用。  注解(Annotation)   注解 作用域 用法    @RequestLine 方法 定义HttpMethod和UriTemplate请求。 {expression}使用大括号括起来的值使用其相">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/new-project.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core1.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core2.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core3.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core4.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core5.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core6.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core7.jpg">
+<meta property="og:image" content="https://reallinxu.github.io/imgs/feign/feign-core8.jpg">
+<meta property="article:published_time" content="2020-01-15T16:28:47.000Z">
+<meta property="article:modified_time" content="2020-09-28T01:18:22.879Z">
+<meta property="article:author" content="Reallinxu">
+<meta property="article:tag" content="spring cloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://reallinxu.github.io/imgs/feign/new-project.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '123456',
+      author: 'TenKen'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://reallinxu.github.io/aticle/feign.html"/>
+
+
+
+
+
+  <title>使用Feign发送http请求以及源码分析 | Reallinxu's Blog</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+		<a href="https://github.com/reallinxu" target="_blank" rel="noopener"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Reallinxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://reallinxu.github.io/aticle/feign.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Reallinxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reallinxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用Feign发送http请求以及源码分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-15T16:28:47+00:00">
+                2020-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring-cloud/" itemprop="url" rel="index">
+                    <span itemprop="name">spring cloud</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/aticle/feign.html#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="aticle/feign.html" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="使用Feign发送http请求以及源码分析"><a href="#使用Feign发送http请求以及源码分析" class="headerlink" title="使用Feign发送http请求以及源码分析"></a>使用Feign发送http请求以及源码分析</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Feign是一个http请求调用的轻量级框架，可以用Java接口注解的方式调用Http请求，而不用像Java中通过封装HTTP请求报文的方式直接调用。 </p>
+<h3 id="注解-Annotation"><a href="#注解-Annotation" class="headerlink" title="注解(Annotation)"></a>注解(Annotation)</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用域</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@RequestLine</td>
+<td>方法</td>
+<td>定义HttpMethod和UriTemplate请求。 {expression}使用大括号括起来的值使用其相应的带@Param注释参数进行解析。</td>
+</tr>
+<tr>
+<td>@Param</td>
+<td>参数</td>
+<td>作用于参数上，定义一个模板变量，其值将用于Expression按名称解析相应的模板。</td>
+</tr>
+<tr>
+<td>@Headers</td>
+<td>方法，类型</td>
+<td>定义一个HeaderTemplate; 的变体UriTemplate。使用带@Param注释的值来解析相应的Expressions。在上使用时Type，该模板将应用于每个请求。当在上使用时Method，模板将仅应用于带注释的方法。</td>
+</tr>
+<tr>
+<td>@QueryMap</td>
+<td>参数</td>
+<td>定义一个Map名称-值对或POJO，以扩展为查询字符串。</td>
+</tr>
+<tr>
+<td>@HeaderMap</td>
+<td>参数</td>
+<td>定义一个Map名称-值对，以扩展为Http Headers</td>
+</tr>
+<tr>
+<td>@Body</td>
+<td>方法</td>
+<td>定义Template，类似于UriTemplate和HeaderTemplate，使用@Param注释值来解决相应的Expressions。</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>如果需要将请求定向到其他主机，则需要在创建Feign客户端时提供的主机，或者要为每个请求提供目标主机，请包含一个java.net.URI参数，Feign将使用该值作为请求目标。<br>@RequestLine(“POST /repos/{owner}/{repo}/issues”)<br>void createIssue(URI host, Issue issue, @Param(“owner”) String owner, @Param(“repo”) String repo);</p>
+</blockquote>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="ready"><a href="#ready" class="headerlink" title="ready"></a>ready</h4><p>idea创建一个springboot项目(此处本人项目端口设置为8089，可自行设置)，勾选openfeign如下图所示：<br><img src="/imgs/feign/new-project.jpg" alt="new project"></p>
+<h4 id="test"><a href="#test" class="headerlink" title="test"></a>test</h4><p>创建controller作为服务接口  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.reallinxu.cloud.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> linxu</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo1 -- <span class="doctag">@RequestLine</span> <span class="doctag">@Param</span> 简单使用</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/demo1/&#123;param1&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demo1</span><span class="params">(@PathVariable String param1)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Demo1: hello"</span> + param1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo2 -- <span class="doctag">@Headers</span>使用</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/demo2/&#123;param1&#125;"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demo2</span><span class="params">(HttpServletRequest request, @PathVariable String param1)</span> </span>&#123;</span><br><span class="line">        System.out.println(request.getHeader(<span class="string">"Accept"</span>));</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Demo2: hello"</span> + param1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo3 -- <span class="doctag">@QueryMap</span>使用 map</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/demo3"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demo3</span><span class="params">(@RequestParam String param1, @RequestParam String param2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Demo3: param1-"</span> + param1 + <span class="string">" param2-"</span> + param2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo4 -- <span class="doctag">@QueryMap</span>使用 pojo</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/demo4"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demo4</span><span class="params">(@RequestParam String param1, @RequestParam String param2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Demo4: param1-"</span> + param1 + <span class="string">" param2-"</span> + param2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo5 -- <span class="doctag">@HeaderMap</span>使用</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/demo5"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demo5</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        System.out.println(request.getHeader(<span class="string">"Accept"</span>));</span><br><span class="line">        System.out.println(request.getHeader(<span class="string">"accept-encoding"</span>));</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Demo5: hello "</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo6 -- <span class="doctag">@Body</span>使用</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/demo6"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">demo6</span><span class="params">(@RequestBody String param)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Demo6: param- "</span> + param;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建接口，用来作为feign客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.reallinxu.cloud.feign;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.reallinxu.cloud.entity.Demo4;</span><br><span class="line"><span class="keyword">import</span> feign.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * feign接口</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> linxu</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestInterface</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo1 -- 基本用法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestLine</span>(<span class="string">"GET /demo1/&#123;param1&#125;"</span>)</span><br><span class="line">    <span class="function">String <span class="title">demo1</span><span class="params">(@Param(<span class="string">"param1"</span>)</span> String param1)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo2 -- <span class="doctag">@Headers</span>使用</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param2</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestLine</span>(<span class="string">"GET /demo2/&#123;param1&#125;"</span>)</span><br><span class="line">    <span class="meta">@Headers</span>(<span class="string">"Accept: &#123;param2&#125;"</span>)</span><br><span class="line">    <span class="function">String <span class="title">demo2</span><span class="params">(@Param(<span class="string">"param1"</span>)</span> String param1, @<span class="title">Param</span><span class="params">(<span class="string">"param2"</span>)</span> String param2)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo3 -- <span class="doctag">@QueryMap</span>使用 map</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> paramMap</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestLine</span>(<span class="string">"GET /demo3"</span>)</span><br><span class="line">    <span class="function">String <span class="title">demo3</span><span class="params">(@QueryMap Map paramMap)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo4 -- <span class="doctag">@QueryMap</span>使用 pojo</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> demo4</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestLine</span>(<span class="string">"GET /demo4"</span>)</span><br><span class="line">    <span class="function">String <span class="title">demo4</span><span class="params">(@QueryMap Demo4 demo4)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo5 -- <span class="doctag">@HeaderMap</span>使用 pojo</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> demo5</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestLine</span>(<span class="string">"GET /demo5"</span>)</span><br><span class="line">    <span class="function">String <span class="title">demo5</span><span class="params">(@HeaderMap Map demo5)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demo6</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestLine</span>(<span class="string">"POST /demo6"</span>)</span><br><span class="line">    <span class="meta">@Headers</span>(<span class="string">"Content-Type: application/json"</span>)</span><br><span class="line">    <span class="meta">@Body</span>(<span class="string">"%7B\"param1\": \"&#123;param1&#125;\", \"param2\": \"&#123;param2&#125;\"%7D"</span>)</span><br><span class="line">    <span class="function">String <span class="title">demo6</span><span class="params">(@Param(<span class="string">"param1"</span>)</span> String param1, @<span class="title">Param</span><span class="params">(<span class="string">"param2"</span>)</span> String param2)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * demoN -- 自定义host</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> param1</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestLine</span>(<span class="string">"GET /demo1/&#123;param1&#125;"</span>)</span><br><span class="line">    <span class="function">String <span class="title">demoN</span><span class="params">(URI host, @Param(<span class="string">"param1"</span>)</span> String param1)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>创建一个Demo4用到的pojo</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.reallinxu.cloud.entity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo4</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String param1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String param2;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getParam1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> param1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setParam1</span><span class="params">(String param1)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.param1 = param1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getParam2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> param2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setParam2</span><span class="params">(String param2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.param2 = param2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建测试案例进行测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.reallinxu.cloud.test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.reallinxu.cloud.entity.Demo4;</span><br><span class="line"><span class="keyword">import</span> com.reallinxu.cloud.feign.TestInterface;</span><br><span class="line"><span class="keyword">import</span> feign.Feign;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.net.URI;</span><br><span class="line"><span class="keyword">import</span> java.net.URISyntaxException;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> linxu</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> URISyntaxException </span>&#123;</span><br><span class="line">        TestInterface testInterface = Feign.builder()</span><br><span class="line">                        .target(TestInterface.class, "http://localhost:8089");</span><br><span class="line"></span><br><span class="line">        <span class="comment">//demo1</span></span><br><span class="line">        System.out.println(testInterface.demo1(<span class="string">"demo1 - 1"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//demo2</span></span><br><span class="line">        System.out.println(testInterface.demo2(<span class="string">"demo2 - 1"</span>, <span class="string">"text/html"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//demo3</span></span><br><span class="line">        Map demo3Map = <span class="keyword">new</span> HashMap&lt;String,String&gt;();</span><br><span class="line">        demo3Map.put(<span class="string">"param1"</span>,<span class="string">"heihei"</span>);</span><br><span class="line">        demo3Map.put(<span class="string">"param2"</span>,<span class="string">"haha"</span>);</span><br><span class="line">        System.out.println(testInterface.demo3(demo3Map));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//demo4</span></span><br><span class="line">        Demo4 demo4 = <span class="keyword">new</span> Demo4();</span><br><span class="line">        demo4.setParam1(<span class="string">"heihei"</span>);</span><br><span class="line">        demo4.setParam2(<span class="string">"haha"</span>);</span><br><span class="line">        System.out.println(testInterface.demo4(demo4));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//demo5</span></span><br><span class="line">        Map demo5 = <span class="keyword">new</span> HashMap&lt;String,String&gt;();</span><br><span class="line">        demo5.put(<span class="string">"Accept"</span>,<span class="string">"text/html"</span>);</span><br><span class="line">        demo5.put(<span class="string">"accept-encoding"</span>,<span class="string">"gzip"</span>);</span><br><span class="line">        System.out.println(testInterface.demo5(demo5));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//demo6</span></span><br><span class="line">        System.out.println(testInterface.demo6(<span class="string">"heihei"</span>,<span class="string">"haha"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//自定义host，此处会访问8081端口，连接拒绝</span></span><br><span class="line">        URI a = <span class="keyword">new</span> URI(<span class="string">"http://localhost:8081"</span>);</span><br><span class="line">        System.out.println(testInterface.demoN(a,<span class="string">"demo2 - 2"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动springboot项目，运行Test查看执行结果。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><h4 id="定义feign客户端接口"><a href="#定义feign客户端接口" class="headerlink" title="定义feign客户端接口"></a>定义feign客户端接口</h4><pre><code>TestInterface testInterface = Feign.builder().target(TestInterface.class, &quot;http://localhost:8089&quot;);</code></pre><p>feign.builder()时可以设置一些参数，未设置为默认值，参数对应如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//控制日志级别</span></span><br><span class="line"><span class="comment">//NONE：不记录。</span></span><br><span class="line"><span class="comment">//BASIC：只记录请求方法和URL以及响应状态代码和执行时间。</span></span><br><span class="line"><span class="comment">//HEADERS：记录基本信息以及请求和响应头。</span></span><br><span class="line"><span class="comment">//FULL：记录请求和响应的头、正文和元数据。</span></span><br><span class="line"><span class="keyword">this</span>.logLevel = Level.NONE; </span><br><span class="line"><span class="comment">//定义在接口上有效的注释和值。通过registerClassAnnotation对@RequestLine、@param等注解的定义及对应处理</span></span><br><span class="line"><span class="keyword">this</span>.contract = <span class="keyword">new</span> Default();</span><br><span class="line"><span class="comment">//Http请求客户端，https调用时需要设置参数</span></span><br><span class="line"><span class="keyword">this</span>.client = <span class="keyword">new</span> feign.Client.Default((SSLSocketFactory)<span class="keyword">null</span>, (HostnameVerifier)<span class="keyword">null</span>);</span><br><span class="line"><span class="comment">//重试机制，设置重试期间与重试次数</span></span><br><span class="line"><span class="keyword">this</span>.retryer = <span class="keyword">new</span> feign.Retryer.Default();</span><br><span class="line"><span class="comment">//可以设置自己的记录日志方式</span></span><br><span class="line"><span class="keyword">this</span>.logger = <span class="keyword">new</span> NoOpLogger();</span><br><span class="line"><span class="comment">//定义编码器，请求参数为对象时调用，默认支持json与String</span></span><br><span class="line"><span class="keyword">this</span>.encoder = <span class="keyword">new</span> feign.codec.Encoder.Default();</span><br><span class="line"><span class="comment">//定义解码器，响应为对象时调用，将响应转为对应对象</span></span><br><span class="line"><span class="keyword">this</span>.decoder = <span class="keyword">new</span> feign.codec.Decoder.Default();</span><br><span class="line"><span class="comment">//如果@QueryMap使用的类型是对象会通过编码转为Map</span></span><br><span class="line"><span class="keyword">this</span>.queryMapEncoder = <span class="keyword">new</span> feign.QueryMapEncoder.Default();</span><br><span class="line"><span class="comment">//可以根据状态实现抛出适合项目场景的类型异常</span></span><br><span class="line"><span class="keyword">this</span>.errorDecoder = <span class="keyword">new</span> feign.codec.ErrorDecoder.Default();</span><br><span class="line"><span class="comment">//控制客户端请求的设置，设置连接时间，读取时间，是否支持3xx重定向</span></span><br><span class="line"><span class="keyword">this</span>.options = <span class="keyword">new</span> Options();</span><br><span class="line"><span class="comment">//控制反射方法的调用</span></span><br><span class="line"><span class="keyword">this</span>.invocationHandlerFactory = <span class="keyword">new</span> feign.InvocationHandlerFactory.Default();</span><br><span class="line"><span class="comment">//解码完成后自动关闭响应</span></span><br><span class="line"><span class="keyword">this</span>.closeAfterDecode = <span class="keyword">true</span>;</span><br><span class="line"><span class="comment">//apache许可证不允许使用文件啥啥玩意的，不管了</span></span><br><span class="line"><span class="keyword">this</span>.propagationPolicy = ExceptionPropagationPolicy.NONE;</span><br></pre></td></tr></table></figure>
+<p>接下来我们看下target方法，原理主要是根据接口生成一个Proxy代理类，主要方法是build().newInstance(target)<br><img src="/imgs/feign/feign-core1.jpg" alt="new project"><br>特别注意框中的几个参数，我们debug进去看下，各自是什么东西<br><img src="/imgs/feign/feign-core2.jpg" alt="new project"><br>可以看出nameToHandler中的key为接口中的方法，value为初始化Feign时设置的参数，注意target中有传入的host地址<br><img src="/imgs/feign/feign-core3.jpg" alt="new project"><br>methodToHandler也很简单直白，明显就是为了以后的反射<br><img src="/imgs/feign/feign-core4.jpg" alt="new project"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">defaultMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"我是默认方法"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将TestInterface接口中加入上方默认方法再debug可以看到defaultMehthodHandlers用于存放接口的默认方法,默认方法需要另外绑定到代理对象上。</p>
+<h4 id="调用feign客户端接口"><a href="#调用feign客户端接口" class="headerlink" title="调用feign客户端接口"></a>调用feign客户端接口</h4><p>代理类就已经生成完成，接下来我们看调用。<br><img src="/imgs/feign/feign-core5.jpg" alt="new project"><br>除了object中自带的一些方法其他的都走反射<br><img src="/imgs/feign/feign-core6.jpg" alt="new project"><br>这里可以看到创建了RestTemplate用来发起请求，并使用创建时设置的配置<br><img src="/imgs/feign/feign-core7.jpg" alt="new project"><br>创建RestTemplate时会将表达式进行转换为正确的连接<br><img src="/imgs/feign/feign-core8.jpg" alt="new project"><br>通过client发送请求，整个请求完成。</p>
+<h3 id="end"><a href="#end" class="headerlink" title="end"></a>end</h3><p>Feign的Http调用到此处就完结了，Feign微服务中还可以通过service-id进行调用，内部使用ribbon进行负载均衡，等后续有兴趣再继续更新，over~</p>
+
+      
+    </div>
+    
+    
+    
+
+      <div>
+        
+        	﻿<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+        
+      </div>
+      
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢你的支持!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Reallinxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Reallinxu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/spring-cloud/" rel="tag"><i class="fa fa-tag"></i> spring cloud</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/aticle/%E6%97%B6%E5%BA%8F%E5%9B%BE.html" rel="next" title="idea插件--时序图Plantuml">
+                <i class="fa fa-chevron-left"></i> idea插件--时序图Plantuml
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/aticle/QLExpress.html" rel="prev" title=" QLExpress规则引擎实例">
+                 QLExpress规则引擎实例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/touxiang.jpg"
+                alt="Reallinxu" />
+            
+              <p class="site-author-name" itemprop="name">Reallinxu</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/reallinxu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.xiajunyi.com/" title="夏军谊的小站" target="_blank">夏军谊的小站</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Feign发送http请求以及源码分析"><span class="nav-number">1.</span> <span class="nav-text">使用Feign发送http请求以及源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解-Annotation"><span class="nav-number">1.2.</span> <span class="nav-text">注解(Annotation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">1.3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ready"><span class="nav-number">1.3.1.</span> <span class="nav-text">ready</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test"><span class="nav-number">1.3.2.</span> <span class="nav-text">test</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">1.4.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义feign客户端接口"><span class="nav-number">1.4.1.</span> <span class="nav-text">定义feign客户端接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用feign客户端接口"><span class="nav-number">1.4.2.</span> <span class="nav-text">调用feign客户端接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#end"><span class="nav-number">1.5.</span> <span class="nav-text">end</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Reallinxu</span>
+
+  
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共37.5k字</span>
+</div>
+ 
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyuiE3NCX';
+      var conf = '75024d54fce3b1095005671b7d316cf3';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>
