@@ -116,7 +116,7 @@ rocketmq发送事务消息后，如果事务没有返回实际结果COMMIT/ROLLB
 
 ### 带着现象看源码
 
-首先进rocketmq源码，既然checkLocalTransaction是实现了TransactionListener的方法，那自然从这里作为入口，看看是哪里调用的，顺腾摸瓜。
+首先进rocketmq源码，既然checkLocalTransaction是实现了TransactionListener的方法，那自然从这里作为入口，看看是哪里调用的，顺藤摸瓜。
 
 ![事务1](/imgs/事务1.png)
 
@@ -132,7 +132,7 @@ rocketmq发送事务消息后，如果事务没有返回实际结果COMMIT/ROLLB
 
 ![事务4](/imgs/事务4.png)
 
-老规矩，顺腾摸瓜，找到了真正执行的地方TransactionalMessageServiceImpl#check方法，上图最上方可以看出，从RMQ_SYS_TRANS_HALF_TOPIC这个topic中拿出Set<MessageQueue>，遍历消息去check事务，中间会涉及到一些校验，回查次数校验等都是在这个方法里，注意其中removeMap会过滤掉一些消息，从RMQ_SYS_TRANS_OP_HALF_TOPIC（在半消息被commit或者rollback处理后，会存储到Topic为RMQ_SYS_TRANS_OP_HALF_TOPIC的队列中，标识半消息已被处理）中最新的offset开始拉一次32条消息，如果offeset小于当前的offset则处理过放入doneOpOffset，未处理过的放入removeMap。当removeMap有的说明已经处理过了直接过滤掉，放入doneOpOffset。
+老规矩，顺藤摸瓜，找到了真正执行的地方TransactionalMessageServiceImpl#check方法，上图最上方可以看出，从RMQ_SYS_TRANS_HALF_TOPIC这个topic中拿出Set<MessageQueue>，遍历消息去check事务，中间会涉及到一些校验，回查次数校验等都是在这个方法里，注意其中removeMap会过滤掉一些消息，从RMQ_SYS_TRANS_OP_HALF_TOPIC（在半消息被commit或者rollback处理后，会存储到Topic为RMQ_SYS_TRANS_OP_HALF_TOPIC的队列中，标识半消息已被处理）中最新的offset开始拉一次32条消息，如果offeset小于当前的offset则处理过放入doneOpOffset，未处理过的放入removeMap。当removeMap有的说明已经处理过了直接过滤掉，放入doneOpOffset。
 
 ![事务5](/imgs/事务5.png)
 
